@@ -15,6 +15,12 @@ import {
 
 const navigationItems = [
   {
+    title: "Home",
+    href: "/",
+    icon: Heart,
+    description: "Dashboard overview"
+  },
+  {
     title: "Family History",
     href: "/family-history",
     icon: ClipboardList,
@@ -95,10 +101,12 @@ export function Navigation() {
 
           {/* User Profile & Mobile Menu */}
           <div className="flex items-center gap-2">
-            <Button variant="ghost" size="sm" className="hidden md:flex">
-              <User className="h-4 w-4 mr-2" />
-              Profile
-            </Button>
+            <Link to="/profile">
+              <Button variant="ghost" size="sm" className="hidden md:flex">
+                <User className="h-4 w-4 mr-2" />
+                Profile
+              </Button>
+            </Link>
 
             {/* Mobile Menu */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -117,10 +125,12 @@ export function Navigation() {
                   </div>
                   <NavLinks mobile onItemClick={() => setIsOpen(false)} />
                   <div className="border-t pt-4 mt-4">
-                    <Button variant="ghost" className="w-full justify-start">
-                      <User className="h-4 w-4 mr-2" />
-                      Profile
-                    </Button>
+                    <Link to="/profile" onClick={() => setIsOpen(false)}>
+                      <Button variant="ghost" className="w-full justify-start">
+                        <User className="h-4 w-4 mr-2" />
+                        Profile
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </SheetContent>

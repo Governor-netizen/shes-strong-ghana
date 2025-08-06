@@ -8,6 +8,7 @@ import FamilyHistory from "./pages/FamilyHistory";
 import Symptoms from "./pages/Symptoms";
 import Appointments from "./pages/Appointments";
 import Education from "./pages/Education";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -24,6 +25,7 @@ const App = () => (
           <Route path="/symptoms" element={<Symptoms />} />
           <Route path="/appointments" element={<Appointments />} />
           <Route path="/education" element={<Education />} />
+          <Route path="/profile" element={<Profile />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

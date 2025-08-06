@@ -127,7 +127,7 @@ export function AIAssistant() {
   }
 
   return (
-    <Card className="fixed bottom-6 right-6 w-80 h-96 z-50 flex flex-col shadow-medical">
+    <Card className="fixed bottom-6 right-6 w-96 h-[500px] z-50 flex flex-col shadow-medical animate-scale-in">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b bg-gradient-primary rounded-t-lg">
         <div className="flex items-center gap-2">
@@ -150,11 +150,11 @@ export function AIAssistant() {
           {messages.map((message) => (
             <div
               key={message.id}
-              className={`flex items-start gap-2 ${
+              className={`flex items-start gap-3 animate-fade-in ${
                 message.type === 'user' ? 'flex-row-reverse' : ''
               }`}
             >
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center ${
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 ${
                 message.type === 'user' 
                   ? 'bg-primary text-primary-foreground' 
                   : 'bg-muted'
@@ -165,10 +165,10 @@ export function AIAssistant() {
                   <Bot className="h-4 w-4" />
                 )}
               </div>
-              <div className={`max-w-[220px] p-3 rounded-lg text-sm ${
+              <div className={`max-w-[280px] p-4 rounded-lg text-sm leading-relaxed ${
                 message.type === 'user'
-                  ? 'bg-primary text-primary-foreground ml-auto'
-                  : 'bg-muted'
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-muted border'
               }`}>
                 {message.content}
               </div>
@@ -178,15 +178,15 @@ export function AIAssistant() {
       </ScrollArea>
 
       {/* Quick Responses */}
-      <div className="p-2 border-t">
-        <div className="flex flex-wrap gap-1 mb-2">
-          {quickResponses.map((response) => (
+      <div className="p-3 border-t bg-muted/30">
+        <div className="flex flex-wrap gap-2">
+          {quickResponses.slice(0, 3).map((response) => (
             <Button
               key={response}
               variant="outline"
               size="sm"
               onClick={() => handleQuickResponse(response)}
-              className="text-xs h-7"
+              className="text-xs h-8 hover-scale"
             >
               {response}
             </Button>
@@ -200,21 +200,21 @@ export function AIAssistant() {
           <Input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Type your message..."
+            placeholder="Describe your symptoms or ask a question..."
             onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
             className="flex-1"
           />
-          <Button onClick={handleSendMessage} size="icon">
+          <Button onClick={handleSendMessage} size="icon" className="bg-gradient-primary">
             <Send className="h-4 w-4" />
           </Button>
         </div>
       </div>
 
       {/* Emergency Notice */}
-      <div className="p-2 bg-destructive/10 border-t">
+      <div className="p-3 bg-destructive/10 border-t">
         <div className="flex items-center gap-2 text-xs text-destructive">
           <AlertTriangle className="h-3 w-3" />
-          <span>For emergencies, call 911 or visit your nearest hospital</span>
+          <span>For emergencies, call your nearest hospital immediately</span>
         </div>
       </div>
     </Card>
