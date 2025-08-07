@@ -48,6 +48,7 @@ export function AIAssistant() {
     }
   ]);
   const [inputValue, setInputValue] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const addMessage = (content: string, type: 'user' | 'bot') => {
     const newMessage: Message = {
@@ -59,60 +60,48 @@ export function AIAssistant() {
     setMessages(prev => [...prev, newMessage]);
   };
 
-  const handleSendMessage = () => {
-    if (!inputValue.trim()) return;
-    
-    addMessage(inputValue, 'user');
-    
-    // Simple bot response logic
-    setTimeout(() => {
-      let botResponse = "I understand your concern. ";
-      
-      if (inputValue.toLowerCase().includes('lump')) {
-        botResponse += "Finding a lump can be concerning. I recommend scheduling an appointment with a healthcare provider as soon as possible for proper examination. Would you like help finding a nearby clinic?";
-      } else if (inputValue.toLowerCase().includes('pain')) {
-        botResponse += "Breast pain can have various causes. Can you describe the type of pain and when you notice it most? I'd also recommend tracking this in your symptom tracker.";
-      } else if (inputValue.toLowerCase().includes('family')) {
-        botResponse += "Family history is important for risk assessment. Have you completed our family history assessment? It can help determine your risk factors.";
-      } else {
-        botResponse += "Thank you for sharing that information. Based on your symptoms, I recommend documenting them in the symptom tracker and considering a consultation with a healthcare provider. Is there anything specific you'd like to know about breast health?";
-      }
-      
-      addMessage(botResponse, 'bot');
-    }, 1500);
-    
-    setInputValue("");
-  };
+const handleSendMessage = async (override?: string) => {
+  const text = (override ?? inputValue).trim();
+  if (!text) return;
 
-  const handleQuickResponse = (response: string) => {
-    addMessage(response, 'user');
-    
-    setTimeout(() => {
-      let botResponse = "";
-      
-      switch (response) {
-        case "I found a lump":
-          botResponse = "This requires immediate attention. Please schedule an appointment with a healthcare provider within the next few days. In the meantime, try not to worry - many lumps are benign. Would you like me to help you find nearby clinics?";
-          break;
-        case "Breast pain":
-          botResponse = "Breast pain can be related to hormonal changes, but it's good to track it. Can you tell me if the pain is in one or both breasts, and if it's related to your menstrual cycle?";
-          break;
-        case "Skin changes":
-          botResponse = "Skin changes should be evaluated by a healthcare provider. This includes dimpling, puckering, or unusual texture. I recommend scheduling an appointment and taking photos to show your doctor.";
-          break;
-        case "Family history concerns":
-          botResponse = "Understanding your family history is crucial for risk assessment. Have you completed our detailed family history questionnaire? It can help determine if you need enhanced screening.";
-          break;
-        case "Schedule appointment":
-          botResponse = "I can help guide you to our appointment scheduler. You can book consultations, follow-ups, and screening appointments. Would you like to proceed to the appointment section?";
-          break;
-        default:
-          botResponse = "Thank you for that information. How can I help you further with your health concerns?";
+  addMessage(text, 'user');
+  setInputValue("");
+  setIsLoading(true);
+
+  try {
+    const { supabase } = await import("@/integrations/supabase/client");
+
+    const { data, error } = await supabase.functions.invoke('openai-chat', {
+      body: {
+        messages: [
+          { role: 'system', content: "You are a helpful, concise health assistant. Be accurate, avoid diagnosis, include Ghana/Sub-Saharan context when relevant. If unsure, say you don't know and suggest seeing a clinician." },
+          ...messages.slice(-10).map(m => ({
+            role: m.type === 'user' ? 'user' : 'assistant',
+            content: m.content
+          })),
+          { role: 'user', content: text }
+        ]
       }
-      
-      addMessage(botResponse, 'bot');
-    }, 1000);
-  };
+    });
+
+    if (error) {
+      console.error("openai-chat error", error);
+      addMessage("Sorry, I couldn't fetch an answer right now. Please try again.", 'bot');
+    } else {
+      const content = (data as any)?.generatedText || "I couldn't find an answer.";
+      addMessage(content, 'bot');
+    }
+  } catch (e: any) {
+    console.error("AI error", e);
+    addMessage("There was a problem reaching the AI service. Please try again.", 'bot');
+  } finally {
+    setIsLoading(false);
+  }
+};
+
+const handleQuickResponse = (response: string) => {
+  handleSendMessage(response);
+};
 
   if (!isOpen) {
     return (
@@ -127,7 +116,7 @@ export function AIAssistant() {
   }
 
   return (
-    <Card className="fixed bottom-6 right-6 w-96 h-[500px] z-50 flex flex-col shadow-medical animate-scale-in">
+    <Card className="fixed bottom-4 right-4 w-[92vw] max-w-md h-[70vh] sm:bottom-6 sm:right-6 sm:w-96 sm:h-[500px] z-50 flex flex-col shadow-medical animate-scale-in">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b bg-gradient-primary rounded-t-lg">
         <div className="flex items-center gap-2">
@@ -165,7 +154,7 @@ export function AIAssistant() {
                   <Bot className="h-4 w-4" />
                 )}
               </div>
-              <div className={`max-w-[280px] p-4 rounded-lg text-sm leading-relaxed ${
+              <div className={`max-w-[85%] p-4 rounded-lg text-sm leading-relaxed ${
                 message.type === 'user'
                   ? 'bg-primary text-primary-foreground'
                   : 'bg-muted border'
@@ -200,11 +189,12 @@ export function AIAssistant() {
           <Input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            placeholder="Describe your symptoms or ask a question..."
-            onKeyPress={(e) => e.key === 'Enter' && handleSendMessage()}
+            placeholder={isLoading ? "Please wait..." : "Describe your symptoms or ask a question..."}
+            onKeyPress={(e) => e.key === 'Enter' && !isLoading && handleSendMessage()}
             className="flex-1"
+            disabled={isLoading}
           />
-          <Button onClick={handleSendMessage} size="icon" className="bg-gradient-primary">
+          <Button onClick={() => handleSendMessage()} size="icon" className="bg-gradient-primary" disabled={isLoading}>
             <Send className="h-4 w-4" />
           </Button>
         </div>
