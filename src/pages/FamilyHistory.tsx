@@ -59,7 +59,7 @@ const questions = [
     questions: [
       { id: "current_weight", label: "Current weight (kg)", type: "number" },
       { id: "height", label: "Height (cm)", type: "number" },
-      { id: "weight_gain", label: "Have you gained significant weight after menopause?", type: "boolean", info: "Post-menopausal obesity increases risk" },
+      { id: "weight_gain", label: "Have you gained significant weight after menopause? (if applicable)", type: "boolean", info: "Post-menopausal obesity increases risk" },
       { id: "alcohol", label: "Do you consume alcohol regularly?", type: "boolean", info: "Regular alcohol consumption increases risk" },
       { id: "alcohol_frequency", label: "How often do you drink alcohol?", type: "select", options: ["Never", "Occasionally", "1-2 times/week", "3-4 times/week", "Daily"] },
       { id: "smoking", label: "Do you smoke or have you smoked?", type: "boolean" },
@@ -593,15 +593,33 @@ export default function FamilyHistory() {
                     
                     {question.type === "number" && (
                       <div className="space-y-3">
-                        <Input
-                          type="number"
-                          value={answers[question.id] || ""}
-                          onChange={(e) => handleAnswer(question.id, parseInt(e.target.value) || 0)}
-                          placeholder="Enter number"
-                          min="0"
-                        />
-                        {question.id === "pregnancies" && (
-                          <p className="text-xs text-muted-foreground">If applicable — enter 0 if none.</p>
+                        {question.id === "pregnancies" ? (
+                          <>
+                            <Input
+                              type="text"
+                              value={answers[question.id] === 0 ? "None" : (answers[question.id] ?? "")}
+                              onChange={(e) => {
+                                const v = e.target.value;
+                                if (v.trim().toLowerCase() === "none") {
+                                  handleAnswer(question.id, 0);
+                                } else {
+                                  const num = parseInt(v);
+                                  handleAnswer(question.id, Number.isFinite(num) ? num : "");
+                                }
+                              }}
+                              placeholder="Enter a number or type “None”"
+                              inputMode="numeric"
+                            />
+                            <p className="text-xs text-muted-foreground">Type “None” if you have not been pregnant.</p>
+                          </>
+                        ) : (
+                          <Input
+                            type="number"
+                            value={answers[question.id] || ""}
+                            onChange={(e) => handleAnswer(question.id, parseInt(e.target.value) || 0)}
+                            placeholder="Enter number"
+                            min="0"
+                          />
                         )}
                       </div>
                     )}
