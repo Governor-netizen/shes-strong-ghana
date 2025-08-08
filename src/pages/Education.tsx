@@ -25,7 +25,7 @@ const educationalContent = {
       description: "Learn about this aggressive form of breast cancer and why early detection is crucial",
       readTime: "5 min read",
       category: "Basics",
-      content: "Triple-negative breast cancer (TNBC) accounts for about 15% of all breast cancers but is more common in West African women...",
+      content: "Triple-Negative Breast Cancer (TNBC) is one of the most aggressive forms—fast-growing, harder to treat, and more common in younger women and those of African ancestry. TNBC does not respond to hormone therapies, so chemotherapy is often the mainstay. There is hope: newer targeted options like PARP inhibitors and immunotherapy show benefit, especially for people with BRCA mutations. Early detection, knowing your risk, and staying informed can make a real difference. Based on “An Overview of Triple‑Negative Breast Cancer” by Pankaj Kumar & Rupali Aggarwal.",
       tags: ["TNBC", "Basics", "Detection"]
     },
     {
@@ -34,7 +34,7 @@ const educationalContent = {
       description: "Exploring hereditary factors and family history patterns specific to Ghanaian populations",
       readTime: "7 min read",
       category: "Genetics",
-      content: "Research shows that certain genetic variations are more prevalent in West African populations...",
+      content: "Women of African ancestry—especially Ghanaian women—face a disproportionately high risk of triple‑negative breast cancer (TNBC). A landmark analysis found 82% of Ghanaian breast cancer cases were TNBC, versus 26% in African Americans and 16% in white Americans. Ghanaian women were diagnosed younger (average age ~48) and with more aggressive tumors (76% grade 3). These patterns point to genetic contributors beyond socioeconomic factors and underline the need for targeted research, earlier detection, and broader access to genetic testing. Based on “African Ancestry and Higher Prevalence of Triple‑Negative Breast Cancer” by Azadeh Stark et al., Cancer (2010).",
       tags: ["Genetics", "Family History", "Ghana"]
     },
     {
@@ -43,7 +43,7 @@ const educationalContent = {
       description: "Modifiable risk factors including diet, exercise, and environmental considerations",
       readTime: "6 min read",
       category: "Prevention",
-      content: "While some risk factors cannot be changed, many lifestyle choices can significantly impact your risk...",
+      content: "This population‑based study of 3,200+ Ghanaian women examined how childbirth and breastfeeding relate to risk across tumor subtypes. Under 50: higher parity increased ER‑negative risk, but extended breastfeeding (≥13 months per child) helped offset it. Age 50+: more births and longer breastfeeding reduced risk across subtypes; ≥3 births with ≥13 months per child was most protective. TNBC was more common in younger women and linked to higher parity without extended breastfeeding; luminal A‑like tumors were more common in older women and strongly reduced by extended breastfeeding. Trends (1945–1975 cohorts) showed fewer births, slightly older first birth, and a dip then rise in breastfeeding—patterns that may shift subtype incidence. Public health: promote extended breastfeeding, educate younger women, and tailor screening to Ghana’s context. Based on a large population‑based study in Ghana.",
       tags: ["Lifestyle", "Prevention", "Diet"]
     }
   ],
@@ -83,7 +83,7 @@ const educationalContent = {
       description: "Creating a strong support system during your health journey",
       readTime: "6 min read",
       category: "Emotional Health",
-      content: "Having a strong support network is crucial for emotional well-being during cancer screening and treatment...",
+      content: "Support saves lives. In Ghana, emotional, informational, financial, and spiritual support improved patients’ wellbeing and treatment outcomes. Nurses and doctors offered guidance on side effects and self‑care; families, friends, and faith communities provided encouragement; some patients received financial help while others struggled, even selling belongings to continue care. Lack of support led to distress, delays, and worse outcomes. Building strong support networks—and normalizing requests for help—should be seen as part of care, not an extra. Based on “Availability, Accessibility, and Impact of Social Support on Breast Cancer Treatment in Kumasi, Ghana.”",
       tags: ["Support", "Mental Health", "Community"]
     },
     {
@@ -92,7 +92,7 @@ const educationalContent = {
       description: "How to have important conversations about family history and genetic testing",
       readTime: "7 min read",
       category: "Communication",
-      content: "Discussing cancer risk with family members can be challenging but is essential for everyone's health...",
+      content: "Cultural, religious, and spiritual beliefs in Ghana powerfully shape how women perceive and respond to breast symptoms. Some view cancer as a curse or spiritual attack, seek help first from traditional healers or prayer camps, or believe it is contagious or incurable—delaying diagnosis and treatment. Compassionate, culturally sensitive education and open family conversations can dispel myths and encourage timely medical care. Based on the review “Socio‑cultural beliefs and perceptions influencing diagnosis and treatment of breast cancer among women in Ghana.”",
       tags: ["Family", "Communication", "Genetics"]
     },
     {
