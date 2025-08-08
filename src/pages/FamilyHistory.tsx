@@ -13,8 +13,7 @@ import {
   AlertTriangle, 
   CheckCircle, 
   ArrowLeft, 
-  ArrowRight,
-  Heart
+  ArrowRight
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -295,9 +294,12 @@ export default function FamilyHistory() {
         <div className="container mx-auto px-4 max-w-2xl">
           <Card className="shadow-medical bg-gradient-card">
             <CardHeader className="text-center">
-              <div className="w-16 h-16 bg-gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Heart className="h-8 w-8 text-primary-foreground" />
-              </div>
+              <img
+                src="/lovable-uploads/2f185e8b-5554-46b6-a58d-37f494f55165.png"
+                alt="She's Strong Ghana logo — heart with pulse line and pink ribbon"
+                className="h-16 w-16 mx-auto mb-4 object-contain"
+                loading="lazy"
+              />
               <CardTitle className="text-2xl">Risk Assessment Results</CardTitle>
               <CardDescription>Based on your family history and lifestyle factors</CardDescription>
             </CardHeader>
