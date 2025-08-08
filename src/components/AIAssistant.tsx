@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -11,7 +11,8 @@ import {
   User,
   AlertTriangle,
   Heart,
-  Phone
+  Phone,
+  Paperclip
 } from "lucide-react";
 
 import { VoiceRecorder } from "@/components/VoiceRecorder";
@@ -20,6 +21,7 @@ interface Message {
   id: string;
   type: 'user' | 'bot';
   content: string;
+  images?: string[];
   timestamp: Date;
 }
 
@@ -51,12 +53,15 @@ export function AIAssistant() {
   ]);
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [mediaPreviews, setMediaPreviews] = useState<string[]>([]);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const addMessage = (content: string, type: 'user' | 'bot') => {
+  const addMessage = (content: string, type: 'user' | 'bot', images?: string[]) => {
     const newMessage: Message = {
       id: Date.now().toString(),
       type,
       content,
+      images,
       timestamp: new Date()
     };
     setMessages(prev => [...prev, newMessage]);
@@ -64,15 +69,38 @@ export function AIAssistant() {
 
 const handleSendMessage = async (override?: string) => {
   const text = (override ?? inputValue).trim();
-  if (!text) return;
+  if (!text && mediaPreviews.length === 0) return;
 
-  addMessage(text, 'user');
+  // Add user message with any attached media
+  addMessage(text || "[Media uploaded]", 'user', mediaPreviews.length ? mediaPreviews : undefined);
   setInputValue("");
   setIsLoading(true);
 
   try {
     const { supabase } = await import("@/integrations/supabase/client");
 
+    if (mediaPreviews.length > 0) {
+      const { data, error } = await supabase.functions.invoke('vision-analyze', {
+        body: {
+          images: mediaPreviews,
+          prompt: text,
+        }
+      });
+
+      if (error) {
+        console.error("vision-analyze error", error);
+        addMessage("Sorry, I couldn't analyze the media right now. Please try again.", 'bot');
+      } else {
+        const content = (data as any)?.generatedText || "I couldn't analyze the media.";
+        addMessage(content, 'bot');
+      }
+
+      // Clear attachments after send
+      setMediaPreviews([]);
+      return;
+    }
+
+    // Fallback to text chat
     const { data, error } = await supabase.functions.invoke('openai-chat', {
       body: {
         messages: [
@@ -101,6 +129,64 @@ const handleSendMessage = async (override?: string) => {
   }
 };
 
+// Handle file uploads (images + first frame of videos)
+const readFileAsDataURL = (file: File) =>
+  new Promise<string>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result as string);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+
+const extractVideoFirstFrame = (file: File): Promise<string> => {
+  return new Promise((resolve, reject) => {
+    const url = URL.createObjectURL(file);
+    const video = document.createElement('video');
+    video.src = url;
+    video.muted = true;
+    video.playsInline = true;
+    video.onloadeddata = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = video.videoWidth;
+        canvas.height = video.videoHeight;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) throw new Error('Canvas context not available');
+        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+        URL.revokeObjectURL(url);
+        resolve(dataUrl);
+      } catch (err) {
+        URL.revokeObjectURL(url);
+        reject(err);
+      }
+    };
+    video.onerror = (e) => {
+      URL.revokeObjectURL(url);
+      reject(e);
+    };
+  });
+};
+
+const handleFiles = async (files: FileList | null) => {
+  if (!files || files.length === 0) return;
+  const previews: string[] = [];
+  for (const file of Array.from(files)) {
+    if (file.type.startsWith('image/')) {
+      const dataUrl = await readFileAsDataURL(file);
+      previews.push(dataUrl);
+    } else if (file.type.startsWith('video/')) {
+      try {
+        const frame = await extractVideoFirstFrame(file);
+        previews.push(frame);
+      } catch (e) {
+        console.error('Failed to extract video frame', e);
+      }
+    }
+  }
+  setMediaPreviews(prev => [...prev, ...previews]);
+};
+
 const handleQuickResponse = (response: string) => {
   handleSendMessage(response);
 };
@@ -118,7 +204,7 @@ const handleQuickResponse = (response: string) => {
   }
 
   return (
-    <Card className="fixed bottom-4 right-4 w-[92vw] max-w-md h-[70vh] sm:bottom-6 sm:right-6 sm:w-96 sm:h-[500px] z-50 flex flex-col shadow-medical animate-scale-in">
+    <Card className="fixed bottom-4 right-4 w-[92vw] max-w-md h-[70vh] sm:bottom-6 sm:right-6 sm:w-96 sm:h-[500px] z-50 flex flex-col shadow-medical animate-scale-in" role="dialog" aria-label="AI Health Assistant">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b bg-gradient-primary rounded-t-lg">
         <div className="flex items-center gap-2">
@@ -130,6 +216,7 @@ const handleQuickResponse = (response: string) => {
           size="icon"
           onClick={() => setIsOpen(false)}
           className="text-primary-foreground hover:bg-primary-foreground/20"
+          aria-label="Close assistant"
         >
           <X className="h-4 w-4" />
         </Button>
@@ -161,7 +248,14 @@ const handleQuickResponse = (response: string) => {
                   ? 'bg-primary text-primary-foreground'
                   : 'bg-muted border'
               }`}>
-                {message.content}
+                <div>{message.content}</div>
+                {message.images && message.images.length > 0 && (
+                  <div className="mt-2 grid grid-cols-3 gap-2">
+                    {message.images.map((src, i) => (
+                      <img key={i} src={src} alt={`uploaded media ${i + 1}`} className="w-20 h-20 object-cover rounded" loading="lazy" />
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           ))}
@@ -187,15 +281,39 @@ const handleQuickResponse = (response: string) => {
 
       {/* Input */}
       <div className="p-4 border-t">
+        {mediaPreviews.length > 0 && (
+          <div className="mb-3 flex items-center justify-between">
+            <div className="flex -space-x-2">
+              {mediaPreviews.slice(0, 5).map((src, i) => (
+                <img key={i} src={src} alt={`preview ${i + 1}`} className="w-10 h-10 rounded object-cover border bg-background" />
+              ))}
+              {mediaPreviews.length > 5 && (
+                <span className="ml-3 text-xs text-muted-foreground">+{mediaPreviews.length - 5} more</span>
+              )}
+            </div>
+            <Button variant="ghost" size="sm" onClick={() => setMediaPreviews([])}>Clear</Button>
+          </div>
+        )}
         <div className="flex items-center gap-2">
           <Input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
-            placeholder={isLoading ? "Please wait..." : "Describe your symptoms or ask a question..."}
+            placeholder={isLoading ? "Please wait..." : "Ask a question or describe what’s in the media..."}
             onKeyPress={(e) => e.key === 'Enter' && !isLoading && handleSendMessage()}
             className="flex-1"
             disabled={isLoading}
           />
+          <input
+            ref={fileInputRef}
+            type="file"
+            accept="image/*,video/*"
+            multiple
+            className="hidden"
+            onChange={(e) => handleFiles(e.target.files)}
+          />
+          <Button variant="outline" size="icon" onClick={() => fileInputRef.current?.click()} disabled={isLoading}>
+            <Paperclip className="h-4 w-4" />
+          </Button>
           <VoiceRecorder onTranscript={(t) => handleSendMessage(t)} disabled={isLoading} />
           <Button onClick={() => handleSendMessage()} size="icon" className="bg-gradient-primary" disabled={isLoading}>
             <Send className="h-4 w-4" />
