@@ -3,7 +3,6 @@ import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { 
   Heart, 
-  UserRound,
   Shield, 
   Users, 
   BookOpen,
@@ -48,7 +47,7 @@ export function HeroSection() {
         <div className="text-center max-w-4xl mx-auto">
           <div className="flex justify-center mb-6">
             <div className="w-16 h-16 bg-gradient-hero rounded-2xl flex items-center justify-center shadow-medical">
-              <UserRound className="h-8 w-8 text-white" aria-hidden="true" />
+              <Heart className="h-8 w-8 text-white" />
             </div>
           </div>
           
