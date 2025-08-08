@@ -14,6 +14,8 @@ import {
   Phone
 } from "lucide-react";
 
+import { VoiceRecorder } from "@/components/VoiceRecorder";
+
 interface Message {
   id: string;
   type: 'user' | 'bot';
@@ -185,7 +187,7 @@ const handleQuickResponse = (response: string) => {
 
       {/* Input */}
       <div className="p-4 border-t">
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           <Input
             value={inputValue}
             onChange={(e) => setInputValue(e.target.value)}
@@ -194,6 +196,7 @@ const handleQuickResponse = (response: string) => {
             className="flex-1"
             disabled={isLoading}
           />
+          <VoiceRecorder onTranscript={(t) => handleSendMessage(t)} disabled={isLoading} />
           <Button onClick={() => handleSendMessage()} size="icon" className="bg-gradient-primary" disabled={isLoading}>
             <Send className="h-4 w-4" />
           </Button>
