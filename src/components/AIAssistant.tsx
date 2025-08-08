@@ -195,10 +195,15 @@ const handleQuickResponse = (response: string) => {
     return (
       <Button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-primary shadow-medical hover:shadow-lg z-50 animate-pulse"
+        className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-primary shadow-medical hover:shadow-lg ring-2 ring-primary ring-offset-2 ring-offset-background z-50 animate-pulse hover-scale"
         size="icon"
       >
-        <MessageCircle className="h-6 w-6 text-primary-foreground" />
+        <img
+          src="/lovable-uploads/149c2f84-f3e6-435d-b22f-fe5f9e85d931.png"
+          alt="AI health assistant icon — female nurse silhouette with ribbon"
+          className="h-8 w-8 rounded-full object-cover"
+          loading="lazy"
+        />
       </Button>
     );
   }
@@ -208,7 +213,12 @@ const handleQuickResponse = (response: string) => {
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b bg-gradient-primary rounded-t-lg">
         <div className="flex items-center gap-2">
-          <Bot className="h-5 w-5 text-primary-foreground" />
+          <img
+            src="/lovable-uploads/149c2f84-f3e6-435d-b22f-fe5f9e85d931.png"
+            alt="AI assistant icon"
+            className="h-5 w-5 rounded-full object-cover ring-1 ring-primary-foreground/30"
+            loading="lazy"
+          />
           <span className="font-semibold text-primary-foreground">AI Health Assistant</span>
         </div>
         <Button
@@ -240,7 +250,12 @@ const handleQuickResponse = (response: string) => {
                 {message.type === 'user' ? (
                   <User className="h-4 w-4" />
                 ) : (
-                  <Bot className="h-4 w-4" />
+                  <img
+                    src="/lovable-uploads/149c2f84-f3e6-435d-b22f-fe5f9e85d931.png"
+                    alt="AI assistant avatar"
+                    className="h-8 w-8 rounded-full object-cover"
+                    loading="lazy"
+                  />
                 )}
               </div>
               <div className={`max-w-[85%] p-4 rounded-lg text-sm leading-relaxed ${
