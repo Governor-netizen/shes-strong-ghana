@@ -45,16 +45,21 @@ export function HeroSection() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 pt-20 pb-16">
         <div className="text-center max-w-4xl mx-auto">
-          <div className="flex justify-center mb-6">
-            <div className="w-16 h-16 bg-gradient-hero rounded-2xl flex items-center justify-center shadow-medical">
-              <img
-                src="/lovable-uploads/56aa1b96-11fa-4f9f-95da-2b824f5276a1.png"
-                alt="She's Strong Ghana logo: heart with stethoscope"
-                className="h-10 w-10 object-contain"
-                loading="eager"
-                fetchPriority="high"
-                decoding="async"
-              />
+          <div className="flex justify-center mb-10">
+            <div className="relative">
+              <div className="relative w-28 h-28 md:w-36 md:h-36 rounded-3xl bg-gradient-hero p-1.5 shadow-medical transition-transform duration-500 hover:scale-105">
+                <div className="flex h-full w-full items-center justify-center rounded-[1.25rem] bg-background/80 backdrop-blur-sm">
+                  <img
+                    src="/lovable-uploads/56aa1b96-11fa-4f9f-95da-2b824f5276a1.png"
+                    alt="She's Strong Ghana logo: heart with stethoscope"
+                    className="h-16 w-16 md:h-24 md:w-24 object-contain"
+                    loading="eager"
+                    fetchPriority="high"
+                    decoding="async"
+                  />
+                </div>
+              </div>
+              <div className="pointer-events-none absolute inset-0 -z-10 blur-2xl opacity-70 bg-gradient-hero rounded-[2rem]" aria-hidden="true" />
             </div>
           </div>
           
