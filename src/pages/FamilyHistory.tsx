@@ -544,9 +544,6 @@ export default function FamilyHistory() {
                       <Label htmlFor="genetic_testing-no">No</Label>
                     </div>
                   </RadioGroup>
-                  <p className="text-sm text-muted-foreground bg-muted/30 p-3 rounded-lg border-l-4 border-warning">
-                    <span className="font-medium">Note:</span> BRCA mutations are more common in TNBC
-                  </p>
                 </div>
 
                 <div className="space-y-3">
@@ -587,11 +584,6 @@ export default function FamilyHistory() {
                             <Label htmlFor={`${question.id}-no`}>No</Label>
                           </div>
                         </RadioGroup>
-                        {question.info && (
-                          <p className="text-sm text-muted-foreground bg-muted/30 p-3 rounded-lg border-l-4 border-warning">
-                            <span className="font-medium">Note:</span> {question.info}
-                          </p>
-                        )}
                       </div>
                     )}
                     
@@ -604,11 +596,6 @@ export default function FamilyHistory() {
                           placeholder="Enter number"
                           min="0"
                         />
-                        {question.info && (
-                          <p className="text-sm text-muted-foreground bg-muted/30 p-3 rounded-lg border-l-4 border-warning">
-                            <span className="font-medium">Note:</span> {question.info}
-                          </p>
-                        )}
                       </div>
                     )}
                     
@@ -625,11 +612,6 @@ export default function FamilyHistory() {
                             </div>
                           ))}
                         </RadioGroup>
-                        {question.info && (
-                          <p className="text-sm text-muted-foreground bg-muted/30 p-3 rounded-lg border-l-4 border-warning">
-                            <span className="font-medium">Note:</span> {question.info}
-                          </p>
-                        )}
                       </div>
                     )}
                   </div>

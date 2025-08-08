@@ -111,22 +111,16 @@ const educationalContent = {
 
 const featuredResources = [
   {
-    title: "Ghana Breast Cancer Awareness Organization",
-    description: "Local support and resources for breast cancer awareness in Ghana",
-    url: "#",
+    title: "Ghana Breast Society (GBS)",
+    description: "Official professional society with breast cancer resources and updates in Ghana",
+    url: "https://ghbreastsociety.com/",
     type: "Organization"
   },
   {
-    title: "WHO Breast Cancer Guidelines",
-    description: "International guidelines for breast cancer prevention and screening",
-    url: "#",
-    type: "Guidelines"
-  },
-  {
-    title: "Genetic Counseling Resources",
-    description: "Information about genetic testing and counseling services",
-    url: "#",
-    type: "Services"
+    title: "Genetic Counselling Resources (McGill University Library)",
+    description: "Curated guides on genetic counselling and patient support",
+    url: "https://libraryguides.mcgill.ca/human-genetics/genetic-counselling",
+    type: "Guide"
   }
 ];
 
@@ -504,7 +498,14 @@ export default function Education() {
               </CardHeader>
               <CardContent className="space-y-4">
                 {featuredResources.map((resource, index) => (
-                  <div key={index} className="border border-border rounded-lg p-4 hover:bg-muted/50 transition-colors">
+                  <a
+                    key={index}
+                    href={resource.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block border border-border rounded-lg p-4 hover:bg-muted/50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30"
+                    aria-label={`${resource.title} - opens in a new tab`}
+                  >
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <h4 className="font-medium mb-1">{resource.title}</h4>
@@ -513,7 +514,7 @@ export default function Education() {
                       </div>
                       <ExternalLink className="h-4 w-4 text-muted-foreground ml-2" />
                     </div>
-                  </div>
+                  </a>
                 ))}
               </CardContent>
             </Card>
