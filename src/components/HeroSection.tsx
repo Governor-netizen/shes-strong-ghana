@@ -47,7 +47,14 @@ export function HeroSection() {
         <div className="text-center max-w-4xl mx-auto">
           <div className="flex justify-center mb-6">
             <div className="w-16 h-16 bg-gradient-hero rounded-2xl flex items-center justify-center shadow-medical">
-              <Heart className="h-8 w-8 text-white" />
+              <img
+                src="/lovable-uploads/56aa1b96-11fa-4f9f-95da-2b824f5276a1.png"
+                alt="She's Strong Ghana logo: heart with stethoscope"
+                className="h-10 w-10 object-contain"
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+              />
             </div>
           </div>
           
