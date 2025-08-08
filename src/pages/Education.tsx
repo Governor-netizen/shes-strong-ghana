@@ -16,6 +16,8 @@ import {
   Users,
   Award
 } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useSEO } from "@/hooks/useSEO";
 
 const educationalContent = {
   "risk-factors": [
@@ -132,6 +134,47 @@ export default function Education() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedArticle, setSelectedArticle] = useState<any>(null);
 
+  useSEO({
+    title: "Learn More about Triple‑Negative Breast Cancer (TNBC) in Ghana | She’s Strong",
+    description:
+      "TNBC basics, risk, symptoms, screening, and support for women in Ghana. Learn what to watch for and the next steps to protect your health.",
+    canonical: typeof window !== "undefined" ? `${window.location.origin}/education` : "/education",
+  });
+
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "Is TNBC more aggressive?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text:
+            "It can grow and spread faster than some other types, so early detection is important.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can lifestyle reduce risk?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text:
+            "Healthy weight, regular activity, limited alcohol, and smoke‑free living support overall breast health.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Do all breast lumps mean cancer?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text:
+            "No—many are benign. Still, any new lump should be checked by a clinician.",
+        },
+      },
+    ],
+  };
+
   const getAllArticles = () => {
     return [
       ...educationalContent["risk-factors"],
@@ -211,7 +254,7 @@ export default function Education() {
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-4">
             <BookOpen className="h-6 w-6 text-primary" />
-            <h1 className="text-2xl font-bold">Education Hub</h1>
+            <h2 className="text-2xl font-bold">Education Hub</h2>
           </div>
           <p className="text-muted-foreground mb-6">
             Reliable, evidence-based information about breast cancer prevention, risk factors, and support resources
@@ -228,6 +271,118 @@ export default function Education() {
             />
           </div>
         </div>
+
+        {/* Learn More Section */}
+        <section aria-labelledby="learn-more-heading" className="mb-10">
+          <Card className="bg-gradient-card shadow-medical">
+            <CardContent className="p-6 md:p-8">
+              <article>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+                  <div className="md:col-span-2">
+                    <h1 id="learn-more-heading" className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-hero bg-clip-text text-transparent">
+                      Learn More: Triple‑Negative Breast Cancer (TNBC)
+                    </h1>
+                    <p className="text-muted-foreground text-lg mb-6">
+                      Triple‑negative breast cancer (TNBC) is a type of breast cancer that tests negative for estrogen, progesterone, and HER2 receptors. Because it grows differently, it may spread faster and respond to different treatments. Early detection and prompt care make a real difference.
+                    </p>
+
+                    <section aria-labelledby="key-facts" className="mb-6">
+                      <h2 id="key-facts" className="text-xl font-semibold mb-2">Why TNBC Matters: Key Facts</h2>
+                      <ul className="list-disc pl-5 space-y-1 text-foreground">
+                        <li>About 15% of breast cancers are triple‑negative.</li>
+                        <li>Early detection improves treatment options and outcomes.</li>
+                        <li>Some families have higher risk due to shared genetics and history.</li>
+                        <li>Awareness plus regular self‑checks and screening can save lives.</li>
+                      </ul>
+                    </section>
+                  </div>
+                  <div>
+                    <img
+                      src="/placeholder.svg"
+                      alt="Ghanaian women standing together, symbolizing strength and support in breast cancer awareness"
+                      loading="lazy"
+                      className="w-full h-40 md:h-48 object-cover rounded-lg"
+                    />
+                  </div>
+                </div>
+
+                <section aria-labelledby="higher-risk" className="mb-6">
+                  <h2 id="higher-risk" className="text-xl font-semibold mb-2">Who Is at Higher Risk?</h2>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>Personal or family history of breast, ovarian, prostate, or pancreatic cancer</li>
+                    <li>A close relative diagnosed at a younger age</li>
+                    <li>Certain inherited genetic changes (mutations)</li>
+                    <li>Limited access to screening or delays in follow‑up</li>
+                  </ul>
+                </section>
+
+                <section aria-labelledby="symptoms" className="mb-6">
+                  <h2 id="symptoms" className="text-xl font-semibold mb-2">Common Signs and Symptoms</h2>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>A new lump or thickening in the breast or underarm</li>
+                    <li>Changes in breast size, shape, or skin (dimpling, redness, scaling)</li>
+                    <li>Nipple changes or discharge not related to breastfeeding</li>
+                    <li>Persistent pain in one area of the breast</li>
+                  </ul>
+                  <p className="text-sm text-muted-foreground mt-2">If you notice a change that lasts more than 2 weeks, get it checked.</p>
+                </section>
+
+                <section aria-labelledby="screening" className="mb-6">
+                  <h2 id="screening" className="text-xl font-semibold mb-2">Screening and When to See a Clinician</h2>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>Know your normal: perform regular self‑checks.</li>
+                    <li>If you feel a new lump or see changes, contact a clinician promptly.</li>
+                    <li>Follow your clinician’s advice on clinical breast exams and imaging based on your age, risk, and history.</li>
+                  </ul>
+                </section>
+
+                <section aria-labelledby="family-history" className="mb-6">
+                  <h2 id="family-history" className="text-xl font-semibold mb-2">Family History and Genetics</h2>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>Family history can increase risk. Let your clinician know if your mother, father, sisters, brothers, grandparents, aunts, or uncles have had cancer.</li>
+                    <li>Your mother’s age at diagnosis can help guide your personal risk discussion.</li>
+                    <li>Genetic counseling/testing may be recommended for some families.</li>
+                  </ul>
+                </section>
+
+                <section aria-labelledby="how-we-help" className="mb-6">
+                  <h2 id="how-we-help" className="text-xl font-semibold mb-2">How She’s Strong Ghana Helps</h2>
+                  <ul className="list-disc pl-5 space-y-1">
+                    <li>Risk Assessment: Answer a few questions to understand your risk profile.</li>
+                    <li>Symptom Tracking: Record changes and get reminders to follow up.</li>
+                    <li>Education Hub: Reliable, easy‑to‑read guidance about TNBC and breast health.</li>
+                    <li>Care Navigation: Find and prepare for appointments with specialists.</li>
+                  </ul>
+                </section>
+
+                <section aria-labelledby="next-steps" className="mb-2">
+                  <h2 id="next-steps" className="text-xl font-semibold mb-2">What You Can Do Today</h2>
+                  <ul className="list-disc pl-5 space-y-1 mb-3">
+                    <li>Start the risk assessment to document family history.</li>
+                    <li>Set a monthly reminder for a self‑check.</li>
+                    <li>Note any breast changes and book an appointment if something feels new or different.</li>
+                    <li>Share this resource with someone you care about.</li>
+                  </ul>
+                  <div className="flex flex-col sm:flex-row gap-3">
+                    <Button asChild size="sm" className="bg-gradient-primary">
+                      <Link to="/family-history">Start Risk Assessment</Link>
+                    </Button>
+                    <Button asChild variant="outline" size="sm">
+                      <Link to="/symptoms">Track Symptoms</Link>
+                    </Button>
+                    <Button asChild variant="secondary" size="sm">
+                      <Link to="/appointments">Find Care</Link>
+                    </Button>
+                  </div>
+                </section>
+              </article>
+              <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+              />
+            </CardContent>
+          </Card>
+        </section>
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
