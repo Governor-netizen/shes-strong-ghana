@@ -51,28 +51,36 @@ export function HeroSection() {
             </div>
           </div>
           
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-hero bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-hero bg-clip-text text-transparent animate-fade-in">
             She's Strong Ghana
           </h1>
           
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
-            Empowering women with tools for early detection, risk assessment, and comprehensive care 
-            for triple-negative breast cancer
-          </p>
+          <ul className="text-lg md:text-xl text-muted-foreground mb-6 space-y-2 text-left mx-auto max-w-2xl">
+            <li>• Early detection and personalized risk insights</li>
+            <li>• Track symptoms and learn what to look for</li>
+            <li>• Connect with trusted care providers</li>
+          </ul>
+
+          <div className="flex justify-center mb-8">
+            <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm">
+              15% of breast cancers are triple-negative — early detection matters.
+            </span>
+          </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button asChild size="lg" className="bg-gradient-primary shadow-medical">
-              <Link to="/family-history">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4 animate-fade-in">
+            <Button asChild size="lg" className="bg-gradient-primary shadow-medical hover-scale h-12 md:h-11 px-6 md:px-8">
+              <Link to="/family-history" aria-label="Start risk assessment (3 steps, under 3 minutes)">
                 Start Risk Assessment
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link to="/education">
+            <Button asChild variant="outline" size="lg" className="hover-scale h-12 md:h-11">
+              <Link to="/education" aria-label="Learn more about triple-negative breast cancer">
                 Learn More
               </Link>
             </Button>
           </div>
+          <div className="text-sm text-muted-foreground mb-12">3 steps • under 3 minutes • Trusted by local clinicians</div>
 
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">

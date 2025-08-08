@@ -89,10 +89,10 @@ export function Navigation() {
             <img
               src="/lovable-uploads/2f185e8b-5554-46b6-a58d-37f494f55165.png"
               alt="She's Strong Ghana logo — heart with pulse line and pink ribbon"
-              className="h-8 w-8 object-contain"
+              className="h-10 w-10 object-contain"
               loading="lazy"
             />
-            <span className="text-xl font-bold bg-gradient-primary bg-clip-text text-transparent tracking-tight">
+            <span className="text-xl font-bold bg-gradient-hero bg-clip-text text-transparent tracking-tight">
               She's Strong
             </span>
           </Link>
