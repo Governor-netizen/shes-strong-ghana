@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -55,6 +55,7 @@ export function AIAssistant() {
   const [isLoading, setIsLoading] = useState(false);
   const [mediaPreviews, setMediaPreviews] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
 
   const addMessage = (content: string, type: 'user' | 'bot', images?: string[]) => {
     const newMessage: Message = {
@@ -191,6 +192,10 @@ const handleQuickResponse = (response: string) => {
   handleSendMessage(response);
 };
 
+useEffect(() => {
+  bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
+}, [messages, isLoading]);
+
   if (!isOpen) {
     return (
       <Button
@@ -274,6 +279,26 @@ const handleQuickResponse = (response: string) => {
               </div>
             </div>
           ))}
+          {isLoading && (
+            <div className="flex items-start gap-3 animate-fade-in">
+              <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-muted">
+                <img
+                  src="/lovable-uploads/149c2f84-f3e6-435d-b22f-fe5f9e85d931.png"
+                  alt="AI assistant typing"
+                  className="h-8 w-8 rounded-full object-cover"
+                  loading="lazy"
+                />
+              </div>
+              <div className="max-w-[85%] p-3 rounded-lg bg-muted border">
+                <div className="typing-indicator" aria-live="polite" aria-label="Assistant is typing">
+                  <span className="typing-dot"></span>
+                  <span className="typing-dot"></span>
+                  <span className="typing-dot"></span>
+                </div>
+              </div>
+            </div>
+          )}
+          <div ref={bottomRef} />
         </div>
       </ScrollArea>
 
