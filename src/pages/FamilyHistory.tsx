@@ -25,7 +25,7 @@ const questions = [
       { id: "breast_cancer", label: "Have you been diagnosed with breast cancer?", type: "boolean" },
       { id: "ovarian_cancer", label: "Have you been diagnosed with ovarian cancer?", type: "boolean" },
       { id: "age_first_period", label: "Age when you first started menstruating", type: "number", info: "Early menarche (before age 12) increases risk" },
-      { id: "pregnancies", label: "Number of pregnancies", type: "number" },
+      { id: "pregnancies", label: "Number of pregnancies (if applicable)", type: "number" },
       { id: "age_first_birth", label: "Age at first childbirth (if applicable)", type: "number", info: "Late first childbirth (after 30) or never giving birth increases risk" },
       { id: "breastfeeding", label: "Did you breastfeed any of your children?", type: "boolean", info: "Lack of breastfeeding increases risk" },
       { id: "breastfeeding_duration", label: "Total months of breastfeeding (if applicable)", type: "number" },
@@ -596,6 +596,9 @@ export default function FamilyHistory() {
                           placeholder="Enter number"
                           min="0"
                         />
+                        {question.id === "pregnancies" && (
+                          <p className="text-xs text-muted-foreground">If applicable — enter 0 if none.</p>
+                        )}
                       </div>
                     )}
                     

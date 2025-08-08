@@ -292,8 +292,8 @@ export default function Education() {
                   </div>
                   <div>
                     <img
-                      src="/placeholder.svg"
-                      alt="Ghanaian women standing together, symbolizing strength and support in breast cancer awareness"
+                      src="/lovable-uploads/9b92abbb-cd8a-4ebc-9559-42ec68c756e9.png"
+                      alt="Illustration of breast cancer cell types: HR+, HER2+, and triple‑negative"
                       loading="lazy"
                       className="w-full h-40 md:h-48 object-cover rounded-lg"
                     />
