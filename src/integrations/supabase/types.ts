@@ -55,26 +55,62 @@ export type Database = {
       }
       profiles: {
         Row: {
+          address: string | null
+          allergies: string | null
           avatar_url: string | null
+          blood_type: string | null
           created_at: string
+          date_of_birth: string | null
+          email: string | null
+          emergency_contact: string | null
+          emergency_phone: string | null
+          first_name: string | null
           full_name: string | null
           id: string
+          last_name: string | null
+          medications: string | null
+          phone: string | null
+          preferred_language: string | null
           updated_at: string
           username: string | null
         }
         Insert: {
+          address?: string | null
+          allergies?: string | null
           avatar_url?: string | null
+          blood_type?: string | null
           created_at?: string
+          date_of_birth?: string | null
+          email?: string | null
+          emergency_contact?: string | null
+          emergency_phone?: string | null
+          first_name?: string | null
           full_name?: string | null
           id: string
+          last_name?: string | null
+          medications?: string | null
+          phone?: string | null
+          preferred_language?: string | null
           updated_at?: string
           username?: string | null
         }
         Update: {
+          address?: string | null
+          allergies?: string | null
           avatar_url?: string | null
+          blood_type?: string | null
           created_at?: string
+          date_of_birth?: string | null
+          email?: string | null
+          emergency_contact?: string | null
+          emergency_phone?: string | null
+          first_name?: string | null
           full_name?: string | null
           id?: string
+          last_name?: string | null
+          medications?: string | null
+          phone?: string | null
+          preferred_language?: string | null
           updated_at?: string
           username?: string | null
         }
