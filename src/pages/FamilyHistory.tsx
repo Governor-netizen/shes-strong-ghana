@@ -16,6 +16,7 @@ import {
   ArrowRight,
   Heart
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const questions = [
   {
@@ -89,6 +90,7 @@ export default function FamilyHistory() {
   const [answers, setAnswers] = useState<Record<string, any>>({});
   const [riskLevel, setRiskLevel] = useState<"low" | "moderate" | "high" | null>(null);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   // Family cancer flow state
   const RELATIVES = [
@@ -348,7 +350,7 @@ export default function FamilyHistory() {
                 >
                   Retake Assessment
                 </Button>
-                <Button className="flex-1">
+                <Button className="flex-1" onClick={() => navigate("/appointments", { state: { fromRiskAssessment: true, riskLevel } })}>
                   Schedule Appointment
                 </Button>
               </div>

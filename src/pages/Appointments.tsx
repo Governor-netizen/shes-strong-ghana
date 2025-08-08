@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -21,6 +21,7 @@ import {
   AlertCircle,
   Stethoscope
 } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 const appointmentTypes = [
   { value: "screening", label: "Screening Mammogram", duration: "30 minutes" },
@@ -76,6 +77,18 @@ export default function Appointments() {
   const [selectedTime, setSelectedTime] = useState("");
   const [notes, setNotes] = useState("");
   const { toast } = useToast();
+  const location = useLocation();
+  useEffect(() => {
+    const state = (location.state as any) || {};
+    if (state.fromRiskAssessment) {
+      setShowBookingForm(true);
+      const defaultType = state.riskLevel === "high" ? "consultation" : "screening";
+      setSelectedType(defaultType);
+      setNotes(`From risk assessment: ${state.riskLevel} risk.`);
+    }
+    // We only want to run this once on mount
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const bookAppointment = () => {
     if (!selectedType || !selectedDoctor || !selectedDate || !selectedTime) {
