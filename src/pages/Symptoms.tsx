@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -58,6 +58,26 @@ export default function Symptoms() {
   const [duration, setDuration] = useState("");
   const [showAddForm, setShowAddForm] = useState(false);
   const { toast } = useToast();
+
+  const addFormRef = useRef<HTMLDivElement | null>(null);
+
+  const scrollToAddForm = () => {
+    requestAnimationFrame(() => {
+      addFormRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  };
+
+  useEffect(() => {
+    if (showAddForm) {
+      scrollToAddForm();
+    }
+  }, [showAddForm]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash === "#add") {
+      setShowAddForm(true);
+    }
+  }, []);
 
   const addSymptom = () => {
     const symptomToAdd = selectedSymptom || customSymptom;
@@ -178,7 +198,7 @@ export default function Symptoms() {
 
         {/* Add Symptom Form */}
         {showAddForm && (
-          <Card className="mb-8 shadow-medical bg-gradient-card">
+          <Card ref={addFormRef} id="add" className="mb-8 shadow-medical bg-gradient-card">
             <CardHeader>
               <CardTitle>Add New Symptom</CardTitle>
               <CardDescription>Record a symptom you're experiencing</CardDescription>
