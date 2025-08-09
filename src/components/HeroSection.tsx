@@ -49,7 +49,7 @@ export function HeroSection() {
           </p>
 
           <div className="flex justify-center mb-8">
-            <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm">About 60% of Ghanaian breast cancers are triple-negative — early detection matters.</span>
+            <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm">About 60% of Ghanaian breast cancer cases are triple-negative — early detection matters.</span>
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4 animate-fade-in">
