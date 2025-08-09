@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,7 +16,23 @@ const educationalContent = {
     description: "Learn about this aggressive form of breast cancer and why early detection is crucial",
     readTime: "5 min read",
     category: "Basics",
-    content: "Triple-Negative Breast Cancer (TNBC) is one of the most aggressive forms—fast-growing, harder to treat, and more common in younger women and those of African ancestry. TNBC does not respond to hormone therapies, so chemotherapy is often the mainstay. There is hope: newer targeted options like PARP inhibitors and immunotherapy show benefit, especially for people with BRCA mutations. Early detection, knowing your risk, and staying informed can make a real difference. Based on “An Overview of Triple‑Negative Breast Cancer” by Pankaj Kumar & Rupali Aggarwal.",
+    content: `
+      <p><strong>Overview</strong></p>
+      <p>Triple-Negative Breast Cancer (TNBC) is an aggressive subtype—fast-growing, harder to treat, and more common in younger women and those of African ancestry. It does not respond to hormone therapies; chemotherapy is often the mainstay. There is hope: newer targeted options like PARP inhibitors and immunotherapy show benefit, especially for people with <strong>BRCA</strong> mutations.</p>
+
+      <h3>Epidemiology in Ghana</h3>
+      <ul>
+        <li>TNBC made up <strong>~82%</strong> of breast cancers in Ghanaian women (vs <strong>26%</strong> in African Americans and <strong>16%</strong> in white Americans).</li>
+        <li>Average age at diagnosis was about <strong>48 years</strong>.</li>
+        <li><strong>76%</strong> of tumors were high grade (grade 3).</li>
+      </ul>
+      <p>These patterns suggest biological and genetic contributors beyond socioeconomic factors, emphasizing early detection, research, and access to care.</p>
+
+      <h3>Genetics and BRCA</h3>
+      <p>BRCA1/2 gene changes raise the risk of TNBC in some families. When present, they may open doors to targeted treatments like <strong>PARP inhibitors</strong> and some <strong>immunotherapies</strong>, alongside standard chemotherapy.</p>
+
+      <p class="text-sm text-muted-foreground">Sources: “An Overview of Triple‑Negative Breast Cancer” (P. Kumar & R. Aggarwal) and “African Ancestry and Higher Prevalence of Triple‑Negative Breast Cancer” (A. Stark et al., Cancer 2010).</p>
+    `,
     tags: ["TNBC", "Basics", "Detection"]
   }, {
     id: 2,
@@ -24,7 +40,46 @@ const educationalContent = {
     description: "Exploring hereditary factors and family history patterns specific to Ghanaian populations",
     readTime: "7 min read",
     category: "Genetics",
-    content: "Women of African ancestry—especially Ghanaian women—face a disproportionately high risk of triple‑negative breast cancer (TNBC). A landmark analysis found 82% of Ghanaian breast cancer cases were TNBC, versus 26% in African Americans and 16% in white Americans. Ghanaian women were diagnosed younger (average age ~48) and with more aggressive tumors (76% grade 3). These patterns point to genetic contributors beyond socioeconomic factors and underline the need for targeted research, earlier detection, and broader access to genetic testing. Based on “African Ancestry and Higher Prevalence of Triple‑Negative Breast Cancer” by Azadeh Stark et al., Cancer (2010).",
+    content: `
+      <p>Some breast cancers happen because of changes (called mutations) in certain genes that can run in families. The most well-known genes linked to triple-negative breast cancer are called <strong>BRCA1</strong> and <strong>BRCA2</strong>.</p>
+
+      <h3>What Are BRCA Genes?</h3>
+      <ul>
+        <li><strong>BRCA1 and BRCA2</strong> are genes that help protect your cells from growing uncontrollably.</li>
+        <li>If these genes have harmful changes (mutations), they increase the risk of breast and ovarian cancers.</li>
+        <li>Not everyone with breast cancer has BRCA mutations, but for some families, these gene changes are important.</li>
+      </ul>
+
+      <h3>How Breast Cancer Can Run in Families</h3>
+      <ul>
+        <li>If a close family member has breast cancer, your risk might be higher.</li>
+        <li>But it’s not always straightforward—it depends on which side of the family the gene comes from and who inherited it.</li>
+      </ul>
+
+      <h3>Example: How You Can Inherit BRCA Gene Changes</h3>
+      <ul>
+        <li>Imagine your grandmother has a BRCA mutation. She can pass it on to her children.</li>
+        <li>Your aunt (your grandmother’s daughter) or your mom might have inherited the gene and developed breast cancer.</li>
+        <li>Your mom has two copies of the gene: one mutated (bad) and one normal (good). She can pass either copy to you.</li>
+        <li>If your mom passes you the normal copy, and your dad passes you a normal copy too, then you do not inherit the mutation.</li>
+        <li>This is why sometimes it looks like the mutation “skips” a generation — it just wasn’t passed on in that family line.</li>
+        <li>Also, a father can carry the BRCA mutation and pass it to you, even if he doesn’t get breast cancer himself. This is because men have less breast tissue and lower estrogen levels, so their risk is lower.</li>
+      </ul>
+
+      <h3>Why Is This Important?</h3>
+      <ul>
+        <li>Knowing your family history helps doctors decide if genetic testing might be useful.</li>
+        <li>If you have a BRCA mutation, there are special screenings and steps to reduce your risk.</li>
+        <li>Family members can also learn about their risks and get tested to stay informed.</li>
+      </ul>
+
+      <h3>What You Can Do</h3>
+      <ul>
+        <li>Talk with your family about who has had breast or ovarian cancer.</li>
+        <li>Share this information with your healthcare provider.</li>
+        <li>Ask if genetic counseling or testing is right for you.</li>
+      </ul>
+    `,
     tags: ["Genetics", "Family History", "Ghana"]
   }, {
     id: 3,
@@ -123,7 +178,7 @@ const educationalContent = {
       <div className="space-y-6">
         <p><strong>Why it matters:</strong> Regular self-exams help you notice changes early between clinic visits.</p>
 
-        <div>
+        <div id="self-exam-video">
           <h3 className="font-semibold mb-3">Watch: Step-by-step Self-Examination</h3>
           <AspectRatio ratio={16 / 9}>
             <iframe
@@ -301,6 +356,16 @@ export default function Education() {
     return [...educationalContent["risk-factors"], ...educationalContent.prevention, ...educationalContent.support];
   };
   const filteredArticles = getAllArticles().filter(article => article.title.toLowerCase().includes(searchTerm.toLowerCase()) || article.description.toLowerCase().includes(searchTerm.toLowerCase()) || article.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())));
+
+  useEffect(() => {
+    if (selectedArticle?.title === "Monthly Self-Examination Guide") {
+      // Delay to ensure content is mounted before scrolling
+      setTimeout(() => {
+        const el = document.getElementById("self-exam-video");
+        el?.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  }, [selectedArticle]);
   if (selectedArticle) {
     return <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 py-8">
         <div className="container mx-auto px-4 max-w-3xl">
@@ -466,7 +531,7 @@ export default function Education() {
                           <Button asChild size="sm" className="bg-gradient-primary">
                             <Link to="/family-history">Start Risk Assessment</Link>
                           </Button>
-                          <Button asChild variant="outline" size="sm">
+                          <Button asChild size="sm" className="bg-gradient-primary">
                             <Link to="/symptoms">Track Symptoms</Link>
                           </Button>
                           <Button asChild variant="secondary" size="sm">
