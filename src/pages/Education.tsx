@@ -298,15 +298,70 @@ const educationalContent = {
     `,
     tags: ["Family", "Communication", "Genetics"]
   }, {
-    id: 9,
-    title: "Managing Anxiety About Cancer Risk",
-    description: "Coping strategies for dealing with worry and anxiety about breast cancer",
-    readTime: "5 min read",
-    category: "Mental Health",
-    content: "It's natural to feel anxious about cancer risk. Here are healthy ways to manage these feelings...",
-    tags: ["Anxiety", "Mental Health", "Coping"]
-  }]
-};
+     id: 9,
+     title: "Managing Anxiety About Cancer Risk",
+     description: "Coping strategies for dealing with worry and anxiety about breast cancer",
+     readTime: "5 min read",
+     category: "Mental Health",
+     content: `
+       <p>It’s natural to feel worried or anxious if you’re thinking about breast cancer risk, especially if it runs in your family or you’re learning new information about your health.</p>
+
+       <h3>Why Anxiety Happens</h3>
+       <ul>
+         <li>Fear of the unknown or what might happen can cause stress.</li>
+         <li>Thinking about cancer risk can feel overwhelming at times.</li>
+         <li>Anxiety is a normal reaction, but it doesn’t have to control you.</li>
+       </ul>
+
+       <h3>Coping Strategies to Help You Feel Stronger</h3>
+       <ol>
+         <li>
+           <p><strong>Get Informed, But Take It Slow</strong></p>
+           <ul>
+             <li>Learning about breast cancer helps you feel more in control.</li>
+             <li>But too much information at once can be overwhelming. Take breaks and ask questions.</li>
+           </ul>
+         </li>
+         <li>
+           <p><strong>Talk About Your Feelings</strong></p>
+           <ul>
+             <li>Share your worries with someone you trust: a family member, friend, or counselor.</li>
+             <li>Sometimes just talking helps ease your mind.</li>
+           </ul>
+         </li>
+         <li>
+           <p><strong>Practice Relaxation Techniques</strong></p>
+           <ul>
+             <li>Try deep breathing, meditation, or gentle stretching to calm your body and mind.</li>
+             <li>Even a few minutes a day can help reduce stress.</li>
+           </ul>
+         </li>
+         <li>
+           <p><strong>Stay Active</strong></p>
+           <ul>
+             <li>Physical activity is a natural way to reduce anxiety and improve mood.</li>
+             <li>Find exercises you enjoy, like walking, dancing, or gardening.</li>
+           </ul>
+         </li>
+         <li>
+           <p><strong>Focus on What You Can Control</strong></p>
+           <ul>
+             <li>You can’t change your genes or family history, but you can make healthy lifestyle choices and attend screenings.</li>
+             <li>Celebrate the positive steps you take every day.</li>
+           </ul>
+         </li>
+         <li>
+           <p><strong>Seek Professional Help If Needed</strong></p>
+           <ul>
+             <li>If anxiety feels too heavy or hard to manage, talk to a healthcare professional.</li>
+             <li>Therapists and counselors can provide support and tools to help.</li>
+           </ul>
+         </li>
+       </ol>
+     `,
+     tags: ["Anxiety", "Mental Health", "Coping"]
+   }]
+ };
 const featuredResources = [{
   title: "Ghana Breast Society (GBS)",
   description: "Official professional society with breast cancer resources and updates in Ghana",
@@ -447,7 +502,7 @@ export default function Education() {
                       Learn More: Triple‑Negative Breast Cancer (TNBC)
                     </h2>
                   </AccordionTrigger>
-                  <AccordionContent className="mt-4">
+                  <AccordionContent className="mt-6 md:mt-8">
                     <article>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
                         <div className="md:col-span-2">
