@@ -30,7 +30,85 @@ const educationalContent = {
     description: "Modifiable risk factors including diet, exercise, and environmental considerations",
     readTime: "6 min read",
     category: "Prevention",
-    content: "This population‑based study of 3,200+ Ghanaian women examined how childbirth and breastfeeding relate to risk across tumor subtypes. Under 50: higher parity increased ER‑negative risk, but extended breastfeeding (≥13 months per child) helped offset it. Age 50+: more births and longer breastfeeding reduced risk across subtypes; ≥3 births with ≥13 months per child was most protective. TNBC was more common in younger women and linked to higher parity without extended breastfeeding; luminal A‑like tumors were more common in older women and strongly reduced by extended breastfeeding. Trends (1945–1975 cohorts) showed fewer births, slightly older first birth, and a dip then rise in breastfeeding—patterns that may shift subtype incidence. Public health: promote extended breastfeeding, educate younger women, and tailor screening to Ghana’s context. Based on a large population‑based study in Ghana.",
+    content: `
+<ol>
+  <li>
+    <p><strong>Food and Eating Habits</strong></p>
+    <p><strong>Negative Effect:</strong> Diets high in fried foods, sugary snacks, red meat, and processed foods can cause inflammation and make it easier for cancer cells to grow.</p>
+    <p><strong>What You Can Do:</strong></p>
+    <ul>
+      <li>Eat more fruits, vegetables, whole grains, and beans.</li>
+      <li>Choose healthy fats (nuts, seeds, olive oil) instead of fried or greasy foods.</li>
+      <li>Limit alcohol to no more than 1 drink per day—or avoid it.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Physical Activity</strong></p>
+    <p><strong>Negative Effect:</strong> Sitting too much can lead to weight gain and higher estrogen levels, which can feed some breast cancers.</p>
+    <p><strong>What You Can Do:</strong></p>
+    <ul>
+      <li>Be active for at least 30 minutes, 5 days a week.</li>
+      <li>Activities can include walking, dancing, cleaning, playing sports, or gardening.</li>
+      <li>Break it up into shorter sessions if needed—every bit counts.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Body Weight</strong></p>
+    <p><strong>Negative Effect:</strong> After menopause, extra body fat produces more estrogen, increasing breast cancer risk.</p>
+    <p><strong>What You Can Do:</strong></p>
+    <ul>
+      <li>Balance what you eat with how much you move.</li>
+      <li>Make small changes—like reducing sugary drinks or walking after meals.</li>
+      <li>Even losing 5–10% of your body weight can improve health.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Alcohol</strong></p>
+    <p><strong>Negative Effect:</strong> Alcohol can damage DNA in cells and change hormone levels, raising risk.</p>
+    <p><strong>What You Can Do:</strong></p>
+    <ul>
+      <li>Limit alcohol to 0–1 drink per day.</li>
+      <li>Try alcohol-free days each week or choose non-alcoholic drinks.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Smoking</strong></p>
+    <p><strong>Negative Effect:</strong> Tobacco contains chemicals that damage DNA and weaken the immune system.</p>
+    <p><strong>What You Can Do:</strong></p>
+    <ul>
+      <li>Quit smoking—talk to a doctor, join a support group, or use quit programs.</li>
+      <li>Avoid secondhand smoke when possible.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Hormone Medicines After Menopause (HRT)</strong></p>
+    <p><strong>Negative Effect:</strong> Long-term use of combined estrogen + progesterone can increase risk.</p>
+    <p><strong>What You Can Do:</strong></p>
+    <ul>
+      <li>Ask your doctor about non-hormonal treatments for menopause symptoms.</li>
+      <li>If you need hormones, use the lowest dose for the shortest time possible.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Breastfeeding and Pregnancy</strong></p>
+    <p><strong>Negative Effect:</strong> Not breastfeeding or having children later in life may slightly increase risk (though this is not always in your control).</p>
+    <p><strong>What You Can Do:</strong></p>
+    <ul>
+      <li>If possible, breastfeed for at least 6–12 months.</li>
+      <li>Support others who choose to breastfeed.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Sleep and Night Shifts</strong></p>
+    <p><strong>Negative Effect:</strong> Working at night for many years may disturb hormones like melatonin, which help protect cells from damage.</p>
+    <p><strong>What You Can Do:</strong></p>
+    <ul>
+      <li>Keep a regular sleep routine even during the day.</li>
+      <li>Use blackout curtains, earplugs, or eye masks to improve rest.</li>
+    </ul>
+  </li>
+</ol>
+    `,
     tags: ["Lifestyle", "Prevention", "Diet"]
   }],
   "prevention": [{
@@ -153,9 +231,11 @@ export default function Education() {
               <CardDescription className="text-lg">{selectedArticle.description}</CardDescription>
             </CardHeader>
             <CardContent className="prose prose-slate max-w-none">
-              <p className="text-foreground leading-relaxed text-base">
-                {selectedArticle.content}
-              </p>
+              {typeof selectedArticle.content === "string" ? (
+                <div className="text-foreground leading-relaxed text-base" dangerouslySetInnerHTML={{ __html: selectedArticle.content }} />
+              ) : (
+                <div className="text-foreground leading-relaxed text-base">{selectedArticle.content}</div>
+              )}
               
               <div className="mt-8 p-6 bg-muted/50 rounded-lg">
                 <h3 className="font-semibold mb-3">Key Takeaways:</h3>
