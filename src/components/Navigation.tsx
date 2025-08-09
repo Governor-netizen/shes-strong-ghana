@@ -59,14 +59,14 @@ export function Navigation() {
             key={item.href}
             to={item.href}
             onClick={onItemClick}
-            className={cn(
-              "flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200",
-              mobile ? "w-full" : "text-sm",
-              isActive
-                ? "bg-primary text-primary-foreground shadow-medical"
-                : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
-            )}
-          >
+             className={cn(
+               "px-4 py-3 rounded-lg transition-all duration-200",
+               mobile ? "w-full flex flex-col items-start gap-2" : "flex items-center gap-3 text-sm",
+               isActive
+                 ? "bg-primary text-primary-foreground shadow-medical"
+                 : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+             )}
+           >
             <item.icon className="h-5 w-5" />
             <div className={mobile ? "text-left" : "hidden lg:block"}>
               <div className="font-medium">{item.title}</div>
@@ -118,7 +118,7 @@ export function Navigation() {
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="right" className="w-80">
+              <SheetContent side="left" className="w-80">
                 <div className="flex flex-col gap-4 mt-8">
                   <div className="flex items-center gap-2 mb-4">
                     <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">

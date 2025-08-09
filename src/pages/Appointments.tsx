@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -78,6 +78,20 @@ export default function Appointments() {
   const [notes, setNotes] = useState("");
   const { toast } = useToast();
   const location = useLocation();
+
+  // Refs for smooth scroll and focusing the first field
+  const bookingFormRef = useRef<HTMLDivElement | null>(null);
+  const typeTriggerRef = useRef<HTMLButtonElement | null>(null);
+
+  const openAndScrollToForm = () => {
+    setShowBookingForm(true);
+    // Wait for the form to render, then scroll and focus
+    setTimeout(() => {
+      bookingFormRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+      try { typeTriggerRef.current?.focus(); } catch { /* noop */ }
+    }, 50);
+  };
+
   useEffect(() => {
     const state = (location.state as any) || {};
     if (state.fromRiskAssessment) {
@@ -85,6 +99,11 @@ export default function Appointments() {
       const defaultType = state.riskLevel === "high" ? "consultation" : "screening";
       setSelectedType(defaultType);
       setNotes(`From risk assessment: ${state.riskLevel} risk.`);
+    }
+
+    // Support deep-linking to /appointments#book
+    if (location.hash === "#book") {
+      openAndScrollToForm();
     }
     // We only want to run this once on mount
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -153,7 +172,7 @@ export default function Appointments() {
               <h1 className="text-2xl font-bold">Appointments</h1>
             </div>
             <Button 
-              onClick={() => setShowBookingForm(!showBookingForm)}
+              onClick={openAndScrollToForm}
               className="bg-gradient-primary"
             >
               <Plus className="h-4 w-4 mr-2" />
@@ -215,7 +234,7 @@ export default function Appointments() {
 
         {/* Booking Form */}
         {showBookingForm && (
-          <Card className="mb-8 shadow-medical bg-gradient-card">
+          <Card ref={bookingFormRef} className="mb-8 shadow-medical bg-gradient-card">
             <CardHeader>
               <CardTitle>Book New Appointment</CardTitle>
               <CardDescription>Schedule your medical appointment</CardDescription>
@@ -224,10 +243,10 @@ export default function Appointments() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <Label>Appointment Type</Label>
-                  <Select value={selectedType} onValueChange={setSelectedType}>
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select appointment type" />
-                    </SelectTrigger>
+                    <Select value={selectedType} onValueChange={setSelectedType}>
+                      <SelectTrigger ref={typeTriggerRef}>
+                        <SelectValue placeholder="Select appointment type" />
+                      </SelectTrigger>
                     <SelectContent>
                       {appointmentTypes.map((type) => (
                         <SelectItem key={type.value} value={type.value}>
