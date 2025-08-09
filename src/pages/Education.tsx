@@ -40,44 +40,44 @@ const educationalContent = {
     description: "Exploring hereditary factors and family history patterns specific to Ghanaian populations",
     readTime: "7 min read",
     category: "Genetics",
-    content: `
+      content: `
       <p>Some breast cancers happen because of changes (called mutations) in certain genes that can run in families. The most well-known genes linked to triple-negative breast cancer are called <strong>BRCA1</strong> and <strong>BRCA2</strong>.</p>
 
       <h3>What Are BRCA Genes?</h3>
       <ul>
         <li><strong>BRCA1 and BRCA2</strong> are genes that help protect your cells from growing uncontrollably.</li>
-        <li>If these genes have harmful changes (mutations), they increase the risk of breast and ovarian cancers.</li>
+        <li><strong>Harmful changes (mutations)</strong> in these genes <strong>increase the risk</strong> of breast and ovarian cancers.</li>
         <li>Not everyone with breast cancer has BRCA mutations, but for some families, these gene changes are important.</li>
       </ul>
 
       <h3>How Breast Cancer Can Run in Families</h3>
       <ul>
-        <li>If a close family member has breast cancer, your risk might be higher.</li>
-        <li>But it’s not always straightforward—it depends on which side of the family the gene comes from and who inherited it.</li>
+        <li>If a <strong>close family member</strong> has breast cancer, your risk might be higher.</li>
+        <li>Risk depends on <strong>which side of the family</strong> the gene comes from and <strong>who inherited it</strong>.</li>
       </ul>
 
       <h3>Example: How You Can Inherit BRCA Gene Changes</h3>
       <ul>
-        <li>Imagine your grandmother has a BRCA mutation. She can pass it on to her children.</li>
+        <li>Imagine your grandmother has a <strong>BRCA mutation</strong>. She can pass it on to her children.</li>
         <li>Your aunt (your grandmother’s daughter) or your mom might have inherited the gene and developed breast cancer.</li>
-        <li>Your mom has two copies of the gene: one mutated (bad) and one normal (good). She can pass either copy to you.</li>
-        <li>If your mom passes you the normal copy, and your dad passes you a normal copy too, then you do not inherit the mutation.</li>
-        <li>This is why sometimes it looks like the mutation “skips” a generation — it just wasn’t passed on in that family line.</li>
-        <li>Also, a father can carry the BRCA mutation and pass it to you, even if he doesn’t get breast cancer himself. This is because men have less breast tissue and lower estrogen levels, so their risk is lower.</li>
+        <li>Your mom has two copies of the gene: one <strong>mutated (bad)</strong> and one <strong>normal (good)</strong>. She can pass either copy to you.</li>
+        <li>If your mom passes you the <strong>normal copy</strong>, and your dad passes you a normal copy too, then you do not inherit the mutation.</li>
+        <li>This is why sometimes it looks like the mutation <strong>“skips” a generation</strong> — it just wasn’t passed on in that family line.</li>
+        <li>Also, a father can carry the BRCA mutation and pass it to you, even if he doesn’t get breast cancer himself.</li>
       </ul>
 
       <h3>Why Is This Important?</h3>
       <ul>
-        <li>Knowing your family history helps doctors decide if genetic testing might be useful.</li>
-        <li>If you have a BRCA mutation, there are special screenings and steps to reduce your risk.</li>
-        <li>Family members can also learn about their risks and get tested to stay informed.</li>
+        <li><strong>Knowing your family history</strong> helps doctors decide if genetic testing might be useful.</li>
+        <li>If you have a <strong>BRCA mutation</strong>, there are <strong>special screenings</strong> and steps to <strong>reduce your risk</strong>.</li>
+        <li><strong>Family members</strong> can also learn about their risks and get tested to stay informed.</li>
       </ul>
 
       <h3>What You Can Do</h3>
       <ul>
-        <li>Talk with your family about who has had breast or ovarian cancer.</li>
-        <li>Share this information with your healthcare provider.</li>
-        <li>Ask if genetic counseling or testing is right for you.</li>
+        <li><strong>Talk with your family</strong> about who has had breast or ovarian cancer.</li>
+        <li><strong>Share</strong> this information with your healthcare provider.</li>
+        <li><strong>Ask</strong> if genetic counseling or testing is right for you.</li>
       </ul>
     `,
     tags: ["Genetics", "Family History", "Ghana"]
@@ -249,34 +249,34 @@ const educationalContent = {
     description: "Foods and dietary patterns that may help reduce breast cancer risk",
     readTime: "8 min read",
     category: "Nutrition",
-    content: `
+      content: `
       <p><strong>Foods That May Help Reduce Breast Cancer Risk</strong></p>
 
-      <h3>1. Fruits and Vegetables</h3>
+      <h3 class="text-lg md:text-xl font-semibold">1. Fruits and Vegetables</h3>
       <ul>
         <li><strong>Examples:</strong> Mangoes, papayas, pineapples, oranges, guava, avocados, tomatoes, garden eggs (eggplants), okra, spinach, kale, and other leafy greens (kontomire).</li>
         <li><strong>Why?</strong> They are full of vitamins, antioxidants, and fiber that protect cells and keep your immune system strong.</li>
       </ul>
 
-      <h3>2. Whole Grains and Legumes</h3>
+      <h3 class="text-lg md:text-xl font-semibold">2. Whole Grains and Legumes</h3>
       <ul>
         <li><strong>Examples:</strong> Brown rice, millet, maize (corn), sorghum, beans, cowpeas, lentils, groundnuts (peanuts).</li>
         <li><strong>Why?</strong> These foods are rich in fiber and nutrients that support digestion and help keep your hormones balanced.</li>
       </ul>
 
-      <h3>3. Healthy Fats</h3>
+      <h3 class="text-lg md:text-xl font-semibold">3. Healthy Fats</h3>
       <ul>
         <li><strong>Examples:</strong> Palm oil (used in moderation), avocado, nuts like groundnuts and cashews, and seeds such as flaxseeds or chia seeds (if available).</li>
         <li><strong>Why?</strong> Healthy fats support cell health and can reduce inflammation. Avoid too much fried or processed fat.</li>
       </ul>
 
-      <h3>4. Fish and Lean Proteins</h3>
+      <h3 class="text-lg md:text-xl font-semibold">4. Fish and Lean Proteins</h3>
       <ul>
         <li><strong>Examples:</strong> Fresh fish (tilapia, sardines), lean chicken, eggs.</li>
         <li><strong>Why?</strong> Protein helps repair body tissues and supports the immune system.</li>
       </ul>
 
-      <h3>Eating Tips for Breast Health</h3>
+      <h3 class="text-lg md:text-xl font-semibold">Eating Tips for Breast Health</h3>
       <ul>
         <li>Limit alcohol — if you drink, keep it to no more than one drink per day or avoid it.</li>
         <li>Avoid too much fried or processed food like indomie, excessive fried fish, or heavily processed snacks.</li>
@@ -284,7 +284,7 @@ const educationalContent = {
         <li>Drink plenty of water every day to help your body stay healthy.</li>
       </ul>
 
-      <h3>Sample Ghanaian Meal for Breast Health</h3>
+      <h3 class="text-lg md:text-xl font-semibold">Sample Ghanaian Meal for Breast Health</h3>
       <ul>
         <li><strong>Breakfast:</strong> Oats porridge or hausa koko with a side of fresh mango or banana slices.</li>
         <li><strong>Lunch:</strong> Brown rice or millet with garden egg stew and steamed kontomire.</li>
@@ -343,7 +343,50 @@ const educationalContent = {
     description: "Creating a strong support system during your health journey",
     readTime: "6 min read",
     category: "Emotional Health",
-    content: "Support saves lives. In Ghana, emotional, informational, financial, and spiritual support improved patients’ wellbeing and treatment outcomes. Nurses and doctors offered guidance on side effects and self‑care; families, friends, and faith communities provided encouragement; some patients received financial help while others struggled, even selling belongings to continue care. Lack of support led to distress, delays, and worse outcomes. Building strong support networks—and normalizing requests for help—should be seen as part of care, not an extra. Based on “Availability, Accessibility, and Impact of Social Support on Breast Cancer Treatment in Kumasi, Ghana.”",
+    content: `
+      <p><strong>Building Your Support Network</strong></p>
+      <p>Creating a strong support system during your health journey is an important part of caring for your emotional and practical needs. A strong network can:</p>
+      <ul>
+        <li><strong>Provide emotional encouragement</strong> during stressful or uncertain times.</li>
+        <li><strong>Offer practical help</strong>, such as driving to appointments, assisting with daily tasks, or helping manage medical paperwork.</li>
+        <li><strong>Share reliable information</strong> and connect you to helpful resources.</li>
+      </ul>
+
+      <h3>Steps to Build Your Support System</h3>
+      <ol>
+        <li>
+          <p><strong>Identify Your Circle</strong></p>
+          <ul>
+            <li>Include family, friends, coworkers, and community members who can offer help or companionship.</li>
+          </ul>
+        </li>
+        <li>
+          <p><strong>Connect with Support Groups</strong></p>
+          <ul>
+            <li>Look for in-person or online groups where you can meet people going through similar experiences.</li>
+            <li>Follow this link to join our online support group and connect with others who understand your journey: <a href="#" target="_blank" rel="noopener noreferrer">Join the Support Group</a></li>
+          </ul>
+        </li>
+        <li>
+          <p><strong>Use Your Care Team</strong></p>
+          <ul>
+            <li>Your doctors, nurses, and patient navigators can connect you to local services and educational programs.</li>
+          </ul>
+        </li>
+        <li>
+          <p><strong>Communicate Your Needs</strong></p>
+          <ul>
+            <li>Let your network know what kind of help would be most valuable to you—whether it’s listening, running errands, or providing health updates to others.</li>
+          </ul>
+        </li>
+        <li>
+          <p><strong>Stay in Touch</strong></p>
+          <ul>
+            <li>Regular check-ins help maintain relationships and keep your support team engaged in your journey.</li>
+          </ul>
+        </li>
+      </ol>
+    `,
     tags: ["Support", "Mental Health", "Community"]
   }, {
     id: 8,
@@ -602,7 +645,7 @@ export default function Education() {
                 <ul className="space-y-2">
                   {getTakeawaysFor(selectedArticle.title).map((point, idx) => (
                     <li key={idx} className="flex items-start gap-2">
-                      <CheckCircle className="h-5 w-5 text-success mt-0.5" />
+                      <CheckCircle className="h-6 w-6 text-success mt-0.5" />
                       <span>{point}</span>
                     </li>
                   ))}
