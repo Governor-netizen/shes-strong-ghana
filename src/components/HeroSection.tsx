@@ -35,7 +35,7 @@ export function HeroSection() {
       <section className="container mx-auto px-4 pt-20 pb-16">
         <div className="text-center max-w-4xl mx-auto">
           <div className="flex justify-center mb-6">
-            <img src="/lovable-uploads/6f5d86f1-d967-4b49-b3e1-7bfa5dfa3241.png" alt="She's Strong Ghana logo — heart with ribbon" className="h-16 w-16 md:h-20 md:w-20 object-contain" loading="eager" width={80} height={80} />
+            <img src="/lovable-uploads/6f5d86f1-d967-4b49-b3e1-7bfa5dfa3241.png" alt="She's Strong Ghana logo — heart with ribbon" className="h-20 w-20 md:h-28 md:w-28 object-contain" loading="eager" width={112} height={112} />
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-hero bg-clip-text text-transparent animate-fade-in">
