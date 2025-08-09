@@ -4,194 +4,139 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { 
-  BookOpen, 
-  Search, 
-  Heart, 
-  Shield, 
-  AlertTriangle, 
-  CheckCircle,
-  ExternalLink,
-  Clock,
-  Users,
-  Award
-} from "lucide-react";
+import { BookOpen, Search, Heart, Shield, AlertTriangle, CheckCircle, ExternalLink, Clock, Users, Award } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSEO } from "@/hooks/useSEO";
-
 const educationalContent = {
-  "risk-factors": [
-    {
-      id: 1,
-      title: "Understanding Triple-Negative Breast Cancer",
-      description: "Learn about this aggressive form of breast cancer and why early detection is crucial",
-      readTime: "5 min read",
-      category: "Basics",
-      content: "Triple-Negative Breast Cancer (TNBC) is one of the most aggressive forms—fast-growing, harder to treat, and more common in younger women and those of African ancestry. TNBC does not respond to hormone therapies, so chemotherapy is often the mainstay. There is hope: newer targeted options like PARP inhibitors and immunotherapy show benefit, especially for people with BRCA mutations. Early detection, knowing your risk, and staying informed can make a real difference. Based on “An Overview of Triple‑Negative Breast Cancer” by Pankaj Kumar & Rupali Aggarwal.",
-      tags: ["TNBC", "Basics", "Detection"]
-    },
-    {
-      id: 2,
-      title: "Genetic Risk Factors in Ghanaian Women",
-      description: "Exploring hereditary factors and family history patterns specific to Ghanaian populations",
-      readTime: "7 min read",
-      category: "Genetics",
-      content: "Women of African ancestry—especially Ghanaian women—face a disproportionately high risk of triple‑negative breast cancer (TNBC). A landmark analysis found 82% of Ghanaian breast cancer cases were TNBC, versus 26% in African Americans and 16% in white Americans. Ghanaian women were diagnosed younger (average age ~48) and with more aggressive tumors (76% grade 3). These patterns point to genetic contributors beyond socioeconomic factors and underline the need for targeted research, earlier detection, and broader access to genetic testing. Based on “African Ancestry and Higher Prevalence of Triple‑Negative Breast Cancer” by Azadeh Stark et al., Cancer (2010).",
-      tags: ["Genetics", "Family History", "Ghana"]
-    },
-    {
-      id: 3,
-      title: "Lifestyle Factors That Impact Risk",
-      description: "Modifiable risk factors including diet, exercise, and environmental considerations",
-      readTime: "6 min read",
-      category: "Prevention",
-      content: "This population‑based study of 3,200+ Ghanaian women examined how childbirth and breastfeeding relate to risk across tumor subtypes. Under 50: higher parity increased ER‑negative risk, but extended breastfeeding (≥13 months per child) helped offset it. Age 50+: more births and longer breastfeeding reduced risk across subtypes; ≥3 births with ≥13 months per child was most protective. TNBC was more common in younger women and linked to higher parity without extended breastfeeding; luminal A‑like tumors were more common in older women and strongly reduced by extended breastfeeding. Trends (1945–1975 cohorts) showed fewer births, slightly older first birth, and a dip then rise in breastfeeding—patterns that may shift subtype incidence. Public health: promote extended breastfeeding, educate younger women, and tailor screening to Ghana’s context. Based on a large population‑based study in Ghana.",
-      tags: ["Lifestyle", "Prevention", "Diet"]
-    }
-  ],
-  "prevention": [
-    {
-      id: 4,
-      title: "Monthly Self-Examination Guide",
-      description: "Step-by-step instructions for performing breast self-examinations at home",
-      readTime: "4 min read",
-      category: "Self-Care",
-      content: "Regular self-examination is a crucial part of early detection. Here's how to perform it correctly...",
-      tags: ["Self-Exam", "Early Detection", "Self-Care"]
-    },
-    {
-      id: 5,
-      title: "Nutrition for Breast Health",
-      description: "Foods and dietary patterns that may help reduce breast cancer risk",
-      readTime: "8 min read",
-      category: "Nutrition",
-      content: "A healthy diet rich in fruits, vegetables, and whole grains may help reduce cancer risk...",
-      tags: ["Nutrition", "Prevention", "Diet"]
-    },
-    {
-      id: 6,
-      title: "Exercise and Breast Cancer Prevention",
-      description: "How physical activity can reduce your risk and improve overall health",
-      readTime: "5 min read",
-      category: "Exercise",
-      content: "Regular physical activity is one of the most effective ways to reduce breast cancer risk...",
-      tags: ["Exercise", "Prevention", "Health"]
-    }
-  ],
-  "support": [
-    {
-      id: 7,
-      title: "Building Your Support Network",
-      description: "Creating a strong support system during your health journey",
-      readTime: "6 min read",
-      category: "Emotional Health",
-      content: "Support saves lives. In Ghana, emotional, informational, financial, and spiritual support improved patients’ wellbeing and treatment outcomes. Nurses and doctors offered guidance on side effects and self‑care; families, friends, and faith communities provided encouragement; some patients received financial help while others struggled, even selling belongings to continue care. Lack of support led to distress, delays, and worse outcomes. Building strong support networks—and normalizing requests for help—should be seen as part of care, not an extra. Based on “Availability, Accessibility, and Impact of Social Support on Breast Cancer Treatment in Kumasi, Ghana.”",
-      tags: ["Support", "Mental Health", "Community"]
-    },
-    {
-      id: 8,
-      title: "Talking to Family About Cancer Risk",
-      description: "How to have important conversations about family history and genetic testing",
-      readTime: "7 min read",
-      category: "Communication",
-      content: "Cultural, religious, and spiritual beliefs in Ghana powerfully shape how women perceive and respond to breast symptoms. Some view cancer as a curse or spiritual attack, seek help first from traditional healers or prayer camps, or believe it is contagious or incurable—delaying diagnosis and treatment. Compassionate, culturally sensitive education and open family conversations can dispel myths and encourage timely medical care. Based on the review “Socio‑cultural beliefs and perceptions influencing diagnosis and treatment of breast cancer among women in Ghana.”",
-      tags: ["Family", "Communication", "Genetics"]
-    },
-    {
-      id: 9,
-      title: "Managing Anxiety About Cancer Risk",
-      description: "Coping strategies for dealing with worry and anxiety about breast cancer",
-      readTime: "5 min read",
-      category: "Mental Health",
-      content: "It's natural to feel anxious about cancer risk. Here are healthy ways to manage these feelings...",
-      tags: ["Anxiety", "Mental Health", "Coping"]
-    }
-  ]
+  "risk-factors": [{
+    id: 1,
+    title: "Understanding Triple-Negative Breast Cancer",
+    description: "Learn about this aggressive form of breast cancer and why early detection is crucial",
+    readTime: "5 min read",
+    category: "Basics",
+    content: "Triple-Negative Breast Cancer (TNBC) is one of the most aggressive forms—fast-growing, harder to treat, and more common in younger women and those of African ancestry. TNBC does not respond to hormone therapies, so chemotherapy is often the mainstay. There is hope: newer targeted options like PARP inhibitors and immunotherapy show benefit, especially for people with BRCA mutations. Early detection, knowing your risk, and staying informed can make a real difference. Based on “An Overview of Triple‑Negative Breast Cancer” by Pankaj Kumar & Rupali Aggarwal.",
+    tags: ["TNBC", "Basics", "Detection"]
+  }, {
+    id: 2,
+    title: "Genetic Risk Factors in Ghanaian Women",
+    description: "Exploring hereditary factors and family history patterns specific to Ghanaian populations",
+    readTime: "7 min read",
+    category: "Genetics",
+    content: "Women of African ancestry—especially Ghanaian women—face a disproportionately high risk of triple‑negative breast cancer (TNBC). A landmark analysis found 82% of Ghanaian breast cancer cases were TNBC, versus 26% in African Americans and 16% in white Americans. Ghanaian women were diagnosed younger (average age ~48) and with more aggressive tumors (76% grade 3). These patterns point to genetic contributors beyond socioeconomic factors and underline the need for targeted research, earlier detection, and broader access to genetic testing. Based on “African Ancestry and Higher Prevalence of Triple‑Negative Breast Cancer” by Azadeh Stark et al., Cancer (2010).",
+    tags: ["Genetics", "Family History", "Ghana"]
+  }, {
+    id: 3,
+    title: "Lifestyle Factors That Impact Risk",
+    description: "Modifiable risk factors including diet, exercise, and environmental considerations",
+    readTime: "6 min read",
+    category: "Prevention",
+    content: "This population‑based study of 3,200+ Ghanaian women examined how childbirth and breastfeeding relate to risk across tumor subtypes. Under 50: higher parity increased ER‑negative risk, but extended breastfeeding (≥13 months per child) helped offset it. Age 50+: more births and longer breastfeeding reduced risk across subtypes; ≥3 births with ≥13 months per child was most protective. TNBC was more common in younger women and linked to higher parity without extended breastfeeding; luminal A‑like tumors were more common in older women and strongly reduced by extended breastfeeding. Trends (1945–1975 cohorts) showed fewer births, slightly older first birth, and a dip then rise in breastfeeding—patterns that may shift subtype incidence. Public health: promote extended breastfeeding, educate younger women, and tailor screening to Ghana’s context. Based on a large population‑based study in Ghana.",
+    tags: ["Lifestyle", "Prevention", "Diet"]
+  }],
+  "prevention": [{
+    id: 4,
+    title: "Monthly Self-Examination Guide",
+    description: "Step-by-step instructions for performing breast self-examinations at home",
+    readTime: "4 min read",
+    category: "Self-Care",
+    content: "Regular self-examination is a crucial part of early detection. Here's how to perform it correctly...",
+    tags: ["Self-Exam", "Early Detection", "Self-Care"]
+  }, {
+    id: 5,
+    title: "Nutrition for Breast Health",
+    description: "Foods and dietary patterns that may help reduce breast cancer risk",
+    readTime: "8 min read",
+    category: "Nutrition",
+    content: "A healthy diet rich in fruits, vegetables, and whole grains may help reduce cancer risk...",
+    tags: ["Nutrition", "Prevention", "Diet"]
+  }, {
+    id: 6,
+    title: "Exercise and Breast Cancer Prevention",
+    description: "How physical activity can reduce your risk and improve overall health",
+    readTime: "5 min read",
+    category: "Exercise",
+    content: "Regular physical activity is one of the most effective ways to reduce breast cancer risk...",
+    tags: ["Exercise", "Prevention", "Health"]
+  }],
+  "support": [{
+    id: 7,
+    title: "Building Your Support Network",
+    description: "Creating a strong support system during your health journey",
+    readTime: "6 min read",
+    category: "Emotional Health",
+    content: "Support saves lives. In Ghana, emotional, informational, financial, and spiritual support improved patients’ wellbeing and treatment outcomes. Nurses and doctors offered guidance on side effects and self‑care; families, friends, and faith communities provided encouragement; some patients received financial help while others struggled, even selling belongings to continue care. Lack of support led to distress, delays, and worse outcomes. Building strong support networks—and normalizing requests for help—should be seen as part of care, not an extra. Based on “Availability, Accessibility, and Impact of Social Support on Breast Cancer Treatment in Kumasi, Ghana.”",
+    tags: ["Support", "Mental Health", "Community"]
+  }, {
+    id: 8,
+    title: "Talking to Family About Cancer Risk",
+    description: "How to have important conversations about family history and genetic testing",
+    readTime: "7 min read",
+    category: "Communication",
+    content: "Cultural, religious, and spiritual beliefs in Ghana powerfully shape how women perceive and respond to breast symptoms. Some view cancer as a curse or spiritual attack, seek help first from traditional healers or prayer camps, or believe it is contagious or incurable—delaying diagnosis and treatment. Compassionate, culturally sensitive education and open family conversations can dispel myths and encourage timely medical care. Based on the review “Socio‑cultural beliefs and perceptions influencing diagnosis and treatment of breast cancer among women in Ghana.”",
+    tags: ["Family", "Communication", "Genetics"]
+  }, {
+    id: 9,
+    title: "Managing Anxiety About Cancer Risk",
+    description: "Coping strategies for dealing with worry and anxiety about breast cancer",
+    readTime: "5 min read",
+    category: "Mental Health",
+    content: "It's natural to feel anxious about cancer risk. Here are healthy ways to manage these feelings...",
+    tags: ["Anxiety", "Mental Health", "Coping"]
+  }]
 };
-
-const featuredResources = [
-  {
-    title: "Ghana Breast Society (GBS)",
-    description: "Official professional society with breast cancer resources and updates in Ghana",
-    url: "https://ghbreastsociety.com/",
-    type: "Organization"
-  },
-  {
-    title: "Genetic Counselling Resources (McGill University Library)",
-    description: "Curated guides on genetic counselling and patient support",
-    url: "https://libraryguides.mcgill.ca/human-genetics/genetic-counselling",
-    type: "Guide"
-  }
-];
-
+const featuredResources = [{
+  title: "Ghana Breast Society (GBS)",
+  description: "Official professional society with breast cancer resources and updates in Ghana",
+  url: "https://ghbreastsociety.com/",
+  type: "Organization"
+}, {
+  title: "Genetic Counselling Resources (McGill University Library)",
+  description: "Curated guides on genetic counselling and patient support",
+  url: "https://libraryguides.mcgill.ca/human-genetics/genetic-counselling",
+  type: "Guide"
+}];
 export default function Education() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedArticle, setSelectedArticle] = useState<any>(null);
-
   useSEO({
     title: "Learn More about Triple‑Negative Breast Cancer (TNBC) in Ghana | She’s Strong",
-    description:
-      "TNBC basics, risk, symptoms, screening, and support for women in Ghana. Learn what to watch for and the next steps to protect your health.",
-    canonical: typeof window !== "undefined" ? `${window.location.origin}/education` : "/education",
+    description: "TNBC basics, risk, symptoms, screening, and support for women in Ghana. Learn what to watch for and the next steps to protect your health.",
+    canonical: typeof window !== "undefined" ? `${window.location.origin}/education` : "/education"
   });
-
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: [
-      {
-        "@type": "Question",
-        name: "Is TNBC more aggressive?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text:
-            "It can grow and spread faster than some other types, so early detection is important.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Can lifestyle reduce risk?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text:
-            "Healthy weight, regular activity, limited alcohol, and smoke‑free living support overall breast health.",
-        },
-      },
-      {
-        "@type": "Question",
-        name: "Do all breast lumps mean cancer?",
-        acceptedAnswer: {
-          "@type": "Answer",
-          text:
-            "No—many are benign. Still, any new lump should be checked by a clinician.",
-        },
-      },
-    ],
+    mainEntity: [{
+      "@type": "Question",
+      name: "Is TNBC more aggressive?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "It can grow and spread faster than some other types, so early detection is important."
+      }
+    }, {
+      "@type": "Question",
+      name: "Can lifestyle reduce risk?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Healthy weight, regular activity, limited alcohol, and smoke‑free living support overall breast health."
+      }
+    }, {
+      "@type": "Question",
+      name: "Do all breast lumps mean cancer?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "No—many are benign. Still, any new lump should be checked by a clinician."
+      }
+    }]
   };
-
   const getAllArticles = () => {
-    return [
-      ...educationalContent["risk-factors"],
-      ...educationalContent.prevention,
-      ...educationalContent.support
-    ];
+    return [...educationalContent["risk-factors"], ...educationalContent.prevention, ...educationalContent.support];
   };
-
-  const filteredArticles = getAllArticles().filter(article =>
-    article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    article.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    article.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
-  );
-
+  const filteredArticles = getAllArticles().filter(article => article.title.toLowerCase().includes(searchTerm.toLowerCase()) || article.description.toLowerCase().includes(searchTerm.toLowerCase()) || article.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())));
   if (selectedArticle) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 py-8">
+    return <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 py-8">
         <div className="container mx-auto px-4 max-w-3xl">
-          <Button 
-            variant="outline" 
-            onClick={() => setSelectedArticle(null)}
-            className="mb-6"
-          >
+          <Button variant="outline" onClick={() => setSelectedArticle(null)} className="mb-6">
             ← Back to Education Hub
           </Button>
           
@@ -231,19 +176,14 @@ export default function Education() {
               </div>
 
               <div className="flex flex-wrap gap-2 mt-6">
-                {selectedArticle.tags.map((tag: string) => (
-                  <Badge key={tag} variant="outline">{tag}</Badge>
-                ))}
+                {selectedArticle.tags.map((tag: string) => <Badge key={tag} variant="outline">{tag}</Badge>)}
               </div>
             </CardContent>
           </Card>
         </div>
-      </div>
-    );
+      </div>;
   }
-
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 py-8">
+  return <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 py-8">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="mb-8">
           <div className="flex items-center gap-2 mb-4">
@@ -257,12 +197,7 @@ export default function Education() {
           {/* Search */}
           <div className="relative">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              placeholder="Search articles, topics, or tags..."
-              className="pl-10"
-            />
+            <Input value={searchTerm} onChange={e => setSearchTerm(e.target.value)} placeholder="Search articles, topics, or tags..." className="pl-10" />
           </div>
         </div>
 
@@ -291,12 +226,7 @@ export default function Education() {
                     </section>
                   </div>
                   <div>
-                    <img
-                      src="/lovable-uploads/9b92abbb-cd8a-4ebc-9559-42ec68c756e9.png"
-                      alt="Illustration of breast cancer cell types: HR+, HER2+, and triple‑negative"
-                      loading="lazy"
-                      className="w-full h-40 md:h-48 object-cover rounded-lg"
-                    />
+                    <img src="/lovable-uploads/9b92abbb-cd8a-4ebc-9559-42ec68c756e9.png" alt="Illustration of breast cancer cell types: HR+, HER2+, and triple‑negative" loading="lazy" className="w-full h-40 md:h-48 object-cover rounded-lg" />
                   </div>
                 </div>
 
@@ -370,10 +300,9 @@ export default function Education() {
                   </div>
                 </section>
               </article>
-              <script
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-              />
+              <script type="application/ld+json" dangerouslySetInnerHTML={{
+              __html: JSON.stringify(faqSchema)
+            }} />
             </CardContent>
           </Card>
         </section>
@@ -436,8 +365,7 @@ export default function Education() {
               
               <TabsContent value="all" className="space-y-6 mt-6">
                 <div className="grid grid-cols-1 gap-6">
-                  {filteredArticles.map((article) => (
-                    <Card key={article.id} className="cursor-pointer hover:shadow-medical transition-shadow bg-gradient-card">
+                  {filteredArticles.map(article => <Card key={article.id} className="cursor-pointer hover:shadow-medical transition-shadow bg-gradient-card">
                       <CardContent className="p-6" onClick={() => setSelectedArticle(article)}>
                         <div className="flex items-start justify-between mb-3">
                           <Badge variant="secondary">{article.category}</Badge>
@@ -449,21 +377,16 @@ export default function Education() {
                         <h3 className="text-lg font-semibold mb-2">{article.title}</h3>
                         <p className="text-muted-foreground mb-4">{article.description}</p>
                         <div className="flex flex-wrap gap-2">
-                          {article.tags.map((tag) => (
-                            <Badge key={tag} variant="outline" className="text-xs">{tag}</Badge>
-                          ))}
+                          {article.tags.map(tag => <Badge key={tag} variant="outline" className="text-xs">{tag}</Badge>)}
                         </div>
                       </CardContent>
-                    </Card>
-                  ))}
+                    </Card>)}
                 </div>
               </TabsContent>
 
-              {Object.entries(educationalContent).map(([category, articles]) => (
-                <TabsContent key={category} value={category} className="space-y-6 mt-6">
+              {Object.entries(educationalContent).map(([category, articles]) => <TabsContent key={category} value={category} className="space-y-6 mt-6">
                   <div className="grid grid-cols-1 gap-6">
-                    {articles.map((article) => (
-                      <Card key={article.id} className="cursor-pointer hover:shadow-medical transition-shadow bg-gradient-card">
+                    {articles.map(article => <Card key={article.id} className="cursor-pointer hover:shadow-medical transition-shadow bg-gradient-card">
                         <CardContent className="p-6" onClick={() => setSelectedArticle(article)}>
                           <div className="flex items-start justify-between mb-3">
                             <Badge variant="secondary">{article.category}</Badge>
@@ -475,16 +398,12 @@ export default function Education() {
                           <h3 className="text-lg font-semibold mb-2">{article.title}</h3>
                           <p className="text-muted-foreground mb-4">{article.description}</p>
                           <div className="flex flex-wrap gap-2">
-                            {article.tags.map((tag) => (
-                              <Badge key={tag} variant="outline" className="text-xs">{tag}</Badge>
-                            ))}
+                            {article.tags.map(tag => <Badge key={tag} variant="outline" className="text-xs">{tag}</Badge>)}
                           </div>
                         </CardContent>
-                      </Card>
-                    ))}
+                      </Card>)}
                   </div>
-                </TabsContent>
-              ))}
+                </TabsContent>)}
             </Tabs>
           </div>
 
@@ -497,15 +416,7 @@ export default function Education() {
                 <CardDescription>External links and organizations</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
-                {featuredResources.map((resource, index) => (
-                  <a
-                    key={index}
-                    href={resource.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block border border-border rounded-lg p-4 hover:bg-muted/50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30"
-                    aria-label={`${resource.title} - opens in a new tab`}
-                  >
+                {featuredResources.map((resource, index) => <a key={index} href={resource.url} target="_blank" rel="noopener noreferrer" className="block border border-border rounded-lg p-4 hover:bg-muted/50 transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30" aria-label={`${resource.title} - opens in a new tab`}>
                     <div className="flex items-start justify-between">
                       <div className="flex-1">
                         <h4 className="font-medium mb-1">{resource.title}</h4>
@@ -514,8 +425,7 @@ export default function Education() {
                       </div>
                       <ExternalLink className="h-4 w-4 text-muted-foreground ml-2" />
                     </div>
-                  </a>
-                ))}
+                  </a>)}
               </CardContent>
             </Card>
 
@@ -546,6 +456,5 @@ export default function Education() {
           </div>
         </div>
       </div>
-    </div>
-  );
+    </div>;
 }
