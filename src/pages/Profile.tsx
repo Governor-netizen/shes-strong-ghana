@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import { 
   User, 
   Save, 
@@ -45,15 +46,91 @@ export default function Profile() {
     bloodType: "",
     allergies: "",
     medications: "",
-    preferredLanguage: "English"
+    preferredLanguage: "English",
   });
 
+  const [loading, setLoading] = useState(false);
+  const [userId, setUserId] = useState<string | null>(null);
+
   const handleChange = (field: keyof UserProfile, value: string) => {
-    setProfile(prev => ({ ...prev, [field]: value }));
+    setProfile((prev) => ({ ...prev, [field]: value }));
   };
 
-  const handleSave = () => {
-    // Here you would typically save to Supabase
+  useEffect(() => {
+    const loadProfile = async () => {
+      const { data: userData } = await supabase.auth.getUser();
+      const uid = userData.user?.id ?? null;
+      setUserId(uid);
+      if (!uid) return;
+
+      const { data, error } = await supabase
+        .from("profiles")
+        .select("*")
+        .eq("id", uid)
+        .maybeSingle();
+
+      if (!error && data) {
+        setProfile({
+          firstName: data.first_name ?? "",
+          lastName: data.last_name ?? "",
+          email: data.email ?? "",
+          phone: data.phone ?? "",
+          dateOfBirth: data.date_of_birth ?? "",
+          address: data.address ?? "",
+          emergencyContact: data.emergency_contact ?? "",
+          emergencyPhone: data.emergency_phone ?? "",
+          bloodType: data.blood_type ?? "",
+          allergies: data.allergies ?? "",
+          medications: data.medications ?? "",
+          preferredLanguage: data.preferred_language ?? "English",
+        });
+      }
+    };
+
+    loadProfile();
+  }, []);
+
+  const handleSave = async () => {
+    setLoading(true);
+    const { data: authData } = await supabase.auth.getUser();
+    const uid = authData.user?.id;
+
+    if (!uid) {
+      setLoading(false);
+      toast({
+        title: "Please sign in",
+        description: "You need to be signed in to save your profile.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    const payload = {
+      id: uid,
+      first_name: profile.firstName || null,
+      last_name: profile.lastName || null,
+      email: profile.email || null,
+      phone: profile.phone || null,
+      date_of_birth: profile.dateOfBirth || null,
+      address: profile.address || null,
+      emergency_contact: profile.emergencyContact || null,
+      emergency_phone: profile.emergencyPhone || null,
+      blood_type: profile.bloodType || null,
+      allergies: profile.allergies || null,
+      medications: profile.medications || null,
+      preferred_language: profile.preferredLanguage || "English",
+      updated_at: new Date().toISOString(),
+    };
+
+    const { error } = await supabase.from("profiles").upsert(payload);
+
+    setLoading(false);
+
+    if (error) {
+      toast({ title: "Save failed", description: error.message, variant: "destructive" });
+      return;
+    }
+
     toast({
       title: "Profile Updated",
       description: "Your profile information has been saved successfully.",
@@ -274,9 +351,9 @@ export default function Profile() {
 
           {/* Save Button */}
           <div className="flex justify-end">
-            <Button onClick={handleSave} className="bg-gradient-primary">
+            <Button onClick={handleSave} className="bg-gradient-primary" disabled={loading}>
               <Save className="h-4 w-4 mr-2" />
-              Save Profile
+              {loading ? "Saving..." : "Save Profile"}
             </Button>
           </div>
         </div>

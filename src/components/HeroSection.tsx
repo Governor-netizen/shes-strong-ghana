@@ -55,11 +55,9 @@ export function HeroSection() {
             She's Strong Ghana
           </h1>
           
-          <ul className="text-lg md:text-xl text-muted-foreground mb-6 space-y-2 text-left mx-auto max-w-2xl">
-            <li>• Early detection and personalized risk insights</li>
-            <li>• Track symptoms and learn what to look for</li>
-            <li>• Connect with trusted care providers</li>
-          </ul>
+          <p className="text-lg md:text-xl text-muted-foreground mb-6 mx-auto max-w-3xl text-center">
+            Empowering women with tools for early detection, risk assessment, and comprehensive care for triple-negative breast cancer.
+          </p>
 
           <div className="flex justify-center mb-8">
             <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm">
