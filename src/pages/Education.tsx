@@ -249,7 +249,49 @@ const educationalContent = {
     description: "Foods and dietary patterns that may help reduce breast cancer risk",
     readTime: "8 min read",
     category: "Nutrition",
-    content: "A healthy diet rich in fruits, vegetables, and whole grains may help reduce cancer risk...",
+    content: `
+      <p><strong>Foods That May Help Reduce Breast Cancer Risk</strong></p>
+
+      <h3>1. Fruits and Vegetables</h3>
+      <ul>
+        <li><strong>Examples:</strong> Mangoes, papayas, pineapples, oranges, guava, avocados, tomatoes, garden eggs (eggplants), okra, spinach, kale, and other leafy greens (kontomire).</li>
+        <li><strong>Why?</strong> They are full of vitamins, antioxidants, and fiber that protect cells and keep your immune system strong.</li>
+      </ul>
+
+      <h3>2. Whole Grains and Legumes</h3>
+      <ul>
+        <li><strong>Examples:</strong> Brown rice, millet, maize (corn), sorghum, beans, cowpeas, lentils, groundnuts (peanuts).</li>
+        <li><strong>Why?</strong> These foods are rich in fiber and nutrients that support digestion and help keep your hormones balanced.</li>
+      </ul>
+
+      <h3>3. Healthy Fats</h3>
+      <ul>
+        <li><strong>Examples:</strong> Palm oil (used in moderation), avocado, nuts like groundnuts and cashews, and seeds such as flaxseeds or chia seeds (if available).</li>
+        <li><strong>Why?</strong> Healthy fats support cell health and can reduce inflammation. Avoid too much fried or processed fat.</li>
+      </ul>
+
+      <h3>4. Fish and Lean Proteins</h3>
+      <ul>
+        <li><strong>Examples:</strong> Fresh fish (tilapia, sardines), lean chicken, eggs.</li>
+        <li><strong>Why?</strong> Protein helps repair body tissues and supports the immune system.</li>
+      </ul>
+
+      <h3>Eating Tips for Breast Health</h3>
+      <ul>
+        <li>Limit alcohol — if you drink, keep it to no more than one drink per day or avoid it.</li>
+        <li>Avoid too much fried or processed food like indomie, excessive fried fish, or heavily processed snacks.</li>
+        <li>Eat a variety of colors on your plate — the more colors, the more nutrients.</li>
+        <li>Drink plenty of water every day to help your body stay healthy.</li>
+      </ul>
+
+      <h3>Sample Ghanaian Meal for Breast Health</h3>
+      <ul>
+        <li><strong>Breakfast:</strong> Oats porridge or hausa koko with a side of fresh mango or banana slices.</li>
+        <li><strong>Lunch:</strong> Brown rice or millet with garden egg stew and steamed kontomire.</li>
+        <li><strong>Snack:</strong> Fresh fruit like pineapple or guava.</li>
+        <li><strong>Dinner:</strong> Grilled tilapia with okro soup and banku. Boiled yam and plantain also work.</li>
+      </ul>
+    `,
     tags: ["Nutrition", "Prevention", "Diet"]
   }, {
     id: 6,
@@ -257,7 +299,42 @@ const educationalContent = {
     description: "How physical activity can reduce your risk and improve overall health",
     readTime: "5 min read",
     category: "Exercise",
-    content: "Regular physical activity is one of the most effective ways to reduce breast cancer risk...",
+    content: `
+      <p><strong>Exercise and Breast Cancer Prevention</strong></p>
+      <p>Moving your body isn’t just good for your mood — it can also lower your risk of breast cancer and improve your overall health.</p>
+
+      <h3>How Does Exercise Help?</h3>
+      <ul>
+        <li><strong>Lowers estrogen levels:</strong> Physical activity reduces certain hormones, like estrogen, that can encourage breast cancer growth.</li>
+        <li><strong>Controls weight:</strong> Exercise helps you maintain a healthy weight, and less body fat means lower breast cancer risk, especially after menopause.</li>
+        <li><strong>Boosts immune system:</strong> Being active helps your body fight off diseases and keeps your cells healthy.</li>
+        <li><strong>Reduces inflammation:</strong> Regular movement lowers harmful inflammation linked to cancer.</li>
+        <li><strong>Improves mental health:</strong> Exercise reduces stress, anxiety, and depression, helping you stay strong in mind and body.</li>
+      </ul>
+
+      <h3>How Much Activity Should You Aim For?</h3>
+      <ul>
+        <li>Try to get at least 30 minutes of moderate exercise, 5 days a week.</li>
+        <li>Moderate exercise means you’re moving enough to raise your heart rate and break a sweat but still able to talk comfortably.</li>
+      </ul>
+
+      <h3>Easy Ways to Be Active in Daily Life</h3>
+      <ul>
+        <li>Walk to market or work when you can.</li>
+        <li>Dance to your favorite music.</li>
+        <li>Do gardening or farming.</li>
+        <li>Clean your home energetically.</li>
+        <li>Play games or sports with friends or family.</li>
+      </ul>
+
+      <h3>Tips to Stay Motivated</h3>
+      <ul>
+        <li>Find a friend or group to exercise with.</li>
+        <li>Set small, achievable goals.</li>
+        <li>Choose activities you enjoy.</li>
+        <li>Celebrate your progress, no matter how small!</li>
+      </ul>
+    `,
     tags: ["Exercise", "Prevention", "Health"]
   }],
   "support": [{
@@ -410,15 +487,88 @@ export default function Education() {
   const getAllArticles = () => {
     return [...educationalContent["risk-factors"], ...educationalContent.prevention, ...educationalContent.support];
   };
-  const filteredArticles = getAllArticles().filter(article => article.title.toLowerCase().includes(searchTerm.toLowerCase()) || article.description.toLowerCase().includes(searchTerm.toLowerCase()) || article.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())));
+  const filteredArticles = getAllArticles().filter(article =>
+    article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    article.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    article.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
 
+  const getTakeawaysFor = (title: string): string[] => {
+    switch (title) {
+      case "Understanding Triple-Negative Breast Cancer":
+        return [
+          "TNBC is more common and often higher grade in Ghana; early detection is vital.",
+          "TNBC lacks hormone receptors; treatment often includes chemo and newer targeted options.",
+          "BRCA mutations may unlock targeted therapies like PARP inhibitors."
+        ];
+      case "Genetic Risk Factors in Ghanaian Women":
+        return [
+          "BRCA1/2 changes can be inherited from either parent and increase risk.",
+          "Knowing family history guides decisions about genetic counseling/testing.",
+          "Sharing information helps relatives understand and manage their own risk."
+        ];
+      case "Lifestyle Factors That Impact Risk":
+        return [
+          "Balanced diet, regular activity, and limiting alcohol/smoking lower risk.",
+          "Small daily changes add up—every bit of movement counts.",
+          "Aim for healthy weight, better sleep, and consider breastfeeding if possible."
+        ];
+      case "Monthly Self-Examination Guide":
+        return [
+          "Do a self‑exam monthly and know your normal.",
+          "Look for lumps, skin/nipple changes, and persistent pain.",
+          "Self‑exams complement, not replace, clinical exams and mammograms."
+        ];
+      case "Nutrition for Breast Health":
+        return [
+          "Prioritize fruits, vegetables, whole grains, legumes, and healthy fats.",
+          "Limit alcohol and heavily fried/processed foods; hydrate daily.",
+          "Use Ghanaian staples—e.g., brown rice, kontomire, garden egg stew—as a healthy base."
+        ];
+      case "Exercise and Breast Cancer Prevention":
+        return [
+          "Aim for at least 30 minutes of moderate activity, 5 days a week.",
+          "Exercise can lower estrogen, weight, inflammation, and improve immunity and mood.",
+          "Build activity into daily life—walking, dancing, chores, gardening."
+        ];
+      case "Building Your Support Network":
+        return [
+          "Strong support improves wellbeing and treatment follow‑through.",
+          "Combine emotional, informational, financial, and spiritual help.",
+          "Ask early—seeking support is part of care, not a luxury."
+        ];
+      case "Talking to Family About Cancer Risk":
+        return [
+          "Open conversations make early detection and prevention more likely.",
+          "Document who had which cancers and at what ages.",
+          "Share what you learn with relatives and clinicians to guide care."
+        ];
+      case "Managing Anxiety About Cancer Risk":
+        return [
+          "Feeling anxious is normal—pace information and talk to someone you trust.",
+          "Practice relaxation and stay active to reduce stress.",
+          "Seek professional support if anxiety interferes with daily life."
+        ];
+      default:
+        return [
+          "Early detection significantly improves outcomes.",
+          "Follow recommended screening for your risk level.",
+          "Healthy lifestyle choices support breast health."
+        ];
+    }
+  };
   useEffect(() => {
-    if (selectedArticle?.title === "Monthly Self-Examination Guide") {
-      // Delay to ensure content is mounted before scrolling
-      setTimeout(() => {
-        const el = document.getElementById("self-exam-video");
-        el?.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100);
+    if (selectedArticle) {
+      // Scroll to top when any article opens
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      // Additionally, auto-scroll to the video for the self-exam article
+      if (selectedArticle?.title === "Monthly Self-Examination Guide") {
+        setTimeout(() => {
+          const el = document.getElementById("self-exam-video");
+          el?.scrollIntoView({ behavior: "smooth", block: "start" });
+        }, 100);
+      }
     }
   }, [selectedArticle]);
   if (selectedArticle) {
@@ -450,18 +600,12 @@ export default function Education() {
               <div className="mt-8 p-6 bg-muted/50 rounded-lg">
                 <h3 className="font-semibold mb-3">Key Takeaways:</h3>
                 <ul className="space-y-2">
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="h-5 w-5 text-success mt-0.5" />
-                    <span>Early detection significantly improves treatment outcomes</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="h-5 w-5 text-success mt-0.5" />
-                    <span>Regular screening is essential for high-risk individuals</span>
-                  </li>
-                  <li className="flex items-start gap-2">
-                    <CheckCircle className="h-5 w-5 text-success mt-0.5" />
-                    <span>Lifestyle modifications can help reduce overall risk</span>
-                  </li>
+                  {getTakeawaysFor(selectedArticle.title).map((point, idx) => (
+                    <li key={idx} className="flex items-start gap-2">
+                      <CheckCircle className="h-5 w-5 text-success mt-0.5" />
+                      <span>{point}</span>
+                    </li>
+                  ))}
                 </ul>
               </div>
 
