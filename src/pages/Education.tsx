@@ -230,7 +230,7 @@ export default function Education() {
               <CardTitle className="text-2xl">{selectedArticle.title}</CardTitle>
               <CardDescription className="text-lg">{selectedArticle.description}</CardDescription>
             </CardHeader>
-            <CardContent className="prose prose-slate max-w-none">
+            <CardContent className="prose prose-slate max-w-none [&_ol>li>p:first-of-type>strong]:text-lg md:[&_ol>li>p:first-of-type>strong]:text-xl [&_ol>li>p:first-of-type>strong]:block [&_ol>li>p:first-of-type]:mb-1 [&_ul]:list-disc [&_ul]:pl-5">
               {typeof selectedArticle.content === "string" ? (
                 <div className="text-foreground leading-relaxed text-base" dangerouslySetInnerHTML={{ __html: selectedArticle.content }} />
               ) : (
