@@ -7,6 +7,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { BookOpen, Search, Heart, Shield, AlertTriangle, CheckCircle, ExternalLink, Clock, Users, Award } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSEO } from "@/hooks/useSEO";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 const educationalContent = {
   "risk-factors": [{
     id: 1,
@@ -117,7 +118,74 @@ const educationalContent = {
     description: "Step-by-step instructions for performing breast self-examinations at home",
     readTime: "4 min read",
     category: "Self-Care",
-    content: "Regular self-examination is a crucial part of early detection. Here's how to perform it correctly...",
+    content: (
+      <div className="space-y-6">
+        <p><strong>Why it matters:</strong> Regular self-exams help you notice changes early between clinic visits.</p>
+
+        <div>
+          <h3 className="font-semibold mb-3">Watch: Step-by-step Self-Examination</h3>
+          <AspectRatio ratio={16 / 9}>
+            <iframe
+              src="https://www.youtube.com/embed/nkPR4ar1EQ4?si=TEOa1L4YRB6l9n0D"
+              title="Breast Self-Examination Step-by-Step Guide"
+              className="w-full h-full rounded-md border"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </AspectRatio>
+          <p className="text-muted-foreground mt-2 text-sm">Video resource to guide your monthly self-exam.</p>
+        </div>
+
+        <ol className="list-decimal pl-5">
+          <li>
+            <p><strong>Before you start:</strong> Choose the right time.</p>
+            <ul>
+              <li>Best time is 3–5 days after your period ends.</li>
+              <li>If you no longer menstruate, pick the same day each month.</li>
+            </ul>
+          </li>
+          <li>
+            <p><strong>In front of a mirror:</strong> Look for visual changes.</p>
+            <ul>
+              <li>Stand with arms at your sides, then raise them overhead.</li>
+              <li>Check for <strong>changes in size or shape</strong>, <strong>skin dimpling or puckering</strong>, or <strong>nipple changes</strong>.</li>
+            </ul>
+          </li>
+          <li>
+            <p><strong>In the shower:</strong> Use the pads of your three middle fingers.</p>
+            <ul>
+              <li>Move in small circles using <strong>light, medium, then firm pressure</strong>.</li>
+              <li>Cover the whole breast, armpit, and collarbone area in a pattern (circular, up-and-down, or wedge).</li>
+            </ul>
+          </li>
+          <li>
+            <p><strong>Lying down:</strong> Repeat the exam.</p>
+            <ul>
+              <li>Place a pillow under your right shoulder and your right hand behind your head (and switch sides).</li>
+              <li>Use the same circular pattern and pressure levels to examine each breast.</li>
+            </ul>
+          </li>
+          <li>
+            <p><strong>Check the nipples:</strong> Gently squeeze.</p>
+            <ul>
+              <li>Look for any <strong>discharge</strong> (clear, bloody, or milky) or tenderness.</li>
+            </ul>
+          </li>
+          <li>
+            <p><strong>What to do if you find a change:</strong> Don't panic.</p>
+            <ul>
+              <li>Most changes are not cancer, but <strong>see a clinician promptly</strong> for evaluation.</li>
+              <li>If you’re high-risk or unsure, book a screening appointment.</li>
+            </ul>
+          </li>
+        </ol>
+
+        <aside className="p-4 rounded-md bg-muted/50">
+          <p className="text-sm"><strong>Note:</strong> Self-exams do not replace clinical breast exams or mammograms.</p>
+        </aside>
+      </div>
+    ),
     tags: ["Self-Exam", "Early Detection", "Self-Care"]
   }, {
     id: 5,
