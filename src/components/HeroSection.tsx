@@ -1,60 +1,42 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { 
-  Heart, 
-  Shield, 
-  Users, 
-  BookOpen,
-  ArrowRight,
-  Star
-} from "lucide-react";
-
-const features = [
-  {
-    icon: Shield,
-    title: "Risk Assessment",
-    description: "Comprehensive family history evaluation to understand your personal risk factors"
-  },
-  {
-    icon: Heart,
-    title: "Symptom Tracking",
-    description: "Monitor and track symptoms with intelligent insights for early detection"
-  },
-  {
-    icon: Users,
-    title: "Expert Care",
-    description: "Schedule appointments with healthcare professionals specialized in breast cancer"
-  },
-  {
-    icon: BookOpen,
-    title: "Education Hub",
-    description: "Access reliable information about prevention, treatment, and support resources"
-  }
-];
-
-const stats = [
-  { number: "15%", label: "of breast cancers are triple-negative" },
-  { number: "40%", label: "higher rates in West African women" },
-  { number: "85%", label: "early detection success rate" }
-];
-
+import { Heart, Shield, Users, BookOpen, ArrowRight, Star } from "lucide-react";
+const features = [{
+  icon: Shield,
+  title: "Risk Assessment",
+  description: "Comprehensive family history evaluation to understand your personal risk factors"
+}, {
+  icon: Heart,
+  title: "Symptom Tracking",
+  description: "Monitor and track symptoms with intelligent insights for early detection"
+}, {
+  icon: Users,
+  title: "Expert Care",
+  description: "Schedule appointments with healthcare professionals specialized in breast cancer"
+}, {
+  icon: BookOpen,
+  title: "Education Hub",
+  description: "Access reliable information about prevention, treatment, and support resources"
+}];
+const stats = [{
+  number: "15%",
+  label: "of breast cancers are triple-negative"
+}, {
+  number: "40%",
+  label: "higher rates in West African women"
+}, {
+  number: "85%",
+  label: "early detection success rate"
+}];
 export function HeroSection() {
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-background to-muted/30">
+  return <div className="min-h-screen bg-gradient-to-br from-background to-muted/30">
       {/* Hero Section */}
       <section className="container mx-auto px-4 pt-20 pb-16">
         <div className="text-center max-w-4xl mx-auto">
           <div className="flex justify-center mb-6">
             <div className="w-16 h-16 bg-gradient-hero rounded-2xl flex items-center justify-center shadow-medical">
-              <img
-                src="/lovable-uploads/6f5d86f1-d967-4b49-b3e1-7bfa5dfa3241.png"
-                alt="She's Strong Ghana logo — heart with ribbon"
-                className="h-10 w-10 object-contain"
-                loading="eager"
-                width={40}
-                height={40}
-              />
+              <img src="/lovable-uploads/6f5d86f1-d967-4b49-b3e1-7bfa5dfa3241.png" alt="She's Strong Ghana logo — heart with ribbon" className="h-10 w-10 object-contain" loading="eager" width={40} height={40} />
             </div>
           </div>
           
@@ -67,9 +49,7 @@ export function HeroSection() {
           </p>
 
           <div className="flex justify-center mb-8">
-            <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm">
-              15% of breast cancers are triple-negative — early detection matters.
-            </span>
+            <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm">About 60% of Ghanaian breast cancers are triple-negative — early detection matters.</span>
           </div>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4 animate-fade-in">
@@ -89,12 +69,10 @@ export function HeroSection() {
 
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            {stats.map((stat, index) => (
-              <Card key={index} className="p-6 text-center bg-gradient-card shadow-card-soft">
+            {stats.map((stat, index) => <Card key={index} className="p-6 text-center bg-gradient-card shadow-card-soft">
                 <div className="text-3xl font-bold text-primary mb-2">{stat.number}</div>
                 <div className="text-sm text-muted-foreground">{stat.label}</div>
-              </Card>
-            ))}
+              </Card>)}
           </div>
         </div>
       </section>
@@ -112,8 +90,7 @@ export function HeroSection() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, index) => (
-            <Card key={index} className="p-6 text-center hover:shadow-medical transition-all duration-300 bg-gradient-card">
+          {features.map((feature, index) => <Card key={index} className="p-6 text-center hover:shadow-medical transition-all duration-300 bg-gradient-card">
               <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center mx-auto mb-4">
                 <feature.icon className="h-6 w-6 text-primary-foreground" />
               </div>
@@ -121,8 +98,7 @@ export function HeroSection() {
               <p className="text-muted-foreground text-sm leading-relaxed">
                 {feature.description}
               </p>
-            </Card>
-          ))}
+            </Card>)}
         </div>
       </section>
 
@@ -153,6 +129,5 @@ export function HeroSection() {
           </div>
         </div>
       </section>
-    </div>
-  );
+    </div>;
 }
