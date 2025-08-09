@@ -642,10 +642,10 @@ export default function Education() {
               
               <div className="mt-8 p-6 bg-muted/50 rounded-lg">
                 <h3 className="font-semibold mb-3">Key Takeaways:</h3>
-                <ul className="space-y-2">
+                <ul className="space-y-3">
                   {getTakeawaysFor(selectedArticle.title).map((point, idx) => (
-                    <li key={idx} className="flex items-start gap-2">
-                      <CheckCircle className="h-6 w-6 text-success mt-0.5" />
+                    <li key={idx} className="flex items-start gap-3">
+                      <CheckCircle className="h-7 w-7 shrink-0 text-success mt-0.5" />
                       <span>{point}</span>
                     </li>
                   ))}
