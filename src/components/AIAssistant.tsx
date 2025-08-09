@@ -47,7 +47,7 @@ export function AIAssistant() {
     {
       id: '1',
       type: 'bot',
-      content: "Hello! I'm your AI health assistant. I can help you with symptom assessment, answer questions about breast cancer, and guide you on next steps. What would you like to discuss today?",
+      content: "Hello! I'm OncoAI, your AI health assistant. I can help you with symptom assessment, answer questions about breast cancer, and guide you on next steps. What would you like to discuss today?",
       timestamp: new Date()
     }
   ]);
@@ -105,7 +105,7 @@ const handleSendMessage = async (override?: string) => {
     const { data, error } = await supabase.functions.invoke('openai-chat', {
       body: {
         messages: [
-          { role: 'system', content: "You are a helpful, concise health assistant. Be accurate, avoid diagnosis, include Ghana/Sub-Saharan context when relevant. If unsure, say you don't know and suggest seeing a clinician." },
+          { role: 'system', content: "You are OncoAI, a helpful, concise health assistant. Be accurate, avoid diagnosis, include Ghana/Sub-Saharan context when relevant. If unsure, say you don't know and suggest seeing a clinician." },
           ...messages.slice(-10).map(m => ({
             role: m.type === 'user' ? 'user' : 'assistant',
             content: m.content
@@ -205,7 +205,7 @@ useEffect(() => {
       >
         <img
           src="/lovable-uploads/149c2f84-f3e6-435d-b22f-fe5f9e85d931.png"
-          alt="AI health assistant icon — female nurse silhouette with ribbon"
+          alt="OncoAI icon — female nurse silhouette with ribbon"
           className="h-8 w-8 rounded-full object-cover"
           loading="lazy"
         />
@@ -214,17 +214,17 @@ useEffect(() => {
   }
 
   return (
-    <Card className="fixed bottom-4 right-4 w-[92vw] max-w-md h-[70vh] sm:bottom-6 sm:right-6 sm:w-96 sm:h-[500px] z-50 flex flex-col shadow-medical animate-scale-in" role="dialog" aria-label="AI Health Assistant">
+    <Card className="fixed bottom-4 right-4 w-[92vw] max-w-md h-[70vh] sm:bottom-6 sm:right-6 sm:w-96 sm:h-[500px] z-50 flex flex-col shadow-medical animate-scale-in" role="dialog" aria-label="OncoAI">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b bg-gradient-primary rounded-t-lg">
         <div className="flex items-center gap-2">
           <img
             src="/lovable-uploads/149c2f84-f3e6-435d-b22f-fe5f9e85d931.png"
-            alt="AI assistant icon"
+            alt="OncoAI icon"
             className="h-5 w-5 rounded-full object-cover ring-1 ring-primary-foreground/30"
             loading="lazy"
           />
-          <span className="font-semibold text-primary-foreground">AI Health Assistant</span>
+          <span className="font-semibold text-primary-foreground">OncoAI</span>
         </div>
         <Button
           variant="ghost"
@@ -257,7 +257,7 @@ useEffect(() => {
                 ) : (
                   <img
                     src="/lovable-uploads/149c2f84-f3e6-435d-b22f-fe5f9e85d931.png"
-                    alt="AI assistant avatar"
+                    alt="OncoAI avatar"
                     className="h-8 w-8 rounded-full object-cover"
                     loading="lazy"
                   />
@@ -284,13 +284,13 @@ useEffect(() => {
               <div className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 bg-muted">
                 <img
                   src="/lovable-uploads/149c2f84-f3e6-435d-b22f-fe5f9e85d931.png"
-                  alt="AI assistant typing"
+                  alt="OncoAI typing"
                   className="h-8 w-8 rounded-full object-cover"
                   loading="lazy"
                 />
               </div>
               <div className="max-w-[85%] p-3 rounded-lg bg-muted border">
-                <div className="typing-indicator" aria-live="polite" aria-label="Assistant is typing">
+                <div className="typing-indicator" aria-live="polite" aria-label="OncoAI is typing">
                   <span className="typing-dot"></span>
                   <span className="typing-dot"></span>
                   <span className="typing-dot"></span>
