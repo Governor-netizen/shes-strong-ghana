@@ -118,18 +118,21 @@ export function Navigation() {
                   <Menu className="h-5 w-5" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-80">
-                <div className="flex flex-col gap-4 mt-8">
-                  <div className="flex items-center gap-2 mb-4">
-                    <div className="w-8 h-8 bg-gradient-primary rounded-lg flex items-center justify-center">
-                      <Heart className="h-5 w-5 text-primary-foreground" />
-                    </div>
+              <SheetContent side="left" className="w-80 p-0">
+                <div className="flex flex-col gap-4 mt-8 pb-8 h-full overflow-y-auto">
+                  <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2 mb-4">
+                    <img
+                      src="/lovable-uploads/2f185e8b-5554-46b6-a58d-37f494f55165.png"
+                      alt="She's Strong Ghana logo — heart with pulse line and pink ribbon"
+                      className="h-8 w-8 object-contain"
+                      loading="lazy"
+                    />
                     <span className="text-lg font-bold">She's Strong</span>
-                  </div>
+                  </Link>
                   <NavLinks mobile onItemClick={() => setIsOpen(false)} />
                   <div className="border-t pt-4 mt-4">
                     <Link to="/profile" onClick={() => setIsOpen(false)}>
-                      <Button variant="ghost" className="w-full justify-start">
+                      <Button variant="ghost" className="w-full justify-start text-foreground">
                         <User className="h-4 w-4 mr-2" />
                         Profile
                       </Button>

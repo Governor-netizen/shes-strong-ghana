@@ -372,7 +372,7 @@ export default function Education() {
         </div>
 
         {/* Learn More Section */}
-        <section aria-labelledby="learn-more-heading" className="mb-10">
+        <section aria-labelledby="learn-more-heading" className="mb-12">
           <Card className="bg-gradient-card shadow-medical">
             <CardContent className="p-6 md:p-8">
               <Accordion type="single" collapsible>
@@ -382,7 +382,7 @@ export default function Education() {
                       Learn More: Triple‑Negative Breast Cancer (TNBC)
                     </h2>
                   </AccordionTrigger>
-                  <AccordionContent>
+                  <AccordionContent className="mt-4">
                     <article>
                       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
                         <div className="md:col-span-2">
