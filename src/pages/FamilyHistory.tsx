@@ -24,7 +24,7 @@ const questions = [
     questions: [
       { id: "breast_cancer", label: "Have you been diagnosed with breast cancer?", type: "boolean" },
       { id: "ovarian_cancer", label: "Have you been diagnosed with ovarian cancer?", type: "boolean" },
-      { id: "age_first_period", label: "Age when you first started menstruating", type: "number", info: "Early menarche (before age 12) increases risk" },
+      { id: "age_first_period", label: "Age when you first started menstruating (if applicable)", type: "number", info: "Early menarche (before age 12) increases risk" },
       { id: "pregnancies", label: "Number of pregnancies (if applicable)", type: "number" },
       { id: "age_first_birth", label: "Age at first childbirth (if applicable)", type: "number", info: "Late first childbirth (after 30) or never giving birth increases risk" },
       { id: "breastfeeding", label: "Did you breastfeed any of your children?", type: "boolean", info: "Lack of breastfeeding increases risk" },
@@ -596,21 +596,22 @@ export default function FamilyHistory() {
                         {question.id === "pregnancies" ? (
                           <>
                             <Input
-                              type="text"
-                              value={answers[question.id] === 0 ? "None" : (answers[question.id] ?? "")}
+                              type="number"
+                              value={answers[question.id] ?? ""}
                               onChange={(e) => {
                                 const v = e.target.value;
-                                if (v.trim().toLowerCase() === "none") {
-                                  handleAnswer(question.id, 0);
+                                if (v === "") {
+                                  handleAnswer(question.id, "");
                                 } else {
                                   const num = parseInt(v);
-                                  handleAnswer(question.id, Number.isFinite(num) ? num : "");
+                                  handleAnswer(question.id, Number.isFinite(num) ? num : (answers[question.id] ?? 0));
                                 }
                               }}
-                              placeholder="Enter a number or type “None”"
+                              placeholder="Enter number (enter 0 if none)"
+                              min={0}
                               inputMode="numeric"
                             />
-                            <p className="text-xs text-muted-foreground">Type “None” if you have not been pregnant.</p>
+                            <p className="text-xs text-muted-foreground">Enter 0 if you have not been pregnant.</p>
                           </>
                         ) : (
                           <Input

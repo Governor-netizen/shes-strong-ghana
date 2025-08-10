@@ -645,7 +645,7 @@ export default function Education() {
                 <ul className="space-y-3">
                   {getTakeawaysFor(selectedArticle.title).map((point, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <CheckCircle className="h-7 w-7 shrink-0 text-success mt-0.5" />
+                      <CheckCircle className="h-5 w-5 shrink-0 text-success mt-0.5" />
                       <span>{point}</span>
                     </li>
                   ))}

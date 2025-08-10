@@ -56,7 +56,7 @@ export function AIAssistant() {
   const [mediaPreviews, setMediaPreviews] = useState<string[]>([]);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
-
+const [animateIntro, setAnimateIntro] = useState(false);
   const addMessage = (content: string, type: 'user' | 'bot', images?: string[]) => {
     const newMessage: Message = {
       id: Date.now().toString(),
@@ -196,11 +196,25 @@ useEffect(() => {
   bottomRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' });
 }, [messages, isLoading]);
 
+// Play OncoAI intro animation once per session
+useEffect(() => {
+  try {
+    const done = sessionStorage.getItem('oncoAIIntroDone');
+    if (!done) {
+      setAnimateIntro(true);
+      // Mark as done after a short delay to ensure initial render applies the class
+      setTimeout(() => sessionStorage.setItem('oncoAIIntroDone', '1'), 0);
+    }
+  } catch {
+    // ignore storage errors
+  }
+}, []);
+
   if (!isOpen) {
     return (
       <Button
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-primary shadow-medical hover:shadow-lg ring-2 ring-primary ring-offset-2 ring-offset-background z-50 animate-pulse hover-scale"
+        className={`fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-primary shadow-medical hover:shadow-lg ring-2 ring-primary ring-offset-2 ring-offset-background z-50 ${animateIntro ? 'oncoai-animate' : 'hover-scale'}`}
         size="icon"
       >
         <img
