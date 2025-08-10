@@ -341,7 +341,7 @@ const educationalContent = {
     readTime: "6 min read",
     category: "Emotional Health",
     content: `
-      <h3 class="text-lg md:text-xl font-semibold">Building Your Support Network</h3>
+      <h3 class="text-base md:text-lg font-medium">Building Your Support Network</h3>
       <p>Creating a strong support system during your health journey is an important part of caring for your emotional and practical needs. A strong network can:</p>
       <ul>
         <li><strong>Provide emotional encouragement</strong> during stressful or uncertain times.</li>
@@ -349,35 +349,35 @@ const educationalContent = {
         <li><strong>Share reliable information</strong> and connect you to helpful resources.</li>
       </ul>
 
-      <h3 class="text-lg md:text-xl font-semibold">Steps to Build Your Support System</h3>
+      <h3 class="text-base md:text-lg font-medium">Steps to Build Your Support System</h3>
       <ol>
         <li>
-          <p class="text-sm md:text-base font-semibold"><strong>Identify Your Circle</strong></p>
+          <p class="text-sm md:text-base font-medium"><strong>Identify Your Circle</strong></p>
           <ul>
             <li>Include family, friends, coworkers, and community members who can offer help or companionship.</li>
           </ul>
         </li>
         <li>
-          <p class="text-sm md:text-base font-semibold"><strong>Connect with Support Groups</strong></p>
+          <p class="text-sm md:text-base font-medium"><strong>Connect with Support Groups</strong></p>
           <ul>
             <li>Look for in-person or online groups where you can meet people going through similar experiences.</li>
-            <li>Follow this link to join our online support group and connect with others who understand your journey: <a href="#" target="_blank" rel="noopener noreferrer">Join the Support Group</a></li>
+            <li>Follow this link to join our online support group and connect with others who understand your journey: <a href="#" target="_blank" rel="noopener noreferrer" class="story-link">Join the Support Group</a></li>
           </ul>
         </li>
         <li>
-          <p class="text-sm md:text-base font-semibold"><strong>Use Your Care Team</strong></p>
+          <p class="text-sm md:text-base font-medium"><strong>Use Your Care Team</strong></p>
           <ul>
             <li>Your doctors, nurses, and patient navigators can connect you to local services and educational programs.</li>
           </ul>
         </li>
         <li>
-          <p class="text-sm md:text-base font-semibold"><strong>Communicate Your Needs</strong></p>
+          <p class="text-sm md:text-base font-medium"><strong>Communicate Your Needs</strong></p>
           <ul>
             <li>Let your network know what kind of help would be most valuable to you—whether it’s listening, running errands, or providing health updates to others.</li>
           </ul>
         </li>
         <li>
-          <p class="text-sm md:text-base font-semibold"><strong>Stay in Touch</strong></p>
+          <p class="text-sm md:text-base font-medium"><strong>Stay in Touch</strong></p>
           <ul>
             <li>Regular check-ins help maintain relationships and keep your support team engaged in your journey.</li>
           </ul>
@@ -423,52 +423,52 @@ const educationalContent = {
      content: `
        <p>It’s natural to feel worried or anxious if you’re thinking about breast cancer risk, especially if it runs in your family or you’re learning new information about your health.</p>
 
-       <h3 class="text-lg md:text-xl font-semibold">Why Anxiety Happens</h3>
+       <h3 class="text-base md:text-lg font-medium">Why Anxiety Happens</h3>
        <ul>
          <li>Fear of the unknown or what might happen can cause stress.</li>
          <li>Thinking about cancer risk can feel overwhelming at times.</li>
          <li>Anxiety is a normal reaction, but it doesn’t have to control you.</li>
        </ul>
 
-       <h3 class="text-lg md:text-xl font-semibold">Coping Strategies to Help You Feel Stronger</h3>
+       <h3 class="text-base md:text-lg font-medium">Coping Strategies to Help You Feel Stronger</h3>
        <ol>
          <li>
-           <p class="text-sm md:text-base font-semibold"><strong>Get Informed, But Take It Slow</strong></p>
+           <p class="text-sm md:text-base font-medium"><strong>Get Informed, But Take It Slow</strong></p>
            <ul>
              <li>Learning about breast cancer helps you feel more in control.</li>
              <li>But too much information at once can be overwhelming. Take breaks and ask questions.</li>
            </ul>
          </li>
          <li>
-           <p class="text-sm md:text-base font-semibold"><strong>Talk About Your Feelings</strong></p>
+           <p class="text-sm md:text-base font-medium"><strong>Talk About Your Feelings</strong></p>
            <ul>
              <li>Share your worries with someone you trust: a family member, friend, or counselor.</li>
              <li>Sometimes just talking helps ease your mind.</li>
            </ul>
          </li>
          <li>
-           <p class="text-sm md:text-base font-semibold"><strong>Practice Relaxation Techniques</strong></p>
+           <p class="text-sm md:text-base font-medium"><strong>Practice Relaxation Techniques</strong></p>
            <ul>
              <li>Try deep breathing, meditation, or gentle stretching to calm your body and mind.</li>
              <li>Even a few minutes a day can help reduce stress.</li>
            </ul>
          </li>
          <li>
-           <p class="text-sm md:text-base font-semibold"><strong>Stay Active</strong></p>
+           <p class="text-sm md:text-base font-medium"><strong>Stay Active</strong></p>
            <ul>
              <li>Physical activity is a natural way to reduce anxiety and improve mood.</li>
              <li>Find exercises you enjoy, like walking, dancing, or gardening.</li>
            </ul>
          </li>
          <li>
-           <p class="text-sm md:text-base font-semibold"><strong>Focus on What You Can Control</strong></p>
+           <p class="text-sm md:text-base font-medium"><strong>Focus on What You Can Control</strong></p>
            <ul>
              <li>You can’t change your genes or family history, but you can make healthy lifestyle choices and attend screenings.</li>
              <li>Celebrate the positive steps you take every day.</li>
            </ul>
          </li>
          <li>
-           <p class="text-sm md:text-base font-semibold"><strong>Seek Professional Help If Needed</strong></p>
+           <p class="text-sm md:text-base font-medium"><strong>Seek Professional Help If Needed</strong></p>
            <ul>
              <li>If anxiety feels too heavy or hard to manage, talk to a healthcare professional.</li>
              <li>Therapists and counselors can provide support and tools to help.</li>
@@ -630,12 +630,12 @@ export default function Education() {
               <CardTitle className="text-2xl">{selectedArticle.title}</CardTitle>
               <CardDescription className="text-lg">{selectedArticle.description}</CardDescription>
             </CardHeader>
-            <CardContent className="prose prose-slate max-w-none [&_h3]:font-semibold [&_ol]:space-y-6 md:[&_ol]:space-y-8 [&_ol>li>p:first-of-type>strong]:text-lg md:[&_ol>li>p:first-of-type>strong]:text-xl [&_ol>li>p:first-of-type>strong]:block [&_ol>li>p:first-of-type]:mb-1 [&_ul]:list-disc [&_ul]:pl-5">
-              {typeof selectedArticle.content === "string" ? (
-                <div className="text-foreground leading-relaxed text-base" dangerouslySetInnerHTML={{ __html: selectedArticle.content }} />
-              ) : (
-                <div className="text-foreground leading-relaxed text-base">{selectedArticle.content}</div>
-              )}
+            <CardContent className="prose prose-slate max-w-none [&_h3]:font-medium [&_ol]:space-y-6 md:[&_ol]:space-y-8 [&_ol>li>p:first-of-type>strong]:text-base md:[&_ol>li>p:first-of-type>strong]:text-lg [&_ol>li>p:first-of-type>strong]:block [&_ol>li>p:first-of-type]:mb-1 [&_ul]:list-disc [&_ul]:pl-5 [&_a]:story-link">
+                {typeof selectedArticle.content === "string" ? (
+                  <div className="text-foreground leading-relaxed text-base md:text-[17px]" dangerouslySetInnerHTML={{ __html: selectedArticle.content }} />
+                ) : (
+                  <div className="text-foreground leading-relaxed text-base md:text-[17px]">{selectedArticle.content}</div>
+                )}
               
               <div className="mt-8 p-6 bg-muted/50 rounded-lg">
                 <h3 className="font-semibold mb-3">Key Takeaways:</h3>

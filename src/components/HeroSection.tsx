@@ -38,7 +38,7 @@ export function HeroSection() {
             <img src="/lovable-uploads/6f5d86f1-d967-4b49-b3e1-7bfa5dfa3241.png" alt="She's Strong Ghana logo — heart with ribbon" className="h-[7.5rem] w-[7.5rem] md:h-[10.5rem] md:w-[10.5rem] object-contain" loading="eager" width={120} height={120} fetchPriority="high" />
           </div>
           
-          <h1 className="text-5xl md:text-7xl leading-tight font-bold mb-6 pb-1 bg-gradient-hero bg-clip-text text-transparent animate-fade-in">
+          <h1 className="text-5xl md:text-7xl leading-snug tracking-tight font-bold mb-6 pb-2 md:pb-3 bg-gradient-hero bg-clip-text text-transparent animate-fade-in">
             She's Strong Ghana
           </h1>
           
