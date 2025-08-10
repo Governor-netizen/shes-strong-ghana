@@ -23,7 +23,8 @@ import {
 } from "lucide-react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
-
+import { useSEO } from "@/hooks/useSEO";
+ 
 const sb: any = supabase;
 const appointmentTypes = [
   { value: "screening", label: "Screening Mammogram", duration: "30 minutes" },
@@ -97,9 +98,15 @@ export default function Appointments() {
   const [providers, setProviders] = useState<Provider[]>([]);
   const [slots, setSlots] = useState<Slot[]>([]);
   const { toast } = useToast();
-  const location = useLocation();
+const location = useLocation();
   const navigate = useNavigate();
 
+  useSEO({
+    title: "Appointments — Book and manage | She's Strong Ghana",
+    description: "Book oncologist appointments and manage your medical visits.",
+    canonical: window.location.origin + "/appointments",
+  });
+ 
   // Refs for smooth scroll and focusing the first field
   const bookingFormRef = useRef<HTMLDivElement | null>(null);
   const typeTriggerRef = useRef<HTMLButtonElement | null>(null);
@@ -168,8 +175,36 @@ export default function Appointments() {
       }
     };
     fetchSlots();
-  }, [selectedDoctor, selectedDate]);
+}, [selectedDoctor, selectedDate]);
 
+  // Realtime subscription to slot changes for selected provider/date
+  useEffect(() => {
+    if (!selectedDoctor) return;
+    const channel = supabase
+      .channel('availability_slots_changes')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'availability_slots', filter: `provider_id=eq.${selectedDoctor}` }, () => {
+        if (!selectedDate) return;
+        const start = startOfDay(selectedDate);
+        const end = addDays(start, 1);
+        supabase
+          .from('availability_slots')
+          .select('id,provider_id,starts_at,ends_at,location,is_booked')
+          .eq('provider_id', selectedDoctor)
+          .gte('starts_at', start.toISOString())
+          .lt('starts_at', end.toISOString())
+          .eq('is_booked', false)
+          .order('starts_at', { ascending: true })
+          .then(({ data, error }) => {
+            if (!error && data) setSlots(data as unknown as Slot[]);
+          });
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  }, [selectedDoctor, selectedDate]);
+ 
   const bookAppointment = async () => {
     if (!selectedType || !selectedDoctor || !selectedDate || !selectedTime) {
       toast({
