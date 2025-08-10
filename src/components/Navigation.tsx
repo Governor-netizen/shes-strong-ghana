@@ -120,6 +120,11 @@ export function Navigation() {
                 Profile
               </Button>
             </Link>
+            <Link to="/auth">
+              <Button variant="secondary" size="sm" className="hidden md:flex">
+                Sign in
+              </Button>
+            </Link>
 
             {/* Mobile Menu */}
             <Sheet open={isOpen} onOpenChange={setIsOpen}>

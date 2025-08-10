@@ -9,7 +9,7 @@ import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
-import { format } from "date-fns";
+import { format, startOfDay, addDays } from "date-fns";
 import { 
   Calendar as CalendarIcon, 
   Clock, 
@@ -21,8 +21,10 @@ import {
   AlertCircle,
   Stethoscope
 } from "lucide-react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { supabase } from "@/integrations/supabase/client";
 
+const sb: any = supabase;
 const appointmentTypes = [
   { value: "screening", label: "Screening Mammogram", duration: "30 minutes" },
   { value: "consultation", label: "Specialist Consultation", duration: "45 minutes" },
@@ -44,6 +46,22 @@ const doctors = [
   { id: "3", name: "Dr. Ama Osei", specialty: "Genetic Counselor", location: "Greater Accra Regional Hospital" },
   { id: "4", name: "Dr. Kofi Boateng", specialty: "Surgeon", location: "37 Military Hospital" }
 ];
+
+interface Provider {
+  id: string;
+  name: string;
+  specialty?: string;
+  location?: string;
+  external_booking_url?: string | null;
+}
+
+interface Slot {
+  id: string;
+  provider_id: string;
+  starts_at: string;
+  ends_at: string;
+  location?: string | null;
+}
 
 interface Appointment {
   id: string;
@@ -76,8 +94,11 @@ export default function Appointments() {
   const [selectedDate, setSelectedDate] = useState<Date>();
   const [selectedTime, setSelectedTime] = useState("");
   const [notes, setNotes] = useState("");
+  const [providers, setProviders] = useState<Provider[]>([]);
+  const [slots, setSlots] = useState<Slot[]>([]);
   const { toast } = useToast();
   const location = useLocation();
+  const navigate = useNavigate();
 
   // Refs for smooth scroll and focusing the first field
   const bookingFormRef = useRef<HTMLDivElement | null>(null);
@@ -109,32 +130,124 @@ export default function Appointments() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const bookAppointment = () => {
+  // Load active providers on mount
+  useEffect(() => {
+    const loadProviders = async () => {
+      const { data, error } = await supabase
+        .from("providers")
+        .select("id,name,specialty,location,external_booking_url")
+        .eq("is_active", true)
+        .order("name", { ascending: true });
+      if (!error && data) {
+        setProviders(data as unknown as Provider[]);
+      }
+    };
+    loadProviders();
+  }, []);
+
+  // Load available slots when provider or date changes
+  useEffect(() => {
+    const fetchSlots = async () => {
+      if (!selectedDoctor || !selectedDate) {
+        setSlots([]);
+        setSelectedTime("");
+        return;
+      }
+      const start = startOfDay(selectedDate);
+      const end = addDays(start, 1);
+      const { data, error } = await supabase
+        .from("availability_slots")
+        .select("id,provider_id,starts_at,ends_at,location,is_booked")
+        .eq("provider_id", selectedDoctor)
+        .gte("starts_at", start.toISOString())
+        .lt("starts_at", end.toISOString())
+        .eq("is_booked", false)
+        .order("starts_at", { ascending: true });
+      if (!error && data) {
+        setSlots(data as unknown as Slot[]);
+      }
+    };
+    fetchSlots();
+  }, [selectedDoctor, selectedDate]);
+
+  const bookAppointment = async () => {
     if (!selectedType || !selectedDoctor || !selectedDate || !selectedTime) {
       toast({
         title: "Missing Information",
         description: "Please fill in all required fields",
-        variant: "destructive"
+        variant: "destructive",
       });
       return;
     }
 
-    const doctor = doctors.find(d => d.id === selectedDoctor);
-    if (!doctor) return;
+    // Require authentication to book
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    if (!session) {
+      toast({
+        title: "Please sign in",
+        description: "Login to book appointments.",
+        variant: "destructive",
+      });
+      navigate("/auth", { replace: false, state: { redirectTo: "/appointments#book" } });
+      return;
+    }
 
-    const newAppointment: Appointment = {
-      id: Date.now().toString(),
-      type: selectedType,
-      doctor: doctor.name,
-      date: selectedDate,
-      time: selectedTime,
-      location: doctor.location,
-      notes,
-      status: "scheduled"
-    };
+    const provider: any = (providers.find((p) => p.id === selectedDoctor) || (doctors as any).find((d: any) => d.id === selectedDoctor));
 
-    setAppointments(prev => [...prev, newAppointment]);
-    
+    // Try to map selected time to an available slot (from Supabase)
+    const selectedSlot = slots.find(
+      (s) => format(new Date(s.starts_at), "HH:mm") === selectedTime
+    );
+
+    if (selectedSlot) {
+      const { data, error } = await supabase
+        .from("appointments")
+        .insert({
+          user_id: session.user.id,
+          provider_id: selectedDoctor,
+          slot_id: selectedSlot.id,
+          starts_at: selectedSlot.starts_at,
+          ends_at: selectedSlot.ends_at,
+          status: "booked",
+          notes,
+        })
+        .select()
+        .single();
+
+      if (error) {
+        toast({ title: "Booking failed", description: error.message, variant: "destructive" });
+        return;
+      }
+
+      const created = data as any;
+      const newAppointment: Appointment = {
+        id: created.id,
+        type: selectedType,
+        doctor: provider?.name || "",
+        date: new Date(created.starts_at),
+        time: format(new Date(created.starts_at), "HH:mm"),
+        location: provider?.location || selectedSlot.location || "",
+        notes,
+        status: "scheduled",
+      };
+      setAppointments((prev) => [...prev, newAppointment]);
+    } else {
+      // Fallback to local booking when no slots are configured yet
+      const newAppointment: Appointment = {
+        id: Date.now().toString(),
+        type: selectedType,
+        doctor: provider?.name || "",
+        date: selectedDate,
+        time: selectedTime,
+        location: provider?.location || "",
+        notes,
+        status: "scheduled",
+      };
+      setAppointments((prev) => [...prev, newAppointment]);
+    }
+
     // Reset form
     setSelectedType("");
     setSelectedDoctor("");
@@ -267,11 +380,11 @@ export default function Appointments() {
                       <SelectValue placeholder="Select doctor" />
                     </SelectTrigger>
                     <SelectContent>
-                      {doctors.map((doctor) => (
+                      {(providers.length > 0 ? providers : doctors).map((doctor: any) => (
                         <SelectItem key={doctor.id} value={doctor.id}>
                           <div>
                             <div className="font-medium">{doctor.name}</div>
-                            <div className="text-sm text-muted-foreground">{doctor.specialty} • {doctor.location}</div>
+                            <div className="text-sm text-muted-foreground">{(doctor.specialty || "Oncologist")} • {doctor.location}</div>
                           </div>
                         </SelectItem>
                       ))}
@@ -309,9 +422,12 @@ export default function Appointments() {
                       <SelectValue placeholder="Select time" />
                     </SelectTrigger>
                     <SelectContent>
-                      {timeSlots.map((time) => (
-                        <SelectItem key={time} value={time}>
-                          {time}
+                      {(slots.length > 0
+                        ? slots.map((s) => ({ id: s.id, label: format(new Date(s.starts_at), "HH:mm") }))
+                        : timeSlots.map((t) => ({ id: t, label: t }))
+                      ).map((opt) => (
+                        <SelectItem key={opt.id} value={opt.label}>
+                          {opt.label}
                         </SelectItem>
                       ))}
                     </SelectContent>
