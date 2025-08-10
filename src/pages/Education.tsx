@@ -28,9 +28,6 @@ const educationalContent = {
       </ul>
       <p>These patterns suggest biological and genetic contributors beyond socioeconomic factors, emphasizing early detection, research, and access to care.</p>
 
-      <h3>Genetics and BRCA</h3>
-      <p>BRCA1/2 gene changes raise the risk of TNBC in some families. When present, they may open doors to targeted treatments like <strong>PARP inhibitors</strong> and some <strong>immunotherapies</strong>, alongside standard chemotherapy.</p>
-
       <p class="text-sm text-muted-foreground">Sources: “An Overview of Triple‑Negative Breast Cancer” (P. Kumar & R. Aggarwal) and “African Ancestry and Higher Prevalence of Triple‑Negative Breast Cancer” (A. Stark et al., Cancer 2010).</p>
     `,
     tags: ["TNBC", "Basics", "Detection"]
@@ -250,27 +247,27 @@ const educationalContent = {
     readTime: "8 min read",
     category: "Nutrition",
       content: `
-      <p><strong>Foods That May Help Reduce Breast Cancer Risk</strong></p>
+      <h3 class="text-lg md:text-xl font-semibold">Foods That May Help Reduce Breast Cancer Risk</h3>
 
-      <h3 class="text-lg md:text-xl font-semibold">1. Fruits and Vegetables</h3>
+      <h4 class="text-base md:text-lg font-semibold">1. Fruits and Vegetables</h4>
       <ul>
         <li><strong>Examples:</strong> Mangoes, papayas, pineapples, oranges, guava, avocados, tomatoes, garden eggs (eggplants), okra, spinach, kale, and other leafy greens (kontomire).</li>
         <li><strong>Why?</strong> They are full of vitamins, antioxidants, and fiber that protect cells and keep your immune system strong.</li>
       </ul>
 
-      <h3 class="text-lg md:text-xl font-semibold">2. Whole Grains and Legumes</h3>
+      <h4 class="text-base md:text-lg font-semibold">2. Whole Grains and Legumes</h4>
       <ul>
         <li><strong>Examples:</strong> Brown rice, millet, maize (corn), sorghum, beans, cowpeas, lentils, groundnuts (peanuts).</li>
         <li><strong>Why?</strong> These foods are rich in fiber and nutrients that support digestion and help keep your hormones balanced.</li>
       </ul>
 
-      <h3 class="text-lg md:text-xl font-semibold">3. Healthy Fats</h3>
+      <h4 class="text-base md:text-lg font-semibold">3. Healthy Fats</h4>
       <ul>
         <li><strong>Examples:</strong> Palm oil (used in moderation), avocado, nuts like groundnuts and cashews, and seeds such as flaxseeds or chia seeds (if available).</li>
         <li><strong>Why?</strong> Healthy fats support cell health and can reduce inflammation. Avoid too much fried or processed fat.</li>
       </ul>
 
-      <h3 class="text-lg md:text-xl font-semibold">4. Fish and Lean Proteins</h3>
+      <h4 class="text-base md:text-lg font-semibold">4. Fish and Lean Proteins</h4>
       <ul>
         <li><strong>Examples:</strong> Fresh fish (tilapia, sardines), lean chicken, eggs.</li>
         <li><strong>Why?</strong> Protein helps repair body tissues and supports the immune system.</li>
@@ -344,7 +341,7 @@ const educationalContent = {
     readTime: "6 min read",
     category: "Emotional Health",
     content: `
-      <p><strong>Building Your Support Network</strong></p>
+      <h3 class="text-lg md:text-xl font-semibold">Building Your Support Network</h3>
       <p>Creating a strong support system during your health journey is an important part of caring for your emotional and practical needs. A strong network can:</p>
       <ul>
         <li><strong>Provide emotional encouragement</strong> during stressful or uncertain times.</li>
@@ -352,35 +349,35 @@ const educationalContent = {
         <li><strong>Share reliable information</strong> and connect you to helpful resources.</li>
       </ul>
 
-      <h3>Steps to Build Your Support System</h3>
+      <h3 class="text-lg md:text-xl font-semibold">Steps to Build Your Support System</h3>
       <ol>
         <li>
-          <p><strong>Identify Your Circle</strong></p>
+          <p class="text-sm md:text-base font-semibold"><strong>Identify Your Circle</strong></p>
           <ul>
             <li>Include family, friends, coworkers, and community members who can offer help or companionship.</li>
           </ul>
         </li>
         <li>
-          <p><strong>Connect with Support Groups</strong></p>
+          <p class="text-sm md:text-base font-semibold"><strong>Connect with Support Groups</strong></p>
           <ul>
             <li>Look for in-person or online groups where you can meet people going through similar experiences.</li>
             <li>Follow this link to join our online support group and connect with others who understand your journey: <a href="#" target="_blank" rel="noopener noreferrer">Join the Support Group</a></li>
           </ul>
         </li>
         <li>
-          <p><strong>Use Your Care Team</strong></p>
+          <p class="text-sm md:text-base font-semibold"><strong>Use Your Care Team</strong></p>
           <ul>
             <li>Your doctors, nurses, and patient navigators can connect you to local services and educational programs.</li>
           </ul>
         </li>
         <li>
-          <p><strong>Communicate Your Needs</strong></p>
+          <p class="text-sm md:text-base font-semibold"><strong>Communicate Your Needs</strong></p>
           <ul>
             <li>Let your network know what kind of help would be most valuable to you—whether it’s listening, running errands, or providing health updates to others.</li>
           </ul>
         </li>
         <li>
-          <p><strong>Stay in Touch</strong></p>
+          <p class="text-sm md:text-base font-semibold"><strong>Stay in Touch</strong></p>
           <ul>
             <li>Regular check-ins help maintain relationships and keep your support team engaged in your journey.</li>
           </ul>
@@ -426,52 +423,52 @@ const educationalContent = {
      content: `
        <p>It’s natural to feel worried or anxious if you’re thinking about breast cancer risk, especially if it runs in your family or you’re learning new information about your health.</p>
 
-       <h3>Why Anxiety Happens</h3>
+       <h3 class="text-lg md:text-xl font-semibold">Why Anxiety Happens</h3>
        <ul>
          <li>Fear of the unknown or what might happen can cause stress.</li>
          <li>Thinking about cancer risk can feel overwhelming at times.</li>
          <li>Anxiety is a normal reaction, but it doesn’t have to control you.</li>
        </ul>
 
-       <h3>Coping Strategies to Help You Feel Stronger</h3>
+       <h3 class="text-lg md:text-xl font-semibold">Coping Strategies to Help You Feel Stronger</h3>
        <ol>
          <li>
-           <p><strong>Get Informed, But Take It Slow</strong></p>
+           <p class="text-sm md:text-base font-semibold"><strong>Get Informed, But Take It Slow</strong></p>
            <ul>
              <li>Learning about breast cancer helps you feel more in control.</li>
              <li>But too much information at once can be overwhelming. Take breaks and ask questions.</li>
            </ul>
          </li>
          <li>
-           <p><strong>Talk About Your Feelings</strong></p>
+           <p class="text-sm md:text-base font-semibold"><strong>Talk About Your Feelings</strong></p>
            <ul>
              <li>Share your worries with someone you trust: a family member, friend, or counselor.</li>
              <li>Sometimes just talking helps ease your mind.</li>
            </ul>
          </li>
          <li>
-           <p><strong>Practice Relaxation Techniques</strong></p>
+           <p class="text-sm md:text-base font-semibold"><strong>Practice Relaxation Techniques</strong></p>
            <ul>
              <li>Try deep breathing, meditation, or gentle stretching to calm your body and mind.</li>
              <li>Even a few minutes a day can help reduce stress.</li>
            </ul>
          </li>
          <li>
-           <p><strong>Stay Active</strong></p>
+           <p class="text-sm md:text-base font-semibold"><strong>Stay Active</strong></p>
            <ul>
              <li>Physical activity is a natural way to reduce anxiety and improve mood.</li>
              <li>Find exercises you enjoy, like walking, dancing, or gardening.</li>
            </ul>
          </li>
          <li>
-           <p><strong>Focus on What You Can Control</strong></p>
+           <p class="text-sm md:text-base font-semibold"><strong>Focus on What You Can Control</strong></p>
            <ul>
              <li>You can’t change your genes or family history, but you can make healthy lifestyle choices and attend screenings.</li>
              <li>Celebrate the positive steps you take every day.</li>
            </ul>
          </li>
          <li>
-           <p><strong>Seek Professional Help If Needed</strong></p>
+           <p class="text-sm md:text-base font-semibold"><strong>Seek Professional Help If Needed</strong></p>
            <ul>
              <li>If anxiety feels too heavy or hard to manage, talk to a healthcare professional.</li>
              <li>Therapists and counselors can provide support and tools to help.</li>
@@ -839,7 +836,7 @@ export default function Education() {
           {/* Main Content */}
           <div className="lg:col-span-2">
             <Tabs defaultValue="all" className="w-full">
-              <TabsList className="grid w-full grid-cols-4">
+              <TabsList className="flex flex-wrap gap-1 md:gap-2">
                 <TabsTrigger value="all">All Topics</TabsTrigger>
                 <TabsTrigger value="risk-factors">Risk Factors</TabsTrigger>
                 <TabsTrigger value="prevention">Prevention</TabsTrigger>

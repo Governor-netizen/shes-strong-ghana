@@ -67,8 +67,8 @@ export function Navigation() {
             to={item.href}
             onClick={onItemClick}
              className={cn(
-               "px-4 py-3 rounded-lg transition-all duration-200",
-               mobile ? "w-full flex flex-col items-start gap-2" : "flex items-center gap-3 text-sm",
+               "px-3 py-2 rounded-lg transition-all duration-200",
+               mobile ? "w-full flex flex-col items-start gap-2" : "flex items-center gap-2 text-sm",
                isActive
                  ? "bg-primary text-primary-foreground shadow-medical"
                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
@@ -99,6 +99,7 @@ export function Navigation() {
               className="h-10 w-10 object-contain"
               loading="eager"
               fetchPriority="high"
+              decoding="sync"
               width={40}
               height={40}
             />
@@ -108,7 +109,7 @@ export function Navigation() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-1 ml-4">
             <NavLinks />
           </div>
 
@@ -137,11 +138,12 @@ export function Navigation() {
                 <div className="flex flex-col gap-4 mt-8 pb-8 h-full overflow-y-auto">
                   <Link to="/" onClick={() => setIsOpen(false)} className="flex items-center gap-2 mb-4">
                     <img
-                      src="/lovable-uploads/2f185e8b-5554-46b6-a58d-37f494f55165.png"
-                      alt="She's Strong Ghana logo — heart with pulse line and pink ribbon"
-                      className="h-8 w-8 object-contain"
-                      loading="lazy"
-                    />
+                       src="/lovable-uploads/2f185e8b-5554-46b6-a58d-37f494f55165.png"
+                       alt="She's Strong Ghana logo — heart with pulse line and pink ribbon"
+                       className="h-8 w-8 object-contain"
+                       loading="lazy"
+                       decoding="async"
+                     />
                     <span className="text-lg font-bold">She's Strong</span>
                   </Link>
                   <NavLinks mobile onItemClick={() => setIsOpen(false)} />
