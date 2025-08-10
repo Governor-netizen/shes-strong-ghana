@@ -43,41 +43,41 @@ const educationalContent = {
       content: `
       <p>Some breast cancers happen because of changes (called mutations) in certain genes that can run in families. The most well-known genes linked to triple-negative breast cancer are called <strong>BRCA1</strong> and <strong>BRCA2</strong>.</p>
 
-      <h3>What Are BRCA Genes?</h3>
+      <h3 class="font-semibold">What Are BRCA Genes?</h3>
       <ul>
-        <li><strong>BRCA1 and BRCA2</strong> are genes that help protect your cells from growing uncontrollably.</li>
-        <li><strong>Harmful changes (mutations)</strong> in these genes <strong>increase the risk</strong> of breast and ovarian cancers.</li>
+        <li>BRCA1 and BRCA2 are genes that help protect your cells from growing uncontrollably.</li>
+        <li>Harmful changes (mutations) in these genes increase the risk of breast and ovarian cancers.</li>
         <li>Not everyone with breast cancer has BRCA mutations, but for some families, these gene changes are important.</li>
       </ul>
 
-      <h3>How Breast Cancer Can Run in Families</h3>
+      <h3 class="font-semibold">How Breast Cancer Can Run in Families</h3>
       <ul>
-        <li>If a <strong>close family member</strong> has breast cancer, your risk might be higher.</li>
-        <li>Risk depends on <strong>which side of the family</strong> the gene comes from and <strong>who inherited it</strong>.</li>
+        <li>If a close family member has breast cancer, your risk might be higher.</li>
+        <li>Risk depends on which side of the family the gene comes from and who inherited it.</li>
       </ul>
 
-      <h3>Example: How You Can Inherit BRCA Gene Changes</h3>
+      <h3 class="font-semibold">Example: How You Can Inherit BRCA Gene Changes</h3>
       <ul>
-        <li>Imagine your grandmother has a <strong>BRCA mutation</strong>. She can pass it on to her children.</li>
+        <li>Imagine your grandmother has a BRCA mutation. She can pass it on to her children.</li>
         <li>Your aunt (your grandmother’s daughter) or your mom might have inherited the gene and developed breast cancer.</li>
-        <li>Your mom has two copies of the gene: one <strong>mutated (bad)</strong> and one <strong>normal (good)</strong>. She can pass either copy to you.</li>
-        <li>If your mom passes you the <strong>normal copy</strong>, and your dad passes you a normal copy too, then you do not inherit the mutation.</li>
-        <li>This is why sometimes it looks like the mutation <strong>“skips” a generation</strong> — it just wasn’t passed on in that family line.</li>
+        <li>Your mom has two copies of the gene: one mutated (bad) and one normal (good). She can pass either copy to you.</li>
+        <li>If your mom passes you the normal copy, and your dad passes you a normal copy too, then you do not inherit the mutation.</li>
+        <li>This is why sometimes it looks like the mutation “skips” a generation — it just wasn’t passed on in that family line.</li>
         <li>Also, a father can carry the BRCA mutation and pass it to you, even if he doesn’t get breast cancer himself.</li>
       </ul>
 
-      <h3>Why Is This Important?</h3>
+      <h3 class="font-semibold">Why Is This Important?</h3>
       <ul>
-        <li><strong>Knowing your family history</strong> helps doctors decide if genetic testing might be useful.</li>
-        <li>If you have a <strong>BRCA mutation</strong>, there are <strong>special screenings</strong> and steps to <strong>reduce your risk</strong>.</li>
-        <li><strong>Family members</strong> can also learn about their risks and get tested to stay informed.</li>
+        <li>Knowing your family history helps doctors decide if genetic testing might be useful.</li>
+        <li>If you have a BRCA mutation, there are special screenings and steps to reduce your risk.</li>
+        <li>Family members can also learn about their risks and get tested to stay informed.</li>
       </ul>
 
-      <h3>What You Can Do</h3>
+      <h3 class="font-semibold">What You Can Do</h3>
       <ul>
-        <li><strong>Talk with your family</strong> about who has had breast or ovarian cancer.</li>
-        <li><strong>Share</strong> this information with your healthcare provider.</li>
-        <li><strong>Ask</strong> if genetic counseling or testing is right for you.</li>
+        <li>Talk with your family about who has had breast or ovarian cancer.</li>
+        <li>Share this information with your healthcare provider.</li>
+        <li>Ask if genetic counseling or testing is right for you.</li>
       </ul>
     `,
     tags: ["Genetics", "Family History", "Ghana"]
@@ -633,7 +633,7 @@ export default function Education() {
               <CardTitle className="text-2xl">{selectedArticle.title}</CardTitle>
               <CardDescription className="text-lg">{selectedArticle.description}</CardDescription>
             </CardHeader>
-            <CardContent className="prose prose-slate max-w-none [&_ol]:space-y-6 md:[&_ol]:space-y-8 [&_ol>li>p:first-of-type>strong]:text-lg md:[&_ol>li>p:first-of-type>strong]:text-xl [&_ol>li>p:first-of-type>strong]:block [&_ol>li>p:first-of-type]:mb-1 [&_ul]:list-disc [&_ul]:pl-5">
+            <CardContent className="prose prose-slate max-w-none [&_h3]:font-semibold [&_ol]:space-y-6 md:[&_ol]:space-y-8 [&_ol>li>p:first-of-type>strong]:text-lg md:[&_ol>li>p:first-of-type>strong]:text-xl [&_ol>li>p:first-of-type>strong]:block [&_ol>li>p:first-of-type]:mb-1 [&_ul]:list-disc [&_ul]:pl-5">
               {typeof selectedArticle.content === "string" ? (
                 <div className="text-foreground leading-relaxed text-base" dangerouslySetInnerHTML={{ __html: selectedArticle.content }} />
               ) : (
