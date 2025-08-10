@@ -10,7 +10,8 @@ import {
   Calendar, 
   BookOpen, 
   Menu,
-  User
+  User,
+  FlaskConical
 } from "lucide-react";
 
 const navigationItems = [
@@ -43,6 +44,12 @@ const navigationItems = [
     href: "/education",
     icon: BookOpen,
     description: "Learn about prevention"
+  },
+  {
+    title: "Join Research",
+    href: "/research",
+    icon: FlaskConical,
+    description: "Get involved in research"
   }
 ];
 
@@ -90,7 +97,10 @@ export function Navigation() {
               src="/lovable-uploads/2f185e8b-5554-46b6-a58d-37f494f55165.png"
               alt="She's Strong Ghana logo — heart with pulse line and pink ribbon"
               className="h-10 w-10 object-contain"
-              loading="lazy"
+              loading="eager"
+              fetchPriority="high"
+              width={40}
+              height={40}
             />
             <span className="text-xl font-bold bg-gradient-hero bg-clip-text text-transparent tracking-tight">
               She's Strong

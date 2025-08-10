@@ -35,7 +35,7 @@ export function HeroSection() {
       <section className="container mx-auto px-4 pt-20 pb-16">
         <div className="text-center max-w-4xl mx-auto">
           <div className="flex justify-center mb-6">
-            <img src="/lovable-uploads/6f5d86f1-d967-4b49-b3e1-7bfa5dfa3241.png" alt="She's Strong Ghana logo — heart with ribbon" className="h-[7.5rem] w-[7.5rem] md:h-[10.5rem] md:w-[10.5rem] object-contain" loading="eager" width={120} height={120} />
+            <img src="/lovable-uploads/6f5d86f1-d967-4b49-b3e1-7bfa5dfa3241.png" alt="She's Strong Ghana logo — heart with ribbon" className="h-[7.5rem] w-[7.5rem] md:h-[10.5rem] md:w-[10.5rem] object-contain" loading="eager" width={120} height={120} fetchPriority="high" />
           </div>
           
           <h1 className="text-5xl md:text-7xl leading-tight font-bold mb-6 pb-1 bg-gradient-hero bg-clip-text text-transparent animate-fade-in">
@@ -60,6 +60,11 @@ export function HeroSection() {
             <Button asChild variant="outline" size="lg" className="hover-scale h-12 md:h-11">
               <Link to="/education" aria-label="Learn more about triple-negative breast cancer">
                 Learn More
+              </Link>
+            </Button>
+            <Button asChild variant="secondary" size="lg" className="hover-scale h-12 md:h-11">
+              <Link to="/research" aria-label="Join our research community">
+                Join Research
               </Link>
             </Button>
           </div>
