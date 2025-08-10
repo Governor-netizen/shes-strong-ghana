@@ -53,6 +53,101 @@ export type Database = {
         }
         Relationships: []
       }
+      appointments: {
+        Row: {
+          created_at: string
+          ends_at: string
+          id: string
+          notes: string | null
+          provider_id: string
+          slot_id: string | null
+          starts_at: string
+          status: Database["public"]["Enums"]["appointment_status"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          ends_at: string
+          id?: string
+          notes?: string | null
+          provider_id: string
+          slot_id?: string | null
+          starts_at: string
+          status?: Database["public"]["Enums"]["appointment_status"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          ends_at?: string
+          id?: string
+          notes?: string | null
+          provider_id?: string
+          slot_id?: string | null
+          starts_at?: string
+          status?: Database["public"]["Enums"]["appointment_status"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "appointments_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "providers"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_slot_id_fkey"
+            columns: ["slot_id"]
+            isOneToOne: false
+            referencedRelation: "availability_slots"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      availability_slots: {
+        Row: {
+          created_at: string
+          ends_at: string
+          id: string
+          is_booked: boolean
+          location: string | null
+          provider_id: string
+          starts_at: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          ends_at: string
+          id?: string
+          is_booked?: boolean
+          location?: string | null
+          provider_id: string
+          starts_at: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          ends_at?: string
+          id?: string
+          is_booked?: boolean
+          location?: string | null
+          provider_id?: string
+          starts_at?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "availability_slots_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "providers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       profiles: {
         Row: {
           address: string | null
@@ -113,6 +208,51 @@ export type Database = {
           preferred_language?: string | null
           updated_at?: string
           username?: string | null
+        }
+        Relationships: []
+      }
+      providers: {
+        Row: {
+          bio: string | null
+          created_at: string
+          email: string | null
+          external_booking_url: string | null
+          id: string
+          is_active: boolean
+          location: string | null
+          name: string
+          phone: string | null
+          photo_url: string | null
+          specialty: string
+          updated_at: string
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          external_booking_url?: string | null
+          id?: string
+          is_active?: boolean
+          location?: string | null
+          name: string
+          phone?: string | null
+          photo_url?: string | null
+          specialty?: string
+          updated_at?: string
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string
+          email?: string | null
+          external_booking_url?: string | null
+          id?: string
+          is_active?: boolean
+          location?: string | null
+          name?: string
+          phone?: string | null
+          photo_url?: string | null
+          specialty?: string
+          updated_at?: string
         }
         Relationships: []
       }
@@ -223,7 +363,7 @@ export type Database = {
       [_ in never]: never
     }
     Enums: {
-      [_ in never]: never
+      appointment_status: "booked" | "confirmed" | "canceled" | "completed"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -350,6 +490,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      appointment_status: ["booked", "confirmed", "canceled", "completed"],
+    },
   },
 } as const
