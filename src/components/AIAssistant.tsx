@@ -58,57 +58,6 @@ export function AIAssistant() {
   const bottomRef = useRef<HTMLDivElement>(null);
 const [animateIntro, setAnimateIntro] = useState(false);
   
-  // Draggable floating action button (FAB) position for the closed state
-  const [fabPos, setFabPos] = useState<{ x: number; y: number } | null>(null);
-  const dragRef = useRef({ dragging: false, startX: 0, startY: 0, pointerX: 0, pointerY: 0 });
-  const clamp = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max);
-
-  useEffect(() => {
-    try {
-      const saved = localStorage.getItem('oncoai-pos');
-      if (saved) {
-        setFabPos(JSON.parse(saved));
-        return;
-      }
-    } catch {}
-    // default: bottom-right
-    const defaultX = Math.max(12, window.innerWidth - 72); // 56px button + margin
-    const defaultY = Math.max(12, window.innerHeight - 96);
-    setFabPos({ x: defaultX, y: defaultY });
-  }, []);
-
-  const onFabPointerDown = (e: any) => {
-    if (!fabPos) return;
-    dragRef.current = {
-      dragging: true,
-      startX: fabPos.x,
-      startY: fabPos.y,
-      pointerX: e.clientX,
-      pointerY: e.clientY,
-    };
-    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
-  };
-
-  const onFabPointerMove = (e: any) => {
-    if (!dragRef.current.dragging) return;
-    const dx = e.clientX - dragRef.current.pointerX;
-    const dy = e.clientY - dragRef.current.pointerY;
-    const newX = clamp(dragRef.current.startX + dx, 8, window.innerWidth - 56 - 8);
-    const newY = clamp(dragRef.current.startY + dy, 8, window.innerHeight - 56 - 8);
-    setFabPos({ x: newX, y: newY });
-  };
-
-  const onFabPointerUp = (e: any) => {
-    if (!dragRef.current.dragging) return;
-    dragRef.current.dragging = false;
-    (e.currentTarget as HTMLElement).releasePointerCapture(e.pointerId);
-    try {
-      if (fabPos) localStorage.setItem('oncoai-pos', JSON.stringify(fabPos));
-    } catch {}
-    const moved = fabPos ? Math.hypot(fabPos.x - dragRef.current.startX, fabPos.y - dragRef.current.startY) : 0;
-    if (moved < 6) setIsOpen(true); // treat as click
-  };
-
   const addMessage = (content: string, type: 'user' | 'bot', images?: string[]) => {
     const newMessage: Message = {
       id: Date.now().toString(),
@@ -265,14 +214,8 @@ useEffect(() => {
   if (!isOpen) {
     return (
       <Button
-        aria-label="Open OncoAI assistant"
-        title="Open OncoAI assistant"
-        onClick={() => !dragRef.current.dragging && setIsOpen(true)}
-        onPointerDown={onFabPointerDown}
-        onPointerMove={onFabPointerMove}
-        onPointerUp={onFabPointerUp}
-        style={fabPos ? { left: fabPos.x, top: fabPos.y } : undefined}
-        className={`fixed ${fabPos ? '' : 'bottom-6 right-6'} w-14 h-14 rounded-full bg-gradient-primary shadow-medical hover:shadow-lg ring-2 ring-primary ring-offset-2 ring-offset-background z-50 ${animateIntro ? 'oncoai-animate' : 'hover-scale'} cursor-grab active:cursor-grabbing`}
+        onClick={() => setIsOpen(true)}
+        className={`fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-primary shadow-medical hover:shadow-lg ring-2 ring-primary ring-offset-2 ring-offset-background z-50 ${animateIntro ? 'oncoai-animate' : 'hover-scale'}`}
         size="icon"
       >
         <img
