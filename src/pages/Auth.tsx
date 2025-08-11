@@ -45,10 +45,13 @@ export default function Auth() {
 
   const handleSignIn = async () => {
     setLoading(true);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
     setLoading(false);
     if (error) {
-      toast({ title: "Sign in failed", description: error.message, variant: "destructive" });
+      const friendly = /invalid login credentials/i.test(error.message)
+        ? "Incorrect email or password. If you just signed up, please confirm your email first."
+        : error.message;
+      toast({ title: "Sign in failed", description: friendly, variant: "destructive" });
     } else {
       toast({ title: "Welcome back", description: "Signed in successfully" });
     }
@@ -58,15 +61,18 @@ export default function Auth() {
     setLoading(true);
     const redirectUrl = `${window.location.origin}/`;
     const { error } = await supabase.auth.signUp({
-      email,
+      email: email.trim(),
       password,
       options: { emailRedirectTo: redirectUrl },
     });
     setLoading(false);
     if (error) {
-      toast({ title: "Sign up failed", description: error.message, variant: "destructive" });
+      const friendly = /already registered/i.test(error.message)
+        ? "This email is already registered. Try signing in instead."
+        : error.message;
+      toast({ title: "Sign up failed", description: friendly, variant: "destructive" });
     } else {
-      toast({ title: "Check your inbox", description: "Confirm your email to finish signup." });
+      toast({ title: "Verify your email", description: "We've sent a confirmation link. Open it to finish signup." });
     }
   };
 
@@ -88,7 +94,7 @@ export default function Auth() {
             <Label htmlFor="password">Password</Label>
             <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="••••••••" />
           </div>
-          <Button className="w-full" onClick={isSignup ? handleSignUp : handleSignIn} disabled={loading}>
+          <Button className="w-full" onClick={isSignup ? handleSignUp : handleSignIn} disabled={loading || !email || !password}>
             {loading ? "Please wait..." : isSignup ? "Create account" : "Sign in"}
           </Button>
           <div className="text-sm text-muted-foreground text-center">

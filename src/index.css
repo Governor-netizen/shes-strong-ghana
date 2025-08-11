@@ -164,5 +164,5 @@ All colors MUST be HSL.
 }
 /* Gentle continuous float from bottom-right to mid-right with blinking */
 .oncoai-float-blink {
-  animation: oncoai-fly-in 8s ease-in-out infinite alternate, soft-blink 1.4s ease-in-out infinite;
+  animation: oncoai-fly-in 6s ease-out forwards, soft-blink 1.4s ease-in-out infinite;
 }
