@@ -206,7 +206,7 @@ export default function Symptoms() {
             <CardContent className="space-y-6">
               <div className="space-y-3">
                 <Label>Select Symptom</Label>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
                   {commonSymptoms.map((symptom) => (
                     <Button
                       key={symptom}
@@ -216,7 +216,7 @@ export default function Symptoms() {
                         setSelectedSymptom(symptom);
                         setCustomSymptom("");
                       }}
-                      className="text-left justify-start"
+                      className="w-full h-auto py-3 text-sm text-left justify-start whitespace-normal break-words leading-normal"
                     >
                       {symptom}
                     </Button>

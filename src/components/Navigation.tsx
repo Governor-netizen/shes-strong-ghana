@@ -147,11 +147,16 @@ export function Navigation() {
                     <span className="text-lg font-bold">She's Strong</span>
                   </Link>
                   <NavLinks mobile onItemClick={() => setIsOpen(false)} />
-                  <div className="border-t pt-4 mt-4">
+                  <div className="border-t pt-4 mt-4 space-y-2">
                     <Link to="/profile" onClick={() => setIsOpen(false)}>
                       <Button variant="ghost" className="w-full justify-start text-foreground">
                         <User className="h-4 w-4 mr-2" />
                         Profile
+                      </Button>
+                    </Link>
+                    <Link to="/auth" onClick={() => setIsOpen(false)}>
+                      <Button variant="secondary" className="w-full justify-start">
+                        Sign in
                       </Button>
                     </Link>
                   </div>
