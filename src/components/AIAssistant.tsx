@@ -215,7 +215,7 @@ useEffect(() => {
     return (
       <Button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-primary shadow-medical hover:shadow-lg ring-2 ring-primary ring-offset-2 ring-offset-background z-50 ${animateIntro ? 'oncoai-animate' : 'hover-scale'}`}
+        className={`fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-primary shadow-medical hover:shadow-lg ring-2 ring-primary ring-offset-2 ring-offset-background z-50 oncoai-float-blink hover-scale`}
         size="icon"
       >
         <img

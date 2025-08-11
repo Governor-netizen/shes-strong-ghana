@@ -22,7 +22,7 @@ const navigationItems = [
     description: "Dashboard overview"
   },
   {
-    title: "Family History",
+    title: "Assessment",
     href: "/family-history",
     icon: ClipboardList,
     description: "Assess your risk factors"
