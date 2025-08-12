@@ -256,6 +256,38 @@ export type Database = {
         }
         Relationships: []
       }
+      risk_assessment_access: {
+        Row: {
+          assessment_id: string
+          created_at: string
+          granted_to: string
+          id: string
+          permission: string
+        }
+        Insert: {
+          assessment_id: string
+          created_at?: string
+          granted_to: string
+          id?: string
+          permission?: string
+        }
+        Update: {
+          assessment_id?: string
+          created_at?: string
+          granted_to?: string
+          id?: string
+          permission?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "risk_assessment_access_assessment_id_fkey"
+            columns: ["assessment_id"]
+            isOneToOne: false
+            referencedRelation: "risk_assessments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       risk_assessments: {
         Row: {
           ai_assessment: string | null
