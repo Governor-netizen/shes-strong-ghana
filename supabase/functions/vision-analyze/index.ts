@@ -25,8 +25,36 @@ serve(async (req) => {
     const images: string[] = Array.isArray(body?.images) ? body.images : [];
     const prompt: string = typeof body?.prompt === "string" ? body.prompt : "";
 
+    // Input validation: limit images and sizes, validate URLs, cap prompt
     if (!images.length) {
       return new Response(JSON.stringify({ error: "No images provided" }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    if (images.length > 4) {
+      return new Response(JSON.stringify({ error: "Too many images. Max 4." }), {
+        status: 400,
+        headers: { ...corsHeaders, "Content-Type": "application/json" },
+      });
+    }
+    const isValidImageUrl = (u: string) => u.startsWith('data:image/') || u.startsWith('https://');
+    for (const u of images) {
+      if (!isValidImageUrl(u)) {
+        return new Response(JSON.stringify({ error: "Invalid image URL format" }), {
+          status: 400,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+      if (u.length > 6_000_000) { // ~4-5MB data URL
+        return new Response(JSON.stringify({ error: "Image too large. Max ~5MB each." }), {
+          status: 413,
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+        });
+      }
+    }
+    if (prompt.length > 2000) {
+      return new Response(JSON.stringify({ error: "Prompt too long. Max 2000 chars." }), {
         status: 400,
         headers: { ...corsHeaders, "Content-Type": "application/json" },
       });

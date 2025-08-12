@@ -48,6 +48,16 @@ serve(async (req) => {
       throw new Error('No audio data provided');
     }
 
+    // Enforce ~15MB max (base64 expands ~4/3)
+    const approxBytes = Math.floor(audio.length * 3 / 4);
+    const MAX_BYTES = 15 * 1024 * 1024;
+    if (approxBytes > MAX_BYTES) {
+      return new Response(
+        JSON.stringify({ error: 'Audio too large. Max 15MB.' }),
+        { status: 413, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
     // Process audio in chunks
     const binaryAudio = processBase64Chunks(audio);
 

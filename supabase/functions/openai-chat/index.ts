@@ -25,17 +25,34 @@ serve(async (req) => {
     const incomingMessages = Array.isArray(body?.messages) ? body.messages : [];
     const prompt = typeof body?.prompt === "string" ? body.prompt : "";
 
+    // Basic input validation to prevent abuse
+    if (incomingMessages.length > 30) {
+      return new Response(
+        JSON.stringify({ error: "Too many messages. Max 30." }),
+        { status: 400, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+    const totalChars = (incomingMessages.reduce((acc: number, m: any) => acc + (String(m?.content || "").length), 0) + prompt.length);
+    if (totalChars > 12000) {
+      return new Response(
+        JSON.stringify({ error: "Request too large. Please shorten your input." }),
+        { status: 413, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+      );
+    }
+
     const messages = [
       {
         role: "system",
         content:
           "You are a concise, compassionate health assistant. Provide accurate, general information. Do not diagnose. When relevant, include Ghana/Sub-Saharan Africa context. If unsure, say you don't know and advise consulting a clinician.",
       },
-      ...incomingMessages.filter((m: any) => m?.role && m?.content),
+      ...incomingMessages
+        .filter((m: any) => m?.role && m?.content)
+        .map((m: any) => ({ ...m, content: String(m.content).slice(0, 2000) })),
     ];
 
     if (prompt) {
-      messages.push({ role: "user", content: prompt });
+      messages.push({ role: "user", content: prompt.slice(0, 2000) });
     }
 
     console.log("openai-chat: calling OpenAI with", messages.length, "messages");

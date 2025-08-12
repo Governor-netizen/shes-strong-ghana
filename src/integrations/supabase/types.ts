@@ -392,7 +392,14 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      can_view_assessment: {
+        Args: { assess_id: string }
+        Returns: boolean
+      }
+      is_assessment_owner: {
+        Args: { assess_id: string }
+        Returns: boolean
+      }
     }
     Enums: {
       appointment_status: "booked" | "confirmed" | "canceled" | "completed"
