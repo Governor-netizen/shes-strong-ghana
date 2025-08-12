@@ -59,6 +59,7 @@ export type Database = {
           ends_at: string
           id: string
           notes: string | null
+          profile_snapshot: Json | null
           provider_id: string
           slot_id: string | null
           starts_at: string
@@ -71,6 +72,7 @@ export type Database = {
           ends_at: string
           id?: string
           notes?: string | null
+          profile_snapshot?: Json | null
           provider_id: string
           slot_id?: string | null
           starts_at: string
@@ -83,6 +85,7 @@ export type Database = {
           ends_at?: string
           id?: string
           notes?: string | null
+          profile_snapshot?: Json | null
           provider_id?: string
           slot_id?: string | null
           starts_at?: string
