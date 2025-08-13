@@ -20,6 +20,11 @@ const educationalContent = {
       <p><strong>Overview</strong></p>
       <p>Triple-Negative Breast Cancer (TNBC) is an aggressive subtype—fast-growing, harder to treat, and more common in younger women and those of African ancestry. It does not respond to hormone therapies; chemotherapy is often the mainstay. There is hope: newer targeted options like PARP inhibitors and immunotherapy show benefit, especially for people with <strong>BRCA</strong> mutations.</p>
 
+      <div className="my-6 p-4 bg-muted/30 rounded-lg">
+        <img src="/lovable-uploads/149c2f84-f3e6-435d-b22f-fe5f9e85d931.png" alt="TNBC prevalence map across Africa showing higher rates in sub-Saharan regions" className="w-full max-w-md mx-auto rounded-lg mb-4" loading="lazy" />
+        <p className="text-sm text-center text-muted-foreground">Epidemiological data showing TNBC distribution across Africa</p>
+      </div>
+
       <h3>Epidemiology in Ghana</h3>
       <ul>
         <li>TNBC made up <strong>~82%</strong> of breast cancers in Ghanaian women (vs <strong>26%</strong> in African Americans and <strong>16%</strong> in white Americans).</li>
@@ -40,12 +45,21 @@ const educationalContent = {
       content: `
       <p>Some breast cancers happen because of changes (called mutations) in certain genes that can run in families. The most well-known genes linked to triple-negative breast cancer are called <strong>BRCA1</strong> and <strong>BRCA2</strong>.</p>
 
-      <h3 class="font-semibold">What Are BRCA Genes?</h3>
-      <ul>
-        <li>BRCA1 and BRCA2 are genes that help protect your cells from growing uncontrollably.</li>
-        <li>Harmful changes (mutations) in these genes increase the risk of breast and ovarian cancers.</li>
-        <li>Not everyone with breast cancer has BRCA mutations, but for some families, these gene changes are important.</li>
-      </ul>
+      <div className="my-6 p-4 bg-muted/30 rounded-lg">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+          <div>
+            <h3 class="font-semibold">What Are BRCA Genes?</h3>
+            <ul>
+              <li>BRCA1 and BRCA2 are genes that help protect your cells from growing uncontrollably.</li>
+              <li>Harmful changes (mutations) in these genes increase the risk of breast and ovarian cancers.</li>
+              <li>Not everyone with breast cancer has BRCA mutations, but for some families, these gene changes are important.</li>
+            </ul>
+          </div>
+          <div className="flex justify-center">
+            <img src="/lovable-uploads/2f185e8b-5554-46b6-a58d-37f494f55165.png" alt="DNA double helix structure illustrating genetic inheritance" className="w-32 h-32 object-contain" loading="lazy" />
+          </div>
+        </div>
+      </div>
 
       <h3 class="font-semibold">How Breast Cancer Can Run in Families</h3>
       <ul>
@@ -267,6 +281,15 @@ const educationalContent = {
         <li><strong>Why?</strong> Healthy fats support cell health and can reduce inflammation. Avoid too much fried or processed fat.</li>
       </ul>
 
+      <div className="my-6 p-4 bg-muted/30 rounded-lg">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+          <img src="/lovable-uploads/6f5d86f1-d967-4b49-b3e1-7bfa5dfa3241.png" alt="Fresh healthy ingredients including avocado and nutritious foods" className="w-full h-32 object-cover rounded-lg" loading="lazy" />
+          <img src="/lovable-uploads/9b92abbb-cd8a-4ebc-9559-42ec68c756e9.png" alt="Variety of colorful fruits and vegetables for cancer prevention" className="w-full h-32 object-cover rounded-lg" loading="lazy" />
+          <img src="/lovable-uploads/149c2f84-f3e6-435d-b22f-fe5f9e85d931.png" alt="Traditional Ghanaian healthy grains and local foods" className="w-full h-32 object-cover rounded-lg" loading="lazy" />
+        </div>
+        <p className="text-sm text-center text-muted-foreground">Healthy foods for breast cancer prevention</p>
+      </div>
+
       <h4 class="text-base md:text-lg font-semibold">4. Fish and Lean Proteins</h4>
       <ul>
         <li><strong>Examples:</strong> Fresh fish (tilapia, sardines), lean chicken, eggs.</li>
@@ -341,6 +364,11 @@ const educationalContent = {
     readTime: "6 min read",
     category: "Emotional Health",
     content: `
+      <div className="my-6 p-4 bg-muted/30 rounded-lg">
+        <img src="/lovable-uploads/9b92abbb-cd8a-4ebc-9559-42ec68c756e9.png" alt="Community network illustration showing connected support system" className="w-full max-w-md mx-auto rounded-lg mb-4" loading="lazy" />
+        <p className="text-sm text-center text-muted-foreground">Building a strong support network in your community</p>
+      </div>
+
       <h3 class="text-base md:text-lg font-medium">Building Your Support Network</h3>
       <p>Creating a strong support system during your health journey is an important part of caring for your emotional and practical needs. A strong network can:</p>
       <ul>
@@ -429,6 +457,18 @@ const educationalContent = {
          <li>Thinking about cancer risk can feel overwhelming at times.</li>
          <li>Anxiety is a normal reaction, but it doesn’t have to control you.</li>
        </ul>
+
+       <div className="my-6 p-4 bg-muted/30 rounded-lg">
+         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-center">
+           <div>
+             <img src="/lovable-uploads/2f185e8b-5554-46b6-a58d-37f494f55165.png" alt="Woman in contemplative pose representing managing anxiety and mental health" className="w-full h-48 object-cover rounded-lg" loading="lazy" />
+           </div>
+           <div>
+             <img src="/lovable-uploads/6f5d86f1-d967-4b49-b3e1-7bfa5dfa3241.png" alt="Peaceful illustration representing anxiety management and mental wellness" className="w-full h-48 object-cover rounded-lg" loading="lazy" />
+           </div>
+         </div>
+         <p className="text-sm text-center text-muted-foreground mt-4">Finding peace and managing anxiety about health concerns</p>
+       </div>
 
        <h3 class="text-base md:text-lg font-medium">Coping Strategies to Help You Feel Stronger</h3>
        <ol>
@@ -705,7 +745,7 @@ export default function Education() {
                           </section>
                         </div>
                         <div>
-                          <img src="/lovable-uploads/9b92abbb-cd8a-4ebc-9559-42ec68c756e9.png" alt="Illustration of breast cancer cell types: HR+, HER2+, and triple‑negative" loading="lazy" className="w-full h-40 md:h-48 object-cover rounded-lg" />
+                          <img src="/lovable-uploads/149c2f84-f3e6-435d-b22f-fe5f9e85d931.png" alt="TNBC prevalence map across Africa showing epidemiological data" loading="lazy" className="w-full h-40 md:h-48 object-cover rounded-lg" />
                         </div>
                       </div>
 
