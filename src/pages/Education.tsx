@@ -22,16 +22,16 @@ const educationalContent = {
 
       <h3>Epidemiology in Ghana</h3>
       
-       <div className="my-6 max-w-2xl mx-auto">
-         <AspectRatio ratio={16 / 10} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
-           <img 
-             src="/lovable-uploads/872f6c14-7342-4c84-b5c5-c263f18c854d.png" 
-             alt="Heatmap showing the prevalence of triple-negative breast cancer (TNBC) among African nations. Ghana shows the highest recorded rates with darker red shading indicating higher prevalence."
-             className="w-full h-full object-contain p-2"
-           />
-         </AspectRatio>
-         <p className="text-sm text-muted-foreground mt-3 text-center font-medium">TNBC prevalence across African nations - Ghana shows some of the highest recorded rates</p>
-       </div>
+      <div className="my-6">
+        <AspectRatio ratio={16 / 10} className="bg-muted rounded-lg overflow-hidden">
+          <img 
+            src="/lovable-uploads/872f6c14-7342-4c84-b5c5-c263f18c854d.png" 
+            alt="Heatmap showing the prevalence of triple-negative breast cancer (TNBC) among African nations. Ghana shows the highest recorded rates with darker red shading indicating higher prevalence."
+            className="w-full h-full object-contain"
+          />
+        </AspectRatio>
+        <p className="text-sm text-muted-foreground mt-2 text-center">TNBC prevalence across African nations - Ghana shows some of the highest recorded rates</p>
+      </div>
 
       <ul>
         <li>TNBC made up <strong>~82%</strong> of breast cancers in Ghanaian women (vs <strong>26%</strong> in African Americans and <strong>16%</strong> in white Americans).</li>
@@ -49,40 +49,29 @@ const educationalContent = {
     description: "Exploring hereditary factors and family history patterns specific to Ghanaian populations",
     readTime: "7 min read",
     category: "Genetics",
-    content: `
-       <div className="my-6 max-w-lg mx-auto">
-         <AspectRatio ratio={16 / 10} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
-           <img 
-             src="/lovable-uploads/bd83064b-31a0-4ce6-8763-8389e3f212e7.png" 
-             alt="Healthy ingredients for breast health including avocados, mango, pineapple, lime juice, jalapeño, onion, and salt arranged on a white background"
-             className="w-full h-full object-cover"
-           />
-         </AspectRatio>
-         <p className="text-sm text-muted-foreground mt-3 text-center font-medium">Nutritious ingredients that support breast health</p>
-       </div>
-
-       <div className="grid md:grid-cols-2 gap-4 my-6 max-w-md mx-auto">
-         <div>
-           <AspectRatio ratio={1} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
-             <img 
-               src="/lovable-uploads/b7edfd68-44db-48f6-80f4-745360ce350a.png" 
-               alt="3D visualization of DNA double helix structure with glowing nodes representing genetic mutations that influence breast cancer risk"
-               className="w-full h-full object-cover p-1"
-             />
-           </AspectRatio>
-           <p className="text-sm text-muted-foreground mt-2 text-center font-medium">DNA structure and genetic mutations</p>
-         </div>
-         <div>
-           <AspectRatio ratio={1} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
-             <img 
-               src="/lovable-uploads/231ca763-384d-49c9-85a3-59a3933f4d54.png" 
-               alt="Simplified DNA helix icon representing genetic testing and hereditary factors in breast cancer risk assessment"
-               className="w-full h-full object-contain p-2"
-             />
-           </AspectRatio>
-           <p className="text-sm text-muted-foreground mt-2 text-center font-medium">Genetic testing and hereditary factors</p>
-         </div>
-       </div>
+      content: `
+      <div className="grid md:grid-cols-2 gap-6 my-6">
+        <div>
+          <AspectRatio ratio={1} className="bg-muted rounded-lg overflow-hidden">
+            <img 
+              src="/lovable-uploads/b7edfd68-44db-48f6-80f4-745360ce350a.png" 
+              alt="3D visualization of DNA double helix structure with glowing nodes representing genetic mutations that influence breast cancer risk"
+              className="w-full h-full object-cover"
+            />
+          </AspectRatio>
+          <p className="text-sm text-muted-foreground mt-2 text-center">DNA structure and genetic mutations</p>
+        </div>
+        <div>
+          <AspectRatio ratio={1} className="bg-muted rounded-lg overflow-hidden">
+            <img 
+              src="/lovable-uploads/231ca763-384d-49c9-85a3-59a3933f4d54.png" 
+              alt="Simplified DNA helix icon representing genetic testing and hereditary factors in breast cancer risk assessment"
+              className="w-full h-full object-contain"
+            />
+          </AspectRatio>
+          <p className="text-sm text-muted-foreground mt-2 text-center">Genetic testing and hereditary factors</p>
+        </div>
+      </div>
 
       <p>Some breast cancers happen because of changes (called mutations) in certain genes that can run in families. The most well-known genes linked to triple-negative breast cancer are called <strong>BRCA1</strong> and <strong>BRCA2</strong>.</p>
 
@@ -217,13 +206,21 @@ const educationalContent = {
     description: "Step-by-step instructions for performing breast self-examinations at home",
     readTime: "4 min read",
     category: "Self-Care",
-    content: <div className="space-y-6">
+    content: (
+      <div className="space-y-6">
         <p><strong>Why it matters:</strong> Regular self-exams help you notice changes early between clinic visits.</p>
 
         <div id="self-exam-video">
           <h3 className="font-semibold mb-3">Watch: Step-by-step Self-Examination</h3>
           <AspectRatio ratio={16 / 9}>
-            <iframe src="https://www.youtube.com/embed/nkPR4ar1EQ4?si=TEOa1L4YRB6l9n0D" title="Breast Self-Examination Step-by-Step Guide" className="w-full h-full rounded-md border" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen />
+            <iframe
+              src="https://www.youtube.com/embed/nkPR4ar1EQ4?si=TEOa1L4YRB6l9n0D"
+              title="Breast Self-Examination Step-by-Step Guide"
+              className="w-full h-full rounded-md border"
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
           </AspectRatio>
           <p className="text-muted-foreground mt-2 text-sm">Video resource to guide your monthly self-exam.</p>
         </div>
@@ -275,7 +272,8 @@ const educationalContent = {
         <aside className="p-4 rounded-md bg-muted/50">
           <p className="text-sm"><strong>Note:</strong> Self-exams do not replace clinical breast exams or mammograms.</p>
         </aside>
-      </div>,
+      </div>
+    ),
     tags: ["Self-Exam", "Early Detection", "Self-Care"]
   }, {
     id: 5,
@@ -283,50 +281,7 @@ const educationalContent = {
     description: "Foods and dietary patterns that may help reduce breast cancer risk",
     readTime: "8 min read",
     category: "Nutrition",
-    content: `
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 my-6">
-        <div>
-          <AspectRatio ratio={4 / 3} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
-            <img 
-              src="/lovable-uploads/bd83064b-31a0-4ce6-8763-8389e3f212e7.png" 
-              alt="Healthy ingredients including avocados, mango, pineapple, lime juice, jalapeño, onion, and salt"
-              className="w-full h-full object-cover"
-            />
-          </AspectRatio>
-          <p className="text-sm text-muted-foreground mt-2 text-center font-medium">Fresh ingredients for healthy meals</p>
-        </div>
-        <div>
-          <AspectRatio ratio={4 / 3} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
-            <img 
-              src="/lovable-uploads/4696283f-fb23-4308-ac8c-29131596a093.png" 
-              alt="Traditional Ghanaian soup with fish and vegetables rich in nutrients"
-              className="w-full h-full object-cover"
-            />
-          </AspectRatio>
-          <p className="text-sm text-muted-foreground mt-2 text-center font-medium">Nutritious fish and vegetable soup</p>
-        </div>
-        <div>
-          <AspectRatio ratio={4 / 3} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
-            <img 
-              src="/lovable-uploads/48d6ab31-4a0e-4790-b10a-506f3568f8e1.png" 
-              alt="Jollof rice with vegetables and beans providing fiber and nutrients"
-              className="w-full h-full object-cover"
-            />
-          </AspectRatio>
-          <p className="text-sm text-muted-foreground mt-2 text-center font-medium">Whole grain rice with vegetables</p>
-        </div>
-        <div>
-          <AspectRatio ratio={4 / 3} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
-            <img 
-              src="/lovable-uploads/e295d18b-ea2f-459d-9830-4266ad291bec.png" 
-              alt="Mixed nuts and legumes providing healthy fats and protein"
-              className="w-full h-full object-cover"
-            />
-          </AspectRatio>
-          <p className="text-sm text-muted-foreground mt-2 text-center font-medium">Nuts and legumes for healthy fats</p>
-        </div>
-      </div>
-
+      content: `
       <h3 class="text-lg md:text-xl font-semibold">Foods That May Help Reduce Breast Cancer Risk</h3>
 
       <h4 class="text-base md:text-lg font-semibold">1. Fruits and Vegetables</h4>
@@ -505,13 +460,13 @@ const educationalContent = {
       <p><strong>Talking openly</strong> helps your family be ready and informed — and that’s powerful.</p>
     `,
     tags: ["Family", "Communication", "Genetics"]
-  }, {
-    id: 9,
-    title: "Managing Anxiety About Cancer Risk",
-    description: "Coping strategies for dealing with worry and anxiety about breast cancer",
-    readTime: "5 min read",
-    category: "Mental Health",
-    content: `
+   }, {
+     id: 9,
+     title: "Managing Anxiety About Cancer Risk",
+     description: "Coping strategies for dealing with worry and anxiety about breast cancer",
+     readTime: "5 min read",
+     category: "Mental Health",
+     content: `
        <p>It’s natural to feel worried or anxious if you’re thinking about breast cancer risk, especially if it runs in your family or you’re learning new information about your health.</p>
 
        <h3 class="text-base md:text-lg font-medium">Why Anxiety Happens</h3>
@@ -567,9 +522,9 @@ const educationalContent = {
          </li>
        </ol>
      `,
-    tags: ["Anxiety", "Mental Health", "Coping"]
-  }]
-};
+     tags: ["Anxiety", "Mental Health", "Coping"]
+   }]
+ };
 const featuredResources = [{
   title: "Ghana Breast Society (GBS)",
   description: "Official professional society with breast cancer resources and updates in Ghana",
@@ -618,47 +573,86 @@ export default function Education() {
   const getAllArticles = () => {
     return [...educationalContent["risk-factors"], ...educationalContent.prevention, ...educationalContent.support];
   };
-  const filteredArticles = getAllArticles().filter(article => article.title.toLowerCase().includes(searchTerm.toLowerCase()) || article.description.toLowerCase().includes(searchTerm.toLowerCase()) || article.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())));
+  const filteredArticles = getAllArticles().filter(article =>
+    article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    article.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    article.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()))
+  );
+
   const getTakeawaysFor = (title: string): string[] => {
     switch (title) {
       case "Understanding Triple-Negative Breast Cancer":
-        return ["TNBC is more common and often higher grade in Ghana; early detection is vital.", "TNBC lacks hormone receptors; treatment often includes chemo and newer targeted options.", "BRCA mutations may unlock targeted therapies like PARP inhibitors."];
+        return [
+          "TNBC is more common and often higher grade in Ghana; early detection is vital.",
+          "TNBC lacks hormone receptors; treatment often includes chemo and newer targeted options.",
+          "BRCA mutations may unlock targeted therapies like PARP inhibitors."
+        ];
       case "Genetic Risk Factors in Ghanaian Women":
-        return ["BRCA1/2 changes can be inherited from either parent and increase risk.", "Knowing family history guides decisions about genetic counseling/testing.", "Sharing information helps relatives understand and manage their own risk."];
+        return [
+          "BRCA1/2 changes can be inherited from either parent and increase risk.",
+          "Knowing family history guides decisions about genetic counseling/testing.",
+          "Sharing information helps relatives understand and manage their own risk."
+        ];
       case "Lifestyle Factors That Impact Risk":
-        return ["Balanced diet, regular activity, and limiting alcohol/smoking lower risk.", "Small daily changes add up—every bit of movement counts.", "Aim for healthy weight, better sleep, and consider breastfeeding if possible."];
+        return [
+          "Balanced diet, regular activity, and limiting alcohol/smoking lower risk.",
+          "Small daily changes add up—every bit of movement counts.",
+          "Aim for healthy weight, better sleep, and consider breastfeeding if possible."
+        ];
       case "Monthly Self-Examination Guide":
-        return ["Do a self‑exam monthly and know your normal.", "Look for lumps, skin/nipple changes, and persistent pain.", "Self‑exams complement, not replace, clinical exams and mammograms."];
+        return [
+          "Do a self‑exam monthly and know your normal.",
+          "Look for lumps, skin/nipple changes, and persistent pain.",
+          "Self‑exams complement, not replace, clinical exams and mammograms."
+        ];
       case "Nutrition for Breast Health":
-        return ["Prioritize fruits, vegetables, whole grains, legumes, and healthy fats.", "Limit alcohol and heavily fried/processed foods; hydrate daily.", "Use Ghanaian staples—e.g., brown rice, kontomire, garden egg stew—as a healthy base."];
+        return [
+          "Prioritize fruits, vegetables, whole grains, legumes, and healthy fats.",
+          "Limit alcohol and heavily fried/processed foods; hydrate daily.",
+          "Use Ghanaian staples—e.g., brown rice, kontomire, garden egg stew—as a healthy base."
+        ];
       case "Exercise and Breast Cancer Prevention":
-        return ["Aim for at least 30 minutes of moderate activity, 5 days a week.", "Exercise can lower estrogen, weight, inflammation, and improve immunity and mood.", "Build activity into daily life—walking, dancing, chores, gardening."];
+        return [
+          "Aim for at least 30 minutes of moderate activity, 5 days a week.",
+          "Exercise can lower estrogen, weight, inflammation, and improve immunity and mood.",
+          "Build activity into daily life—walking, dancing, chores, gardening."
+        ];
       case "Building Your Support Network":
-        return ["Strong support improves wellbeing and treatment follow‑through.", "Combine emotional, informational, financial, and spiritual help.", "Ask early—seeking support is part of care, not a luxury."];
+        return [
+          "Strong support improves wellbeing and treatment follow‑through.",
+          "Combine emotional, informational, financial, and spiritual help.",
+          "Ask early—seeking support is part of care, not a luxury."
+        ];
       case "Talking to Family About Cancer Risk":
-        return ["Open conversations make early detection and prevention more likely.", "Document who had which cancers and at what ages.", "Share what you learn with relatives and clinicians to guide care."];
+        return [
+          "Open conversations make early detection and prevention more likely.",
+          "Document who had which cancers and at what ages.",
+          "Share what you learn with relatives and clinicians to guide care."
+        ];
       case "Managing Anxiety About Cancer Risk":
-        return ["Feeling anxious is normal—pace information and talk to someone you trust.", "Practice relaxation and stay active to reduce stress.", "Seek professional support if anxiety interferes with daily life."];
+        return [
+          "Feeling anxious is normal—pace information and talk to someone you trust.",
+          "Practice relaxation and stay active to reduce stress.",
+          "Seek professional support if anxiety interferes with daily life."
+        ];
       default:
-        return ["Early detection significantly improves outcomes.", "Follow recommended screening for your risk level.", "Healthy lifestyle choices support breast health."];
+        return [
+          "Early detection significantly improves outcomes.",
+          "Follow recommended screening for your risk level.",
+          "Healthy lifestyle choices support breast health."
+        ];
     }
   };
   useEffect(() => {
     if (selectedArticle) {
       // Scroll to top when any article opens
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
+      window.scrollTo({ top: 0, behavior: "smooth" });
 
       // Additionally, auto-scroll to the video for the self-exam article
       if (selectedArticle?.title === "Monthly Self-Examination Guide") {
         setTimeout(() => {
           const el = document.getElementById("self-exam-video");
-          el?.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
+          el?.scrollIntoView({ behavior: "smooth", block: "start" });
         }, 100);
       }
     }
@@ -682,18 +676,22 @@ export default function Education() {
               <CardTitle className="text-2xl">{selectedArticle.title}</CardTitle>
               <CardDescription className="text-lg">{selectedArticle.description}</CardDescription>
             </CardHeader>
-            <CardContent className="prose prose-slate max-w-none [&_h3]:font-medium [&_ol]:space-y-6 md:[&_ol]:space-y-8 [&_ol>li>p:first-of-type>strong]:text-base md:[&_ol>li>p:first-of-type>strong]:text-lg [&_ol>li>p:first-of-type>strong]:block [&_ol>li>p:first-of-type]:mb-1 [&_ul]:list-disc [&_ul]:pl-5 [&_a]:story-link rounded-none">
-                {typeof selectedArticle.content === "string" ? <div className="text-foreground leading-relaxed text-base md:text-[17px]" dangerouslySetInnerHTML={{
-              __html: selectedArticle.content
-            }} /> : <div className="text-foreground leading-relaxed text-base md:text-[17px]">{selectedArticle.content}</div>}
+            <CardContent className="prose prose-slate max-w-none [&_h3]:font-medium [&_ol]:space-y-6 md:[&_ol]:space-y-8 [&_ol>li>p:first-of-type>strong]:text-base md:[&_ol>li>p:first-of-type>strong]:text-lg [&_ol>li>p:first-of-type>strong]:block [&_ol>li>p:first-of-type]:mb-1 [&_ul]:list-disc [&_ul]:pl-5 [&_a]:story-link">
+                {typeof selectedArticle.content === "string" ? (
+                  <div className="text-foreground leading-relaxed text-base md:text-[17px]" dangerouslySetInnerHTML={{ __html: selectedArticle.content }} />
+                ) : (
+                  <div className="text-foreground leading-relaxed text-base md:text-[17px]">{selectedArticle.content}</div>
+                )}
               
               <div className="mt-8 p-6 bg-muted/50 rounded-lg">
                 <h3 className="font-semibold mb-3">Key Takeaways:</h3>
                 <ul className="space-y-3">
-                  {getTakeawaysFor(selectedArticle.title).map((point, idx) => <li key={idx} className="flex items-start gap-3">
+                  {getTakeawaysFor(selectedArticle.title).map((point, idx) => (
+                    <li key={idx} className="flex items-start gap-3">
                       <CheckCircle className="h-4 w-4 shrink-0 text-success mt-0.5" />
                       <span>{point}</span>
-                    </li>)}
+                    </li>
+                  ))}
                 </ul>
               </div>
 
@@ -830,9 +828,7 @@ export default function Education() {
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
-              <script type="application/ld+json" dangerouslySetInnerHTML={{
-              __html: JSON.stringify(faqSchema)
-            }} />
+              <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
             </CardContent>
           </Card>
         </section>
