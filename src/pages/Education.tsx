@@ -21,6 +21,18 @@ const educationalContent = {
       <p>Triple-Negative Breast Cancer (TNBC) is an aggressive subtype—fast-growing, harder to treat, and more common in younger women and those of African ancestry. It does not respond to hormone therapies; chemotherapy is often the mainstay. There is hope: newer targeted options like PARP inhibitors and immunotherapy show benefit, especially for people with <strong>BRCA</strong> mutations.</p>
 
       <h3>Epidemiology in Ghana</h3>
+      
+      <div className="my-6">
+        <AspectRatio ratio={16 / 10} className="bg-muted rounded-lg overflow-hidden">
+          <img 
+            src="/lovable-uploads/872f6c14-7342-4c84-b5c5-c263f18c854d.png" 
+            alt="Heatmap showing the prevalence of triple-negative breast cancer (TNBC) among African nations. Ghana shows the highest recorded rates with darker red shading indicating higher prevalence."
+            className="w-full h-full object-contain"
+          />
+        </AspectRatio>
+        <p className="text-sm text-muted-foreground mt-2 text-center">TNBC prevalence across African nations - Ghana shows some of the highest recorded rates</p>
+      </div>
+
       <ul>
         <li>TNBC made up <strong>~82%</strong> of breast cancers in Ghanaian women (vs <strong>26%</strong> in African Americans and <strong>16%</strong> in white Americans).</li>
         <li>Average age at diagnosis was about <strong>48 years</strong>.</li>
