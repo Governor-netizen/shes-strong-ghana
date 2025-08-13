@@ -52,7 +52,7 @@ const educationalContent = {
       content: `
       <div className="grid md:grid-cols-2 gap-6 my-6">
         <div>
-          <AspectRatio ratio={1} className="bg-muted rounded-lg overflow-hidden">
+          <AspectRatio ratio={1} className="bg-muted rounded-lg overflow-hidden max-w-sm mx-auto">
             <img 
               src="/lovable-uploads/b7edfd68-44db-48f6-80f4-745360ce350a.png" 
               alt="3D visualization of DNA double helix structure with glowing nodes representing genetic mutations that influence breast cancer risk"
@@ -62,7 +62,7 @@ const educationalContent = {
           <p className="text-sm text-muted-foreground mt-2 text-center">DNA structure and genetic mutations</p>
         </div>
         <div>
-          <AspectRatio ratio={1} className="bg-muted rounded-lg overflow-hidden">
+          <AspectRatio ratio={1} className="bg-muted rounded-lg overflow-hidden max-w-sm mx-auto">
             <img 
               src="/lovable-uploads/231ca763-384d-49c9-85a3-59a3933f4d54.png" 
               alt="Simplified DNA helix icon representing genetic testing and hereditary factors in breast cancer risk assessment"
