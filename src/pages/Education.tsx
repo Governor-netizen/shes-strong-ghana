@@ -50,7 +50,18 @@ const educationalContent = {
     readTime: "7 min read",
     category: "Genetics",
     content: `
-       <div className="grid md:grid-cols-2 gap-4 my-6 max-w-xl mx-auto">
+       <div className="my-6 max-w-lg mx-auto">
+         <AspectRatio ratio={16 / 10} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
+           <img 
+             src="/lovable-uploads/bd83064b-31a0-4ce6-8763-8389e3f212e7.png" 
+             alt="Healthy ingredients for breast health including avocados, mango, pineapple, lime juice, jalapeño, onion, and salt arranged on a white background"
+             className="w-full h-full object-cover"
+           />
+         </AspectRatio>
+         <p className="text-sm text-muted-foreground mt-3 text-center font-medium">Nutritious ingredients that support breast health</p>
+       </div>
+
+       <div className="grid md:grid-cols-2 gap-4 my-6 max-w-md mx-auto">
          <div>
            <AspectRatio ratio={1} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
              <img 
@@ -273,6 +284,49 @@ const educationalContent = {
     readTime: "8 min read",
     category: "Nutrition",
     content: `
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 my-6">
+        <div>
+          <AspectRatio ratio={4 / 3} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
+            <img 
+              src="/lovable-uploads/bd83064b-31a0-4ce6-8763-8389e3f212e7.png" 
+              alt="Healthy ingredients including avocados, mango, pineapple, lime juice, jalapeño, onion, and salt"
+              className="w-full h-full object-cover"
+            />
+          </AspectRatio>
+          <p className="text-sm text-muted-foreground mt-2 text-center font-medium">Fresh ingredients for healthy meals</p>
+        </div>
+        <div>
+          <AspectRatio ratio={4 / 3} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
+            <img 
+              src="/lovable-uploads/4696283f-fb23-4308-ac8c-29131596a093.png" 
+              alt="Traditional Ghanaian soup with fish and vegetables rich in nutrients"
+              className="w-full h-full object-cover"
+            />
+          </AspectRatio>
+          <p className="text-sm text-muted-foreground mt-2 text-center font-medium">Nutritious fish and vegetable soup</p>
+        </div>
+        <div>
+          <AspectRatio ratio={4 / 3} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
+            <img 
+              src="/lovable-uploads/48d6ab31-4a0e-4790-b10a-506f3568f8e1.png" 
+              alt="Jollof rice with vegetables and beans providing fiber and nutrients"
+              className="w-full h-full object-cover"
+            />
+          </AspectRatio>
+          <p className="text-sm text-muted-foreground mt-2 text-center font-medium">Whole grain rice with vegetables</p>
+        </div>
+        <div>
+          <AspectRatio ratio={4 / 3} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
+            <img 
+              src="/lovable-uploads/e295d18b-ea2f-459d-9830-4266ad291bec.png" 
+              alt="Mixed nuts and legumes providing healthy fats and protein"
+              className="w-full h-full object-cover"
+            />
+          </AspectRatio>
+          <p className="text-sm text-muted-foreground mt-2 text-center font-medium">Nuts and legumes for healthy fats</p>
+        </div>
+      </div>
+
       <h3 class="text-lg md:text-xl font-semibold">Foods That May Help Reduce Breast Cancer Risk</h3>
 
       <h4 class="text-base md:text-lg font-semibold">1. Fruits and Vegetables</h4>
