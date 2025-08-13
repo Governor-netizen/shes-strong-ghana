@@ -51,8 +51,8 @@ const educationalContent = {
     category: "Genetics",
       content: `
       <div className="grid md:grid-cols-2 gap-6 my-6">
-        <div>
-          <AspectRatio ratio={1} className="bg-muted rounded-lg overflow-hidden max-w-sm mx-auto">
+        <div className="relative overflow-hidden">
+          <AspectRatio ratio={1} className="bg-muted rounded-lg overflow-hidden max-w-xs sm:max-w-48 md:max-w-40 lg:max-w-48 mx-auto transform transition-transform duration-300 ease-out hover:scale-105">
             <img 
               src="/lovable-uploads/b7edfd68-44db-48f6-80f4-745360ce350a.png" 
               alt="3D visualization of DNA double helix structure with glowing nodes representing genetic mutations that influence breast cancer risk"
