@@ -22,16 +22,16 @@ const educationalContent = {
 
       <h3>Epidemiology in Ghana</h3>
       
-      <div className="my-6">
-        <AspectRatio ratio={16 / 10} className="bg-muted rounded-lg overflow-hidden">
-          <img 
-            src="/lovable-uploads/872f6c14-7342-4c84-b5c5-c263f18c854d.png" 
-            alt="Heatmap showing the prevalence of triple-negative breast cancer (TNBC) among African nations. Ghana shows the highest recorded rates with darker red shading indicating higher prevalence."
-            className="w-full h-full object-contain"
-          />
-        </AspectRatio>
-        <p className="text-sm text-muted-foreground mt-2 text-center">TNBC prevalence across African nations - Ghana shows some of the highest recorded rates</p>
-      </div>
+       <div className="my-6 max-w-2xl mx-auto">
+         <AspectRatio ratio={16 / 10} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
+           <img 
+             src="/lovable-uploads/872f6c14-7342-4c84-b5c5-c263f18c854d.png" 
+             alt="Heatmap showing the prevalence of triple-negative breast cancer (TNBC) among African nations. Ghana shows the highest recorded rates with darker red shading indicating higher prevalence."
+             className="w-full h-full object-contain p-2"
+           />
+         </AspectRatio>
+         <p className="text-sm text-muted-foreground mt-3 text-center font-medium">TNBC prevalence across African nations - Ghana shows some of the highest recorded rates</p>
+       </div>
 
       <ul>
         <li>TNBC made up <strong>~82%</strong> of breast cancers in Ghanaian women (vs <strong>26%</strong> in African Americans and <strong>16%</strong> in white Americans).</li>
@@ -50,28 +50,28 @@ const educationalContent = {
     readTime: "7 min read",
     category: "Genetics",
     content: `
-      <div className="grid md:grid-cols-2 gap-6 my-6">
-        <div>
-          <AspectRatio ratio={1} className="bg-muted rounded-lg overflow-hidden">
-            <img 
-              src="/lovable-uploads/b7edfd68-44db-48f6-80f4-745360ce350a.png" 
-              alt="3D visualization of DNA double helix structure with glowing nodes representing genetic mutations that influence breast cancer risk"
-              className="w-full h-full object-cover"
-            />
-          </AspectRatio>
-          <p className="text-sm text-muted-foreground mt-2 text-center">DNA structure and genetic mutations</p>
-        </div>
-        <div>
-          <AspectRatio ratio={1} className="bg-muted rounded-lg overflow-hidden">
-            <img 
-              src="/lovable-uploads/231ca763-384d-49c9-85a3-59a3933f4d54.png" 
-              alt="Simplified DNA helix icon representing genetic testing and hereditary factors in breast cancer risk assessment"
-              className="w-full h-full object-contain"
-            />
-          </AspectRatio>
-          <p className="text-sm text-muted-foreground mt-2 text-center">Genetic testing and hereditary factors</p>
-        </div>
-      </div>
+       <div className="grid md:grid-cols-2 gap-4 my-6 max-w-xl mx-auto">
+         <div>
+           <AspectRatio ratio={1} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
+             <img 
+               src="/lovable-uploads/b7edfd68-44db-48f6-80f4-745360ce350a.png" 
+               alt="3D visualization of DNA double helix structure with glowing nodes representing genetic mutations that influence breast cancer risk"
+               className="w-full h-full object-cover p-1"
+             />
+           </AspectRatio>
+           <p className="text-sm text-muted-foreground mt-2 text-center font-medium">DNA structure and genetic mutations</p>
+         </div>
+         <div>
+           <AspectRatio ratio={1} className="bg-muted rounded-lg overflow-hidden shadow-card-soft border">
+             <img 
+               src="/lovable-uploads/231ca763-384d-49c9-85a3-59a3933f4d54.png" 
+               alt="Simplified DNA helix icon representing genetic testing and hereditary factors in breast cancer risk assessment"
+               className="w-full h-full object-contain p-2"
+             />
+           </AspectRatio>
+           <p className="text-sm text-muted-foreground mt-2 text-center font-medium">Genetic testing and hereditary factors</p>
+         </div>
+       </div>
 
       <p>Some breast cancers happen because of changes (called mutations) in certain genes that can run in families. The most well-known genes linked to triple-negative breast cancer are called <strong>BRCA1</strong> and <strong>BRCA2</strong>.</p>
 
