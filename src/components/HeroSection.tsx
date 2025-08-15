@@ -2,6 +2,8 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Heart, Shield, Users, BookOpen, ArrowRight, Star } from "lucide-react";
+import BlurText from "./BlurText";
+import { motion } from "framer-motion";
 const features = [{
   icon: Shield,
   title: "Risk Assessment",
@@ -37,41 +39,64 @@ export function HeroSection() {
           
           {/* Left side: Content */}
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl md:text-7xl leading-snug tracking-tight font-bold mb-6 pb-2 md:pb-3 bg-gradient-hero bg-clip-text text-transparent animate-fade-in">
-              She's Strong Ghana
-            </h1>
+            <BlurText
+              text="She's Strong Ghana"
+              className="text-5xl md:text-7xl leading-snug tracking-tight font-bold mb-6 pb-2 md:pb-3 bg-gradient-hero bg-clip-text text-transparent"
+              animateBy="words"
+              direction="top"
+              delay={100}
+            />
             
-            <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-3xl">
-              Empowering women with tools for early detection, risk assessment, and comprehensive care for triple-negative breast cancer.
-            </p>
+            <BlurText
+              text="Empowering women with tools for early detection, risk assessment, and comprehensive care for triple-negative breast cancer."
+              className="text-lg md:text-xl text-muted-foreground mb-6 max-w-3xl"
+              animateBy="words"
+              direction="top"
+              delay={50}
+            />
 
             <div className="flex justify-center lg:justify-start mb-8">
               <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm">About 60% of Ghanaian breast cancer cases are triple-negative — early detection matters.</span>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-4 animate-fade-in">
-              <Button asChild size="lg" className="bg-gradient-primary shadow-medical hover-scale h-12 md:h-11 px-6 md:px-8">
-                <Link to="/family-history" aria-label="Start risk assessment (3 steps, under 3 minutes)">
-                  Start Risk Assessment
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="hover-scale h-12 md:h-11">
-                <Link to="/education" aria-label="Learn more about triple-negative breast cancer">
-                  Learn More
-                </Link>
-              </Button>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-4">
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Button asChild size="lg" className="bg-gradient-primary shadow-medical h-12 md:h-11 px-6 md:px-8">
+                  <Link to="/family-history" aria-label="Start risk assessment (3 steps, under 3 minutes)">
+                    Start Risk Assessment
+                    <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
+                </Button>
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                <Button asChild variant="outline" size="lg" className="h-12 md:h-11">
+                  <Link to="/education" aria-label="Learn more about triple-negative breast cancer">
+                    Learn More
+                  </Link>
+                </Button>
+              </motion.div>
             </div>
             <div className="text-sm text-muted-foreground mb-8 lg:mb-0">3 steps • under 3 minutes • Trusted by local clinicians</div>
           </div>
 
           {/* Right side: Hero image with animations */}
-          <div className="flex justify-center lg:justify-end">
+          <motion.div 
+            className="flex justify-center lg:justify-end"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1, delay: 0.5 }}
+          >
             <div className="relative group">
               <img
                 src="/lovable-uploads/ff01b965-6445-4eef-a8ae-b891a4f1b8e8.png"
                 alt="Strong woman with breast cancer awareness ribbon flexing muscles, showing strength and empowerment"
-                className="w-full max-w-md rounded-2xl shadow-2xl transition-all duration-700 ease-out transform group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl animate-fade-in"
+                className="w-full max-w-md rounded-2xl shadow-2xl transition-all duration-700 ease-out transform group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl"
                 loading="eager"
                 fetchPriority="high"
               />
@@ -80,7 +105,7 @@ export function HeroSection() {
               {/* Subtle overlay */}
               <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>
-          </div>
+          </motion.div>
         </div>
 
         {/* Stats Section - moved below hero */}
