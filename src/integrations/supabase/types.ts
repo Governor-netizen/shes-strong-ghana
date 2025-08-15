@@ -98,13 +98,6 @@ export type Database = {
             foreignKeyName: "appointments_provider_id_fkey"
             columns: ["provider_id"]
             isOneToOne: false
-            referencedRelation: "provider_public_info"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "appointments_provider_id_fkey"
-            columns: ["provider_id"]
-            isOneToOne: false
             referencedRelation: "providers"
             referencedColumns: ["id"]
           },
@@ -149,13 +142,6 @@ export type Database = {
           updated_at?: string
         }
         Relationships: [
-          {
-            foreignKeyName: "availability_slots_provider_id_fkey"
-            columns: ["provider_id"]
-            isOneToOne: false
-            referencedRelation: "provider_public_info"
-            referencedColumns: ["id"]
-          },
           {
             foreignKeyName: "availability_slots_provider_id_fkey"
             columns: ["provider_id"]
@@ -406,51 +392,7 @@ export type Database = {
       }
     }
     Views: {
-      provider_public_info: {
-        Row: {
-          bio: string | null
-          created_at: string | null
-          email: string | null
-          external_booking_url: string | null
-          id: string | null
-          is_active: boolean | null
-          location: string | null
-          name: string | null
-          phone: string | null
-          photo_url: string | null
-          specialty: string | null
-          updated_at: string | null
-        }
-        Insert: {
-          bio?: string | null
-          created_at?: string | null
-          email?: never
-          external_booking_url?: string | null
-          id?: string | null
-          is_active?: boolean | null
-          location?: string | null
-          name?: string | null
-          phone?: never
-          photo_url?: string | null
-          specialty?: string | null
-          updated_at?: string | null
-        }
-        Update: {
-          bio?: string | null
-          created_at?: string | null
-          email?: never
-          external_booking_url?: string | null
-          id?: string | null
-          is_active?: boolean | null
-          location?: string | null
-          name?: string | null
-          phone?: never
-          photo_url?: string | null
-          specialty?: string | null
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       can_view_assessment: {
