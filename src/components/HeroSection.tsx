@@ -31,31 +31,27 @@ const stats = [{
 }];
 export function HeroSection() {
   return <div className="min-h-screen bg-gradient-to-br from-background to-muted/30">
-      {/* Logo Section */}
-      <div className="container mx-auto px-4 pt-12 pb-8 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-blue-pink bg-clip-text text-transparent mb-2">
-          She's Strong Ghana
-        </h1>
-        <p className="text-lg text-muted-foreground">
-          Empowering Women Through Early Detection
-        </p>
-      </div>
-
       {/* Hero Section */}
-      <section className="container mx-auto px-4 pb-16">
+      <section className="container mx-auto px-4 pt-12 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           
           {/* Left side: Content */}
-          <div className="text-center lg:text-left">
+          <div className="text-left">
+            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-blue-pink bg-clip-text text-transparent mb-2">
+              She's Strong Ghana
+            </h1>
+            <p className="text-lg text-muted-foreground mb-6">
+              Empowering Women Through Early Detection
+            </p>
             <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-3xl">
               Empowering women with tools for early detection, risk assessment, and comprehensive care for triple-negative breast cancer.
             </p>
 
-            <div className="flex justify-center lg:justify-start mb-8">
+            <div className="flex justify-start mb-8">
               <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm">About 60% of Ghanaian breast cancer cases are triple-negative — early detection matters.</span>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-4 animate-fade-in">
+            <div className="flex flex-col sm:flex-row gap-4 justify-start mb-4 animate-fade-in">
               <Button asChild size="lg" className="bg-gradient-primary shadow-medical hover-scale h-12 md:h-11 px-6 md:px-8">
                 <Link to="/family-history" aria-label="Start risk assessment (3 steps, under 3 minutes)">
                   Start Risk Assessment
