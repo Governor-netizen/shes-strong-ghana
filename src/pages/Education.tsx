@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import { useSEO } from "@/hooks/useSEO";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
-import { SafeContent } from "@/components/SafeContent";
+import ReactMarkdown from 'react-markdown';
 const educationalContent = {
   "risk-factors": [{
     id: 1,
@@ -677,8 +677,12 @@ export default function Education() {
               <CardTitle className="text-2xl">{selectedArticle.title}</CardTitle>
               <CardDescription className="text-lg">{selectedArticle.description}</CardDescription>
             </CardHeader>
-              <CardContent className="prose prose-slate max-w-none [&_h3]:font-medium [&_ol]:space-y-6 md:[&_ol]:space-y-8 [&_ol>li>p:first-of-type>strong]:text-base md:[&_ol>li>p:first-of-type>strong]:text-lg [&_ol>li>p:first-of-type>strong]:block [&_ol>li>p:first-of-type]:mb-1 [&_ul]:list-disc [&_ul]:pl-5 [&_a]:story-link">
-                <SafeContent content={selectedArticle.content} />
+            <CardContent className="prose prose-slate max-w-none [&_h3]:font-medium [&_ol]:space-y-6 md:[&_ol]:space-y-8 [&_ol>li>p:first-of-type>strong]:text-base md:[&_ol>li>p:first-of-type>strong]:text-lg [&_ol>li>p:first-of-type>strong]:block [&_ol>li>p:first-of-type]:mb-1 [&_ul]:list-disc [&_ul]:pl-5 [&_a]:story-link">
+                {selectedArticle.content.includes('<') ? (
+                  <div dangerouslySetInnerHTML={{ __html: selectedArticle.content }} />
+                ) : (
+                  <ReactMarkdown>{selectedArticle.content}</ReactMarkdown>
+                )}
               
               <div className="mt-8 p-6 bg-muted/50 rounded-lg">
                 <h3 className="font-semibold mb-3">Key Takeaways:</h3>
