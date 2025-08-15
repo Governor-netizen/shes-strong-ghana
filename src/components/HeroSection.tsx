@@ -37,7 +37,7 @@ export function HeroSection() {
           
           {/* Left side: Content */}
           <div className="text-center lg:text-left order-2 lg:order-1">
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-blue-pink bg-clip-text text-transparent mb-2">
+            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-blue-pink bg-clip-text text-transparent mb-2 leading-tight py-1">
               She's Strong Ghana
             </h1>
             <p className="text-lg text-muted-foreground mb-6">
