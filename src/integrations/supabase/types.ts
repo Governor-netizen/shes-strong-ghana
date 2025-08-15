@@ -7,7 +7,7 @@ export type Json =
   | Json[]
 
 export type Database = {
-  // Allows to automatically instanciate createClient with right options
+  // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
     PostgrestVersion: "13.0.4"
@@ -25,7 +25,7 @@ export type Database = {
           severity: string
           title: string
           type: string
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           coordinates?: unknown | null
@@ -37,7 +37,7 @@ export type Database = {
           severity: string
           title: string
           type: string
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           coordinates?: unknown | null
@@ -49,7 +49,7 @@ export type Database = {
           severity?: string
           title?: string
           type?: string
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -98,6 +98,13 @@ export type Database = {
             foreignKeyName: "appointments_provider_id_fkey"
             columns: ["provider_id"]
             isOneToOne: false
+            referencedRelation: "provider_public_info"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "appointments_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
             referencedRelation: "providers"
             referencedColumns: ["id"]
           },
@@ -142,6 +149,13 @@ export type Database = {
           updated_at?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "availability_slots_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "provider_public_info"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "availability_slots_provider_id_fkey"
             columns: ["provider_id"]
@@ -300,7 +314,7 @@ export type Database = {
           location: string
           longitude: number
           risk_level: string
-          user_id: string | null
+          user_id: string
         }
         Insert: {
           ai_assessment?: string | null
@@ -310,7 +324,7 @@ export type Database = {
           location: string
           longitude: number
           risk_level: string
-          user_id?: string | null
+          user_id: string
         }
         Update: {
           ai_assessment?: string | null
@@ -320,7 +334,7 @@ export type Database = {
           location?: string
           longitude?: number
           risk_level?: string
-          user_id?: string | null
+          user_id?: string
         }
         Relationships: []
       }
@@ -392,11 +406,59 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      provider_public_info: {
+        Row: {
+          bio: string | null
+          created_at: string | null
+          email: string | null
+          external_booking_url: string | null
+          id: string | null
+          is_active: boolean | null
+          location: string | null
+          name: string | null
+          phone: string | null
+          photo_url: string | null
+          specialty: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          bio?: string | null
+          created_at?: string | null
+          email?: never
+          external_booking_url?: string | null
+          id?: string | null
+          is_active?: boolean | null
+          location?: string | null
+          name?: string | null
+          phone?: never
+          photo_url?: string | null
+          specialty?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          bio?: string | null
+          created_at?: string | null
+          email?: never
+          external_booking_url?: string | null
+          id?: string | null
+          is_active?: boolean | null
+          location?: string | null
+          name?: string | null
+          phone?: never
+          photo_url?: string | null
+          specialty?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       can_view_assessment: {
         Args: { assess_id: string }
+        Returns: boolean
+      }
+      has_appointment_with_provider: {
+        Args: { provider_uuid: string }
         Returns: boolean
       }
       is_assessment_owner: {
