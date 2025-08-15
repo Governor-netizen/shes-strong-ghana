@@ -33,7 +33,7 @@ export function HeroSection() {
   return <div className="min-h-screen bg-gradient-to-br from-background to-muted/30">
       {/* Logo Section */}
       <div className="container mx-auto px-4 pt-12 pb-8 text-center">
-        <h1 className="text-4xl md:text-5xl font-bold text-primary mb-2">
+        <h1 className="text-4xl md:text-5xl font-bold bg-gradient-blue-pink bg-clip-text text-transparent mb-2">
           She's Strong Ghana
         </h1>
         <p className="text-lg text-muted-foreground">
