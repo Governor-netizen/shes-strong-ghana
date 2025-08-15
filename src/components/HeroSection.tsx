@@ -31,16 +31,22 @@ const stats = [{
 }];
 export function HeroSection() {
   return <div className="min-h-screen bg-gradient-to-br from-background to-muted/30">
+      {/* Logo Section */}
+      <div className="container mx-auto px-4 pt-12 pb-8 text-center">
+        <h1 className="text-4xl md:text-5xl font-bold text-primary mb-2">
+          She's Strong Ghana
+        </h1>
+        <p className="text-lg text-muted-foreground">
+          Empowering Women Through Early Detection
+        </p>
+      </div>
+
       {/* Hero Section */}
-      <section className="container mx-auto px-4 pt-20 pb-16">
+      <section className="container mx-auto px-4 pb-16">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           
           {/* Left side: Content */}
           <div className="text-center lg:text-left">
-            <h1 className="text-5xl md:text-7xl leading-snug tracking-tight font-bold mb-6 pb-2 md:pb-3 bg-gradient-hero bg-clip-text text-transparent animate-fade-in">
-              She's Strong Ghana
-            </h1>
-            
             <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-3xl">
               Empowering women with tools for early detection, risk assessment, and comprehensive care for triple-negative breast cancer.
             </p>
@@ -71,7 +77,7 @@ export function HeroSection() {
               <img
                 src="/lovable-uploads/ff01b965-6445-4eef-a8ae-b891a4f1b8e8.png"
                 alt="Strong woman with breast cancer awareness ribbon flexing muscles, showing strength and empowerment"
-                className="w-full max-w-md rounded-2xl shadow-2xl transition-all duration-700 ease-out transform group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl animate-fade-in"
+                className="w-full max-w-xl rounded-2xl shadow-2xl transition-all duration-700 ease-out transform group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl animate-fade-in"
                 loading="eager"
                 fetchPriority="high"
               />
