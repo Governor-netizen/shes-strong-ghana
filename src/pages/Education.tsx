@@ -678,10 +678,14 @@ export default function Education() {
               <CardDescription className="text-lg">{selectedArticle.description}</CardDescription>
             </CardHeader>
             <CardContent className="prose prose-slate max-w-none [&_h3]:font-medium [&_ol]:space-y-6 md:[&_ol]:space-y-8 [&_ol>li>p:first-of-type>strong]:text-base md:[&_ol>li>p:first-of-type>strong]:text-lg [&_ol>li>p:first-of-type>strong]:block [&_ol>li>p:first-of-type]:mb-1 [&_ul]:list-disc [&_ul]:pl-5 [&_a]:story-link">
-                {selectedArticle.content.includes('<') ? (
-                  <div dangerouslySetInnerHTML={{ __html: selectedArticle.content }} />
+                {typeof selectedArticle.content === 'string' ? (
+                  selectedArticle.content.includes('<') ? (
+                    <div dangerouslySetInnerHTML={{ __html: selectedArticle.content }} />
+                  ) : (
+                    <ReactMarkdown>{selectedArticle.content}</ReactMarkdown>
+                  )
                 ) : (
-                  <ReactMarkdown>{selectedArticle.content}</ReactMarkdown>
+                  selectedArticle.content
                 )}
               
               <div className="mt-8 p-6 bg-muted/50 rounded-lg">
