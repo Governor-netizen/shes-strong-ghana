@@ -36,7 +36,7 @@ export function HeroSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
           
           {/* Left side: Content */}
-          <div className="text-left">
+          <div className="text-center lg:text-left order-2 lg:order-1">
             <h1 className="text-4xl md:text-5xl font-bold bg-gradient-blue-pink bg-clip-text text-transparent mb-2">
               She's Strong Ghana
             </h1>
@@ -47,11 +47,11 @@ export function HeroSection() {
               Empowering women with tools for early detection, risk assessment, and comprehensive care for triple-negative breast cancer.
             </p>
 
-            <div className="flex justify-start mb-8">
+            <div className="flex justify-center lg:justify-start mb-8">
               <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm">About 60% of Ghanaian breast cancer cases are triple-negative — early detection matters.</span>
             </div>
             
-            <div className="flex flex-col sm:flex-row gap-4 justify-start mb-4 animate-fade-in">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-4 animate-fade-in">
               <Button asChild size="lg" className="bg-gradient-primary shadow-medical hover-scale h-12 md:h-11 px-6 md:px-8">
                 <Link to="/family-history" aria-label="Start risk assessment (3 steps, under 3 minutes)">
                   Start Risk Assessment
@@ -68,7 +68,7 @@ export function HeroSection() {
           </div>
 
           {/* Right side: Hero image with animations */}
-          <div className="flex justify-center lg:justify-end">
+          <div className="flex justify-center lg:justify-end order-1 lg:order-2">
             <div className="relative group">
               <img
                 src="/lovable-uploads/ff01b965-6445-4eef-a8ae-b891a4f1b8e8.png"
