@@ -41,7 +41,7 @@ export function HeroSection() {
             <BlurText 
               text="She's Strong Ghana"
               className="text-4xl md:text-5xl font-bold bg-gradient-blue-pink bg-clip-text text-transparent mb-2 leading-relaxed py-2"
-              delay={100}
+              delay={150}
               animateBy="words"
               direction="top"
             />
