@@ -46,18 +46,18 @@ const BlurText = ({
           key={index}
           className="inline-block"
           initial={{ 
-            filter: 'blur(10px)', 
-            opacity: 0, 
-            y: direction === 'top' ? -20 : 20 
+            filter: 'blur(3px)', 
+            opacity: 0.7, 
+            y: direction === 'top' ? -10 : 10 
           }}
           animate={inView ? { 
             filter: 'blur(0px)', 
             opacity: 1, 
             y: 0 
           } : {
-            filter: 'blur(10px)', 
-            opacity: 0, 
-            y: direction === 'top' ? -20 : 20 
+            filter: 'blur(3px)', 
+            opacity: 0.7, 
+            y: direction === 'top' ? -10 : 10 
           }}
           transition={{
             duration: 0.6,
