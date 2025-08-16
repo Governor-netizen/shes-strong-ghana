@@ -33,11 +33,11 @@ export function HeroSection() {
   return <div 
     className="min-h-screen bg-cover bg-center bg-no-repeat relative"
     style={{
-      backgroundImage: `url('/lovable-uploads/2c3168e1-8c11-4319-ab12-22046a8c0c4e.png')`
+      backgroundImage: `url('/lovable-uploads/42feaf70-5f41-4011-a4ba-b6358a67485d.png')`
     }}
   >
     {/* Overlay for text readability */}
-    <div className="absolute inset-0 bg-gradient-to-br from-background/20 via-background/10 to-muted/30"></div>
+    <div className="absolute inset-0 bg-gradient-to-br from-background/10 via-transparent to-muted/20"></div>
     
     {/* Content */}
     <div className="relative z-10">
