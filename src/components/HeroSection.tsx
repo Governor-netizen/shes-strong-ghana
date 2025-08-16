@@ -101,11 +101,11 @@ export function HeroSection() {
 
       {/* Inspirational Section */}
       <section className="relative w-full h-96 md:h-[500px] overflow-hidden">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: "url('/lovable-uploads/a630612f-05e8-47ef-8260-cc08531e1f2c.png')"
-          }}
+        {/* Background Image */}
+        <img 
+          src="/lovable-uploads/a630612f-05e8-47ef-8260-cc08531e1f2c.png"
+          alt="Joyful woman with pink ribbons representing hope and strength"
+          className="absolute inset-0 w-full h-full object-cover"
         />
         {/* Dark overlay for text readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/30 to-black/40" />
