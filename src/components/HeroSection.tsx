@@ -31,13 +31,13 @@ const stats = [{
 }];
 export function HeroSection() {
   return <div 
-    className="min-h-screen bg-cover bg-center bg-no-repeat relative"
+    className="min-h-screen bg-cover bg-right bg-no-repeat relative"
     style={{
-      backgroundImage: `url('/lovable-uploads/2c3168e1-8c11-4319-ab12-22046a8c0c4e.png')`
+      backgroundImage: `url('/lovable-uploads/549d1c32-b9be-4751-a715-490dc696d442.png')`
     }}
   >
-    {/* Overlay for text readability */}
-    <div className="absolute inset-0 bg-gradient-to-br from-background/20 via-background/10 to-muted/30"></div>
+    {/* Soft pink overlay for text readability */}
+    <div className="absolute inset-0 bg-pink-500/40"></div>
     
     {/* Content */}
     <div className="relative z-10">
