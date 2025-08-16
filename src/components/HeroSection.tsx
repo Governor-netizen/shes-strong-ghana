@@ -104,7 +104,7 @@ export function HeroSection() {
         <div 
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage: "url('/lovable-uploads/464c72ca-24cf-4f5b-9f38-56d7474a98f4.png')"
+            backgroundImage: "url('/lovable-uploads/a630612f-05e8-47ef-8260-cc08531e1f2c.png')"
           }}
         />
         {/* Dark overlay for text readability */}
