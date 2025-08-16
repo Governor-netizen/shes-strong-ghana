@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Heart, Shield, Users, BookOpen, ArrowRight, Star } from "lucide-react";
+import BlurText from "@/components/ui/blur-text";
 const features = [{
   icon: Shield,
   title: "Risk Assessment",
@@ -37,9 +38,13 @@ export function HeroSection() {
           
           {/* Left side: Content */}
           <div className="text-center lg:text-left order-2 lg:order-1">
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-blue-pink bg-clip-text text-transparent mb-2 leading-relaxed py-2">
-              She's Strong Ghana
-            </h1>
+            <BlurText 
+              text="She's Strong Ghana"
+              className="text-4xl md:text-5xl font-bold bg-gradient-blue-pink bg-clip-text text-transparent mb-2 leading-relaxed py-2"
+              delay={100}
+              animateBy="words"
+              direction="top"
+            />
             <p className="text-lg text-muted-foreground mb-6">
               Empowering Women Through Early Detection
             </p>
