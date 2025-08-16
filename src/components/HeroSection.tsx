@@ -76,7 +76,7 @@ export function HeroSection() {
               <img
                 src="/lovable-uploads/ff01b965-6445-4eef-a8ae-b891a4f1b8e8.png"
                 alt="Strong woman with breast cancer awareness ribbon flexing muscles, showing strength and empowerment"
-                className="w-full max-w-md rounded-2xl shadow-2xl transition-all duration-700 ease-out transform group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl opacity-90 hover:opacity-100"
+                className="w-full max-w-lg rounded-2xl shadow-2xl transition-all duration-700 ease-out transform group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl opacity-90 hover:opacity-100"
                 loading="eager"
                 fetchPriority="high"
               />
