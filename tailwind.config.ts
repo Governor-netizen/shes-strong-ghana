@@ -80,8 +80,7 @@ export default {
 			backgroundImage: {
 				'gradient-primary': 'var(--gradient-primary)',
 				'gradient-hero': 'var(--gradient-hero)',
-				'gradient-card': 'var(--gradient-card)',
-				'gradient-blue-pink': 'var(--gradient-blue-pink)'
+				'gradient-card': 'var(--gradient-card)'
 			},
 			boxShadow: {
 				'medical': 'var(--shadow-medical)',

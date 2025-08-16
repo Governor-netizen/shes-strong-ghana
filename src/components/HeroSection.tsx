@@ -32,67 +32,51 @@ const stats = [{
 export function HeroSection() {
   return <div className="min-h-screen bg-gradient-to-br from-background to-muted/30">
       {/* Hero Section */}
-      <section className="container mx-auto px-4 pt-12 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
+      <section className="container mx-auto px-4 pt-20 pb-16">
+        <div className="text-center max-w-4xl mx-auto">
+          <div className="flex justify-center mb-6">
+            <img src="/lovable-uploads/6f5d86f1-d967-4b49-b3e1-7bfa5dfa3241.png" alt="She's Strong Ghana logo — heart with ribbon" className="h-[7.5rem] w-[7.5rem] md:h-[10.5rem] md:w-[10.5rem] object-contain" loading="eager" width={120} height={120} fetchPriority="high" />
+          </div>
           
-          {/* Left side: Content */}
-          <div className="text-center lg:text-left order-2 lg:order-1">
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-blue-pink bg-clip-text text-transparent mb-2 leading-relaxed py-2">
-              She's Strong Ghana
-            </h1>
-            <p className="text-lg text-muted-foreground mb-6">
-              Empowering Women Through Early Detection
-            </p>
-            <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-3xl">
-              Empowering women with tools for early detection, risk assessment, and comprehensive care for triple-negative breast cancer.
-            </p>
+          <h1 className="text-5xl md:text-7xl leading-snug tracking-tight font-bold mb-6 pb-2 md:pb-3 bg-gradient-hero bg-clip-text text-transparent animate-fade-in">
+            She's Strong Ghana
+          </h1>
+          
+          <p className="text-lg md:text-xl text-muted-foreground mb-6 mx-auto max-w-3xl text-center">
+            Empowering women with tools for early detection, risk assessment, and comprehensive care for triple-negative breast cancer.
+          </p>
 
-            <div className="flex justify-center lg:justify-start mb-8">
-              <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm">About 60% of Ghanaian breast cancer cases are triple-negative — early detection matters.</span>
-            </div>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-4 animate-fade-in">
-              <Button asChild size="lg" className="bg-gradient-primary shadow-medical hover-scale h-12 md:h-11 px-6 md:px-8">
-                <Link to="/family-history" aria-label="Start risk assessment (3 steps, under 3 minutes)">
-                  Start Risk Assessment
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="hover-scale h-12 md:h-11">
-                <Link to="/education" aria-label="Learn more about triple-negative breast cancer">
-                  Learn More
-                </Link>
-              </Button>
-            </div>
-            <div className="text-sm text-muted-foreground mb-8 lg:mb-0">3 steps • under 3 minutes • Trusted by local clinicians</div>
+          <div className="flex justify-center mb-8">
+            <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm">About 60% of Ghanaian breast cancer cases are triple-negative — early detection matters.</span>
           </div>
-
-          {/* Right side: Hero image with animations */}
-          <div className="flex justify-center lg:justify-end order-1 lg:order-2">
-            <div className="relative group">
-              <img
-                src="/lovable-uploads/ff01b965-6445-4eef-a8ae-b891a4f1b8e8.png"
-                alt="Strong woman with breast cancer awareness ribbon flexing muscles, showing strength and empowerment"
-                className="w-full max-w-xl rounded-2xl shadow-2xl transition-all duration-700 ease-out transform group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl animate-fade-in"
-                loading="eager"
-                fetchPriority="high"
-              />
-              {/* Animated glow effect */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 opacity-0 group-hover:opacity-100 transition-all duration-700 blur-2xl scale-110 -z-10"></div>
-              {/* Subtle overlay */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            </div>
+          
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4 animate-fade-in">
+            <Button asChild size="lg" className="bg-gradient-primary shadow-medical hover-scale h-12 md:h-11 px-6 md:px-8">
+              <Link to="/family-history" aria-label="Start risk assessment (3 steps, under 3 minutes)">
+                Start Risk Assessment
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button asChild variant="outline" size="lg" className="hover-scale h-12 md:h-11">
+              <Link to="/education" aria-label="Learn more about triple-negative breast cancer">
+                Learn More
+              </Link>
+            </Button>
+            <Button asChild variant="secondary" size="lg" className="hover-scale h-12 md:h-11">
+              <Link to="/research" aria-label="Join our research community">
+                Join Research
+              </Link>
+            </Button>
           </div>
-        </div>
+          <div className="text-sm text-muted-foreground mb-12">3 steps • under 3 minutes • Trusted by local clinicians</div>
 
-        {/* Stats Section - moved below hero */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-20 max-w-4xl mx-auto">
-          {stats.map((stat, index) => 
-            <Card key={index} className="p-6 text-center bg-gradient-card shadow-card-soft hover-scale">
-              <div className="text-3xl font-bold text-primary mb-2">{stat.number}</div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
-            </Card>
-          )}
+          {/* Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
+            {stats.map((stat, index) => <Card key={index} className="p-6 text-center bg-gradient-card shadow-card-soft">
+                <div className="text-3xl font-bold text-primary mb-2">{stat.number}</div>
+                <div className="text-sm text-muted-foreground">{stat.label}</div>
+              </Card>)}
+          </div>
         </div>
       </section>
 
