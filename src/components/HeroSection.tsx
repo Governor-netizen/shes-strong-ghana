@@ -37,7 +37,7 @@ export function HeroSection() {
     }}
   >
     {/* Overlay for text readability */}
-    <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-background/60 to-muted/70"></div>
+    <div className="absolute inset-0 bg-gradient-to-br from-background/20 via-background/10 to-muted/30"></div>
     
     {/* Content */}
     <div className="relative z-10">
