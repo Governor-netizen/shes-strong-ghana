@@ -30,37 +30,29 @@ const stats = [{
   label: "early detection success rate"
 }];
 export function HeroSection() {
-  return <div 
-    className="min-h-screen bg-cover bg-right bg-no-repeat relative"
-    style={{
-      backgroundImage: `url('/lovable-uploads/549d1c32-b9be-4751-a715-490dc696d442.png')`
-    }}
-  >
-    {/* Soft pink overlay for text readability */}
-    <div className="absolute inset-0 bg-pink-500/40"></div>
-    
-    {/* Content */}
-    <div className="relative z-10">
-      {/* Hero Section */}
-      <section className="container mx-auto px-4 pt-20 pb-16">
-        <div className="text-center max-w-4xl mx-auto">
-          <div className="flex justify-center mb-6">
+  return <div className="min-h-screen bg-white">
+    {/* Hero Section */}
+    <section className="container mx-auto px-4 pt-20 pb-16">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-[80vh]">
+        {/* Left Content */}
+        <div className="text-center lg:text-left space-y-8">
+          <div className="flex justify-center lg:justify-start mb-6">
             <img src="/lovable-uploads/6f5d86f1-d967-4b49-b3e1-7bfa5dfa3241.png" alt="She's Strong Ghana logo — heart with ribbon" className="h-[7.5rem] w-[7.5rem] md:h-[10.5rem] md:w-[10.5rem] object-contain" loading="eager" width={120} height={120} fetchPriority="high" />
           </div>
           
-          <h1 className="text-5xl md:text-7xl leading-snug tracking-tight font-bold mb-6 pb-2 md:pb-3 bg-gradient-hero bg-clip-text text-transparent animate-fade-in">
+          <h1 className="text-4xl md:text-6xl lg:text-7xl leading-snug tracking-tight font-bold mb-6 pb-2 md:pb-3 bg-gradient-hero bg-clip-text text-transparent animate-fade-in">
             She's Strong Ghana
           </h1>
           
-          <p className="text-lg md:text-xl text-muted-foreground mb-6 mx-auto max-w-3xl text-center">
+          <p className="text-lg md:text-xl text-muted-foreground mb-6 max-w-2xl mx-auto lg:mx-0">
             Empowering women with tools for early detection, risk assessment, and comprehensive care for triple-negative breast cancer.
           </p>
 
-          <div className="flex justify-center mb-8">
+          <div className="flex justify-center lg:justify-start mb-8">
             <span className="px-3 py-1 rounded-full bg-secondary text-secondary-foreground text-sm">About 60% of Ghanaian breast cancer cases are triple-negative — early detection matters.</span>
           </div>
           
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-4 animate-fade-in">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-4 animate-fade-in">
             <Button asChild size="lg" className="bg-gradient-primary shadow-medical hover-scale h-12 md:h-11 px-6 md:px-8">
               <Link to="/family-history" aria-label="Start risk assessment (3 steps, under 3 minutes)">
                 Start Risk Assessment
@@ -78,70 +70,83 @@ export function HeroSection() {
               </Link>
             </Button>
           </div>
-          <div className="text-sm text-muted-foreground mb-12">3 steps • under 3 minutes • Trusted by local clinicians</div>
+          <div className="text-sm text-muted-foreground mb-8">3 steps • under 3 minutes • Trusted by local clinicians</div>
 
           {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-            {stats.map((stat, index) => <Card key={index} className="p-6 text-center bg-gradient-card shadow-card-soft">
-                <div className="text-3xl font-bold text-primary mb-2">{stat.number}</div>
-                <div className="text-sm text-muted-foreground">{stat.label}</div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 lg:gap-6">
+            {stats.map((stat, index) => <Card key={index} className="p-4 lg:p-6 text-center bg-gradient-card shadow-card-soft">
+                <div className="text-2xl lg:text-3xl font-bold text-primary mb-2">{stat.number}</div>
+                <div className="text-xs lg:text-sm text-muted-foreground">{stat.label}</div>
               </Card>)}
           </div>
         </div>
-      </section>
 
-      {/* Features Section */}
-      <section className="container mx-auto px-4 pb-20">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Comprehensive Care & Support
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            From risk assessment to ongoing care, we provide the tools and resources 
-            you need at every step of your health journey
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {features.map((feature, index) => <Card key={index} className="p-6 text-center hover:shadow-medical transition-all duration-300 bg-gradient-card">
-              <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center mx-auto mb-4">
-                <feature.icon className="h-6 w-6 text-primary-foreground" />
-              </div>
-              <h3 className="text-lg font-semibold mb-3">{feature.title}</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                {feature.description}
-              </p>
-            </Card>)}
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="bg-gradient-hero py-16">
-        <div className="container mx-auto px-4 text-center">
-          <div className="max-w-3xl mx-auto text-white">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Take Control of Your Health Today
-            </h2>
-            <p className="text-xl opacity-90 mb-8">
-              Early detection saves lives. Start your health journey with our comprehensive 
-              assessment tools and expert guidance.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" variant="secondary">
-                <Link to="/family-history">
-                  Begin Assessment
-                  <Star className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button asChild size="lg" className="hover-scale h-12 md:h-11">
-                <Link to="/symptoms">
-                  Track Symptoms
-                </Link>
-              </Button>
-            </div>
+        {/* Right Image */}
+        <div className="flex justify-center lg:justify-end order-first lg:order-last">
+          <div className="relative w-full max-w-md lg:max-w-lg xl:max-w-xl">
+            <img 
+              src="/lovable-uploads/549d1c32-b9be-4751-a715-490dc696d442.png" 
+              alt="Strong woman flexing with breast cancer awareness ribbon" 
+              className="w-full h-auto object-contain rounded-lg"
+              loading="eager"
+              fetchPriority="high"
+            />
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
+
+    {/* Features Section */}
+    <section className="container mx-auto px-4 pb-20">
+      <div className="text-center mb-12">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4">
+          Comprehensive Care & Support
+        </h2>
+        <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          From risk assessment to ongoing care, we provide the tools and resources 
+          you need at every step of your health journey
+        </p>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {features.map((feature, index) => <Card key={index} className="p-6 text-center hover:shadow-medical transition-all duration-300 bg-gradient-card">
+            <div className="w-12 h-12 bg-gradient-primary rounded-xl flex items-center justify-center mx-auto mb-4">
+              <feature.icon className="h-6 w-6 text-primary-foreground" />
+            </div>
+            <h3 className="text-lg font-semibold mb-3">{feature.title}</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed">
+              {feature.description}
+            </p>
+          </Card>)}
+      </div>
+    </section>
+
+    {/* CTA Section */}
+    <section className="bg-gradient-hero py-16">
+      <div className="container mx-auto px-4 text-center">
+        <div className="max-w-3xl mx-auto text-white">
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">
+            Take Control of Your Health Today
+          </h2>
+          <p className="text-xl opacity-90 mb-8">
+            Early detection saves lives. Start your health journey with our comprehensive 
+            assessment tools and expert guidance.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Button asChild size="lg" variant="secondary">
+              <Link to="/family-history">
+                Begin Assessment
+                <Star className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+            <Button asChild size="lg" className="hover-scale h-12 md:h-11">
+              <Link to="/symptoms">
+                Track Symptoms
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
   </div>;
 }
