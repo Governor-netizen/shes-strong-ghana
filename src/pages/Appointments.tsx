@@ -24,6 +24,7 @@ import {
 import { useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useSEO } from "@/hooks/useSEO";
+import { secureProviderData } from "@/utils/secureProviderData";
  
 const sb: any = supabase;
 const appointmentTypes = [
@@ -137,16 +138,18 @@ const location = useLocation();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Load active providers on mount
+  // Load active providers on mount with secure data
   useEffect(() => {
     const loadProviders = async () => {
       const { data, error } = await supabase
         .from("providers")
-        .select("id,name,specialty,location,external_booking_url")
+        .select("id,name,specialty,location,external_booking_url,phone,email")
         .eq("is_active", true)
         .order("name", { ascending: true });
       if (!error && data) {
-        setProviders(data as unknown as Provider[]);
+        // Apply security layer to mask sensitive contact information
+        const securedData = await secureProviderData(data as any);
+        setProviders(securedData as unknown as Provider[]);
       }
     };
     loadProviders();

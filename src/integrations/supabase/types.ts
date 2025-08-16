@@ -98,13 +98,6 @@ export type Database = {
             foreignKeyName: "appointments_provider_id_fkey"
             columns: ["provider_id"]
             isOneToOne: false
-            referencedRelation: "provider_public_info"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "appointments_provider_id_fkey"
-            columns: ["provider_id"]
-            isOneToOne: false
             referencedRelation: "providers"
             referencedColumns: ["id"]
           },
@@ -153,17 +146,82 @@ export type Database = {
             foreignKeyName: "availability_slots_provider_id_fkey"
             columns: ["provider_id"]
             isOneToOne: false
-            referencedRelation: "provider_public_info"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "availability_slots_provider_id_fkey"
-            columns: ["provider_id"]
-            isOneToOne: false
             referencedRelation: "providers"
             referencedColumns: ["id"]
           },
         ]
+      }
+      post_treatment_surveys: {
+        Row: {
+          audio_engagement: number | null
+          caregiver_support: boolean | null
+          chemo_cycles: number | null
+          comorbidities: string[] | null
+          created_at: string | null
+          distance_to_clinic: number | null
+          energy_level: number | null
+          mood_score: number | null
+          pain_level: number | null
+          patient_id: string | null
+          reminders_read_rate: number | null
+          side_effect_severity: Json | null
+          submitted_at: string | null
+          surgery_recovery_status: string | null
+          survey_id: string
+          text_engagement: number | null
+          transportation_access: boolean | null
+          treatment_stage: string | null
+          updated_at: string | null
+          video_engagement: number | null
+          work_schedule_conflict: boolean | null
+        }
+        Insert: {
+          audio_engagement?: number | null
+          caregiver_support?: boolean | null
+          chemo_cycles?: number | null
+          comorbidities?: string[] | null
+          created_at?: string | null
+          distance_to_clinic?: number | null
+          energy_level?: number | null
+          mood_score?: number | null
+          pain_level?: number | null
+          patient_id?: string | null
+          reminders_read_rate?: number | null
+          side_effect_severity?: Json | null
+          submitted_at?: string | null
+          surgery_recovery_status?: string | null
+          survey_id?: string
+          text_engagement?: number | null
+          transportation_access?: boolean | null
+          treatment_stage?: string | null
+          updated_at?: string | null
+          video_engagement?: number | null
+          work_schedule_conflict?: boolean | null
+        }
+        Update: {
+          audio_engagement?: number | null
+          caregiver_support?: boolean | null
+          chemo_cycles?: number | null
+          comorbidities?: string[] | null
+          created_at?: string | null
+          distance_to_clinic?: number | null
+          energy_level?: number | null
+          mood_score?: number | null
+          pain_level?: number | null
+          patient_id?: string | null
+          reminders_read_rate?: number | null
+          side_effect_severity?: Json | null
+          submitted_at?: string | null
+          surgery_recovery_status?: string | null
+          survey_id?: string
+          text_engagement?: number | null
+          transportation_access?: boolean | null
+          treatment_stage?: string | null
+          updated_at?: string | null
+          video_engagement?: number | null
+          work_schedule_conflict?: boolean | null
+        }
+        Relationships: []
       }
       profiles: {
         Row: {
@@ -272,6 +330,44 @@ export type Database = {
           updated_at?: string
         }
         Relationships: []
+      }
+      recommendations: {
+        Row: {
+          action: string | null
+          confidence_score: number | null
+          generated_at: string | null
+          model_version: string | null
+          rationale: string | null
+          recommendation_id: string
+          survey_id: string | null
+        }
+        Insert: {
+          action?: string | null
+          confidence_score?: number | null
+          generated_at?: string | null
+          model_version?: string | null
+          rationale?: string | null
+          recommendation_id?: string
+          survey_id?: string | null
+        }
+        Update: {
+          action?: string | null
+          confidence_score?: number | null
+          generated_at?: string | null
+          model_version?: string | null
+          rationale?: string | null
+          recommendation_id?: string
+          survey_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "recommendations_survey_id_fkey"
+            columns: ["survey_id"]
+            isOneToOne: false
+            referencedRelation: "post_treatment_surveys"
+            referencedColumns: ["survey_id"]
+          },
+        ]
       }
       risk_assessment_access: {
         Row: {
@@ -406,51 +502,7 @@ export type Database = {
       }
     }
     Views: {
-      provider_public_info: {
-        Row: {
-          bio: string | null
-          created_at: string | null
-          email: string | null
-          external_booking_url: string | null
-          id: string | null
-          is_active: boolean | null
-          location: string | null
-          name: string | null
-          phone: string | null
-          photo_url: string | null
-          specialty: string | null
-          updated_at: string | null
-        }
-        Insert: {
-          bio?: string | null
-          created_at?: string | null
-          email?: never
-          external_booking_url?: string | null
-          id?: string | null
-          is_active?: boolean | null
-          location?: string | null
-          name?: string | null
-          phone?: never
-          photo_url?: string | null
-          specialty?: string | null
-          updated_at?: string | null
-        }
-        Update: {
-          bio?: string | null
-          created_at?: string | null
-          email?: never
-          external_booking_url?: string | null
-          id?: string | null
-          is_active?: boolean | null
-          location?: string | null
-          name?: string | null
-          phone?: never
-          photo_url?: string | null
-          specialty?: string | null
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
       can_view_assessment: {

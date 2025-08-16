@@ -4,6 +4,7 @@ import { AIAssistant } from "@/components/AIAssistant";
 import { useSEO } from "@/hooks/useSEO";
 import AuthStatus from "@/components/auth/AuthStatus";
 
+
 const Index = () => {
   useSEO({
     title: "She's Strong Ghana — Early Detection & Risk Assessment",
