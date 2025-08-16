@@ -37,7 +37,7 @@ export function HeroSection() {
           
           {/* Left side: Content */}
           <div className="text-center lg:text-left order-2 lg:order-1 space-y-6">
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-blue-pink bg-clip-text text-transparent leading-tight animate-slide-in-left">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-blue-pink bg-clip-text text-transparent leading-tight animate-slide-in-left">
               She's Strong Ghana
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground/90 font-medium animate-slide-in-left-delayed">
@@ -96,6 +96,29 @@ export function HeroSection() {
               <div className="text-sm text-muted-foreground">{stat.label}</div>
             </Card>
           )}
+        </div>
+      </section>
+
+      {/* Inspirational Section */}
+      <section className="relative w-full h-96 md:h-[500px] overflow-hidden">
+        <div 
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: "url('/lovable-uploads/464c72ca-24cf-4f5b-9f38-56d7474a98f4.png')"
+          }}
+        />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/40 via-black/30 to-black/40" />
+        
+        {/* Text overlay */}
+        <div className="relative z-10 flex items-center justify-center h-full">
+          <div className="text-center text-white px-4">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight animate-fade-in">
+              <span className="block mb-2">Hope.</span>
+              <span className="block mb-2">Strength.</span>
+              <span className="block">Early Detection.</span>
+            </h2>
+          </div>
         </div>
       </section>
 
