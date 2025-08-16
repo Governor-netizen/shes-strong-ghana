@@ -30,7 +30,17 @@ const stats = [{
   label: "early detection success rate"
 }];
 export function HeroSection() {
-  return <div className="min-h-screen bg-gradient-to-br from-background to-muted/30">
+  return <div 
+    className="min-h-screen bg-cover bg-center bg-no-repeat relative"
+    style={{
+      backgroundImage: `url('/lovable-uploads/2c3168e1-8c11-4319-ab12-22046a8c0c4e.png')`
+    }}
+  >
+    {/* Overlay for text readability */}
+    <div className="absolute inset-0 bg-gradient-to-br from-background/80 via-background/60 to-muted/70"></div>
+    
+    {/* Content */}
+    <div className="relative z-10">
       {/* Hero Section */}
       <section className="container mx-auto px-4 pt-20 pb-16">
         <div className="text-center max-w-4xl mx-auto">
@@ -132,5 +142,6 @@ export function HeroSection() {
           </div>
         </div>
       </section>
-    </div>;
+    </div>
+  </div>;
 }
