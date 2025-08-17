@@ -40,13 +40,14 @@ export function HeroSection() {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-normal pb-2 animate-slide-in-left">
               <span className="bg-gradient-blue-pink bg-clip-text text-transparent">She's Strong</span>{" "}
               {/* Mobile and tablet: show emoji */}
-              <span className="text-4xl md:text-5xl lg:text-6xl md:hidden" role="img" aria-label="Ghana">🇬🇭</span>
+              <span className="text-4xl md:text-5xl lg:text-6xl lg:hidden" role="img" aria-label="Ghana">🇬🇭</span>
               {/* Desktop and laptop: show flag image */}
               <img 
-                src="/lovable-uploads/aa46ec75-21ec-4911-a94f-2613db1c0cdb.png" 
+                src="/lovable-uploads/b18f084d-fccd-4c70-bbb8-291062d81972.png" 
                 alt="Ghana flag" 
-                className="hidden md:inline-block w-8 h-6 md:w-10 md:h-7 lg:w-12 lg:h-9 object-contain align-middle ml-1"
+                className="hidden lg:inline-block w-8 h-6 md:w-10 md:h-7 lg:w-12 lg:h-9 object-contain align-middle ml-1"
                 loading="eager"
+                fetchPriority="high"
               />
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground/90 font-medium animate-slide-in-left-delayed">
