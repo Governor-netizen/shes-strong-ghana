@@ -39,16 +39,7 @@ export function HeroSection() {
           <div className="text-center lg:text-left order-2 lg:order-1 space-y-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-normal pb-2 animate-slide-in-left">
               <span className="bg-gradient-blue-pink bg-clip-text text-transparent">She's Strong</span>{" "}
-              {/* Mobile and tablet: show emoji */}
-              <span className="text-4xl md:text-5xl lg:text-6xl lg:hidden" role="img" aria-label="Ghana">🇬🇭</span>
-              {/* Desktop and laptop: show flag image */}
-              <img 
-                src="/lovable-uploads/53bce3d7-ae32-482a-9ea4-22ff9a555108.png" 
-                alt="Ghana flag" 
-                className="hidden lg:inline-block w-8 h-6 md:w-10 md:h-7 lg:w-12 lg:h-9 object-contain align-middle ml-1"
-                loading="eager"
-                fetchPriority="high"
-              />
+              <span className="text-4xl md:text-5xl lg:text-6xl" role="img" aria-label="Ghana">🇬🇭</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground/90 font-medium animate-slide-in-left-delayed">
               Empowering Women Through Early Detection
