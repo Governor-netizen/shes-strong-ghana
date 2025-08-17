@@ -39,7 +39,8 @@ export function HeroSection() {
           <div className="text-center lg:text-left order-2 lg:order-1 space-y-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-normal pb-2 animate-slide-in-left">
               <span className="bg-gradient-blue-pink bg-clip-text text-transparent">She's Strong</span>{" "}
-              <span className="text-4xl md:text-5xl lg:text-6xl" role="img" aria-label="Ghana">🇬🇭</span>
+              <span className="text-4xl md:text-5xl lg:text-6xl lg:hidden" role="img" aria-label="Ghana">🇬🇭</span>
+              <span className="bg-gradient-blue-pink bg-clip-text text-transparent text-4xl md:text-5xl lg:text-6xl hidden lg:inline">Ghana</span>
             </h1>
             <p className="text-xl md:text-2xl text-muted-foreground/90 font-medium animate-slide-in-left-delayed">
               Empowering Women Through Early Detection
