@@ -43,7 +43,7 @@ export function HeroSection() {
               <span className="text-4xl md:text-5xl lg:text-6xl lg:hidden" role="img" aria-label="Ghana">🇬🇭</span>
               {/* Desktop and laptop: show flag image */}
               <img 
-                src="/lovable-uploads/b18f084d-fccd-4c70-bbb8-291062d81972.png" 
+                src="/lovable-uploads/53bce3d7-ae32-482a-9ea4-22ff9a555108.png" 
                 alt="Ghana flag" 
                 className="hidden lg:inline-block w-8 h-6 md:w-10 md:h-7 lg:w-12 lg:h-9 object-contain align-middle ml-1"
                 loading="eager"
