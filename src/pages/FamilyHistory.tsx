@@ -394,11 +394,10 @@ export default function FamilyHistory() {
                     onValueChange={(val) => {
                       const yes = val === "yes";
                       setFamilyGate(yes);
-                      if (!yes) {
+                       if (!yes) {
                         setSelectedRelatives([]);
                         setRelativeDetails({});
-                        setCurrentStep((s) => Math.min(questions.length - 1, s + 1));
-                      }
+                       }
                     }}
                   >
                     <div className="flex items-center space-x-2">
@@ -530,42 +529,45 @@ export default function FamilyHistory() {
                   </>
                 )}
 
-                {/* Genetic testing questions */}
+                 {/* Genetic testing questions - always show regardless of family history */}
                 <div className="space-y-3">
-                  <Label className="text-base font-medium">
-                    Have you had genetic testing for BRCA1/BRCA2 mutations?
-                  </Label>
-                  <RadioGroup
-                    value={answers["genetic_testing"]?.toString()}
-                    onValueChange={(value) => handleAnswer("genetic_testing", value === "true")}
-                  >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="true" id="genetic_testing-yes" />
-                      <Label htmlFor="genetic_testing-yes">Yes</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="false" id="genetic_testing-no" />
-                      <Label htmlFor="genetic_testing-no">No</Label>
-                    </div>
-                  </RadioGroup>
-                </div>
+                   <Label className="text-base font-medium">
+                     Have you had genetic testing for BRCA1/BRCA2 mutations?
+                   </Label>
+                   <RadioGroup
+                     value={answers["genetic_testing"]?.toString()}
+                     onValueChange={(value) => handleAnswer("genetic_testing", value === "true")}
+                   >
+                     <div className="flex items-center space-x-2">
+                       <RadioGroupItem value="true" id="genetic_testing-yes" />
+                       <Label htmlFor="genetic_testing-yes">Yes</Label>
+                     </div>
+                     <div className="flex items-center space-x-2">
+                       <RadioGroupItem value="false" id="genetic_testing-no" />
+                       <Label htmlFor="genetic_testing-no">No</Label>
+                     </div>
+                   </RadioGroup>
+                 </div>
 
-                <div className="space-y-3">
-                  <Label className="text-base font-medium">If tested, were any mutations found?</Label>
-                  <RadioGroup
-                    value={answers["genetic_results"]?.toString()}
-                    onValueChange={(value) => handleAnswer("genetic_results", value === "true")}
-                  >
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="true" id="genetic_results-yes" />
-                      <Label htmlFor="genetic_results-yes">Yes</Label>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <RadioGroupItem value="false" id="genetic_results-no" />
-                      <Label htmlFor="genetic_results-no">No</Label>
-                    </div>
-                  </RadioGroup>
-                </div>
+                 {/* Only show genetic results question if user answered "Yes" to testing */}
+                 {answers["genetic_testing"] === true && (
+                   <div className="space-y-3">
+                     <Label className="text-base font-medium">If tested, were any mutations found?</Label>
+                     <RadioGroup
+                       value={answers["genetic_results"]?.toString()}
+                       onValueChange={(value) => handleAnswer("genetic_results", value === "true")}
+                     >
+                       <div className="flex items-center space-x-2">
+                         <RadioGroupItem value="true" id="genetic_results-yes" />
+                         <Label htmlFor="genetic_results-yes">Yes</Label>
+                       </div>
+                       <div className="flex items-center space-x-2">
+                         <RadioGroupItem value="false" id="genetic_results-no" />
+                         <Label htmlFor="genetic_results-no">No</Label>
+                       </div>
+                     </RadioGroup>
+                   </div>
+                 )}
               </>
             ) : (
               <>

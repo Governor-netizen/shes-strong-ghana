@@ -1,24 +1,27 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { 
-  Heart, 
   ClipboardList, 
-  Activity, 
   Calendar, 
   BookOpen, 
   Menu,
   User,
   FlaskConical
 } from "lucide-react";
+import homeIcon from "@/assets/home-icon.svg";
+import personIcon from "@/assets/person-icon.svg";
+
+const HomeIcon = () => <img src={homeIcon} alt="Home" className="h-5 w-5" />;
+const PersonIcon = () => <img src={personIcon} alt="Symptom Tracker" className="h-5 w-5" />;
 
 const navigationItems = [
   {
     title: "Home",
     href: "/",
-    icon: Heart,
+    icon: HomeIcon,
     description: "Dashboard overview"
   },
   {
@@ -30,7 +33,7 @@ const navigationItems = [
   {
     title: "Symptom Tracker",
     href: "/symptoms",
-    icon: Activity,
+    icon: PersonIcon,
     description: "Monitor your health"
   },
   {
@@ -74,7 +77,7 @@ export function Navigation() {
                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
              )}
            >
-            <item.icon className="h-5 w-5" />
+             <item.icon className="h-5 w-5" />
             <div className={mobile ? "text-left" : "hidden lg:block"}>
               <div className="font-medium">{item.title}</div>
               {mobile && (
