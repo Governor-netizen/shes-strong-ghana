@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -116,6 +116,11 @@ export default function FamilyHistory() {
   const handleAnswer = (questionId: string, value: any) => {
     setAnswers(prev => ({ ...prev, [questionId]: value }));
   };
+
+  // Scroll to top when component mounts or step changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [currentStep]);
 
   const calculateRisk = (ans: Record<string, any> = answers) => {
     let riskScore = 0;
