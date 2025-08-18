@@ -1,0 +1,21 @@
+{
+  "name": "She's Strong Ghana",
+  "short_name": "She's Strong",
+  "description": "Empowering Ghanaian women with tools for breast cancer prevention and care",
+  "icons": [
+    {
+      "src": "/lovable-uploads/ea46465e-faf7-4abe-bad9-c632da178031.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/lovable-uploads/ea46465e-faf7-4abe-bad9-c632da178031.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "theme_color": "#e91e63",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/"
+}
