@@ -16,6 +16,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useScrollToTop } from "@/hooks/useScrollToTop";
 
 const questions = [
   {
@@ -85,6 +86,8 @@ const questions = [
 ];
 
 export default function FamilyHistory() {
+  useScrollToTop();
+  
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, any>>({});
   const [riskLevel, setRiskLevel] = useState<"low" | "moderate" | "high" | null>(null);
@@ -652,7 +655,10 @@ export default function FamilyHistory() {
         <div className="flex justify-between mt-8">
           <Button
             variant="outline"
-            onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
+            onClick={() => {
+              setCurrentStep(Math.max(0, currentStep - 1));
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
             disabled={currentStep === 0}
           >
             <ArrowLeft className="h-4 w-4 mr-2" />
@@ -666,7 +672,10 @@ export default function FamilyHistory() {
             </Button>
           ) : (
             <Button
-              onClick={() => setCurrentStep(Math.min(questions.length - 1, currentStep + 1))}
+              onClick={() => {
+                setCurrentStep(Math.min(questions.length - 1, currentStep + 1));
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              }}
               className="bg-gradient-primary"
             >
               Next
