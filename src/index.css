@@ -161,9 +161,9 @@ All colors MUST be HSL.
   50% { opacity: 0.4; }
 }
 .oncoai-animate {
-  animation: oncoai-fly-in 1.2s ease-out forwards, soft-blink 1.2s ease-in-out infinite;
+  animation: oncoai-fly-in 2.8s ease-out forwards, soft-blink 1.2s ease-in-out infinite;
 }
-/* Gentle continuous float from bottom-right to mid-right with blinking - faster */
+/* Gentle continuous float from bottom-right to mid-right with blinking */
 .oncoai-float-blink {
-  animation: oncoai-fly-in 2.5s ease-out forwards, soft-blink 1.4s ease-in-out infinite;
+  animation: oncoai-fly-in 6s ease-out forwards, soft-blink 1.4s ease-in-out infinite;
 }
