@@ -151,6 +151,181 @@ export type Database = {
           },
         ]
       }
+      notification_preferences: {
+        Row: {
+          channels: Database["public"]["Enums"]["notification_channel"][] | null
+          created_at: string
+          enabled: boolean | null
+          id: string
+          notification_type: Database["public"]["Enums"]["notification_type"]
+          quiet_hours_end: string | null
+          quiet_hours_start: string | null
+          reminder_timing: number[] | null
+          timezone: string | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          channels?:
+            | Database["public"]["Enums"]["notification_channel"][]
+            | null
+          created_at?: string
+          enabled?: boolean | null
+          id?: string
+          notification_type: Database["public"]["Enums"]["notification_type"]
+          quiet_hours_end?: string | null
+          quiet_hours_start?: string | null
+          reminder_timing?: number[] | null
+          timezone?: string | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          channels?:
+            | Database["public"]["Enums"]["notification_channel"][]
+            | null
+          created_at?: string
+          enabled?: boolean | null
+          id?: string
+          notification_type?: Database["public"]["Enums"]["notification_type"]
+          quiet_hours_end?: string | null
+          quiet_hours_start?: string | null
+          reminder_timing?: number[] | null
+          timezone?: string | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      notification_templates: {
+        Row: {
+          care_stage: Database["public"]["Enums"]["care_stage"] | null
+          channel: Database["public"]["Enums"]["notification_channel"]
+          created_at: string
+          id: string
+          is_active: boolean | null
+          message_template: string
+          title_template: string
+          type: Database["public"]["Enums"]["notification_type"]
+          updated_at: string
+          variables: Json | null
+        }
+        Insert: {
+          care_stage?: Database["public"]["Enums"]["care_stage"] | null
+          channel: Database["public"]["Enums"]["notification_channel"]
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          message_template: string
+          title_template: string
+          type: Database["public"]["Enums"]["notification_type"]
+          updated_at?: string
+          variables?: Json | null
+        }
+        Update: {
+          care_stage?: Database["public"]["Enums"]["care_stage"] | null
+          channel?: Database["public"]["Enums"]["notification_channel"]
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          message_template?: string
+          title_template?: string
+          type?: Database["public"]["Enums"]["notification_type"]
+          updated_at?: string
+          variables?: Json | null
+        }
+        Relationships: []
+      }
+      notifications: {
+        Row: {
+          care_stage: Database["public"]["Enums"]["care_stage"] | null
+          channel: Database["public"]["Enums"]["notification_channel"]
+          created_at: string
+          id: string
+          message: string
+          metadata: Json | null
+          priority: number | null
+          read_at: string | null
+          related_appointment_id: string | null
+          scheduled_for: string | null
+          sent_at: string | null
+          status: Database["public"]["Enums"]["delivery_status"]
+          template_id: string | null
+          title: string
+          type: Database["public"]["Enums"]["notification_type"]
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          care_stage?: Database["public"]["Enums"]["care_stage"] | null
+          channel?: Database["public"]["Enums"]["notification_channel"]
+          created_at?: string
+          id?: string
+          message: string
+          metadata?: Json | null
+          priority?: number | null
+          read_at?: string | null
+          related_appointment_id?: string | null
+          scheduled_for?: string | null
+          sent_at?: string | null
+          status?: Database["public"]["Enums"]["delivery_status"]
+          template_id?: string | null
+          title: string
+          type: Database["public"]["Enums"]["notification_type"]
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          care_stage?: Database["public"]["Enums"]["care_stage"] | null
+          channel?: Database["public"]["Enums"]["notification_channel"]
+          created_at?: string
+          id?: string
+          message?: string
+          metadata?: Json | null
+          priority?: number | null
+          read_at?: string | null
+          related_appointment_id?: string | null
+          scheduled_for?: string | null
+          sent_at?: string | null
+          status?: Database["public"]["Enums"]["delivery_status"]
+          template_id?: string | null
+          title?: string
+          type?: Database["public"]["Enums"]["notification_type"]
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      patient_journey_stages: {
+        Row: {
+          created_at: string
+          current_stage: Database["public"]["Enums"]["care_stage"]
+          id: string
+          metadata: Json | null
+          stage_started_at: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          current_stage?: Database["public"]["Enums"]["care_stage"]
+          id?: string
+          metadata?: Json | null
+          stage_started_at?: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          current_stage?: Database["public"]["Enums"]["care_stage"]
+          id?: string
+          metadata?: Json | null
+          stage_started_at?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       post_treatment_surveys: {
         Row: {
           audio_engagement: number | null
@@ -520,6 +695,32 @@ export type Database = {
     }
     Enums: {
       appointment_status: "booked" | "confirmed" | "canceled" | "completed"
+      care_stage:
+        | "screening"
+        | "post_screening"
+        | "diagnosis"
+        | "treatment_planning"
+        | "chemotherapy"
+        | "surgery"
+        | "radiation"
+        | "follow_up"
+        | "survivorship"
+      delivery_status: "pending" | "sent" | "delivered" | "failed" | "read"
+      notification_channel: "in_app" | "email" | "push" | "sms"
+      notification_type:
+        | "appointment_reminder"
+        | "appointment_confirmation"
+        | "appointment_follow_up"
+        | "screening_results"
+        | "diagnosis_available"
+        | "treatment_reminder"
+        | "pre_treatment"
+        | "post_treatment"
+        | "side_effect_check"
+        | "wellness_tip"
+        | "support_group"
+        | "mental_health_check"
+        | "educational_content"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -648,6 +849,34 @@ export const Constants = {
   public: {
     Enums: {
       appointment_status: ["booked", "confirmed", "canceled", "completed"],
+      care_stage: [
+        "screening",
+        "post_screening",
+        "diagnosis",
+        "treatment_planning",
+        "chemotherapy",
+        "surgery",
+        "radiation",
+        "follow_up",
+        "survivorship",
+      ],
+      delivery_status: ["pending", "sent", "delivered", "failed", "read"],
+      notification_channel: ["in_app", "email", "push", "sms"],
+      notification_type: [
+        "appointment_reminder",
+        "appointment_confirmation",
+        "appointment_follow_up",
+        "screening_results",
+        "diagnosis_available",
+        "treatment_reminder",
+        "pre_treatment",
+        "post_treatment",
+        "side_effect_check",
+        "wellness_tip",
+        "support_group",
+        "mental_health_check",
+        "educational_content",
+      ],
     },
   },
 } as const
