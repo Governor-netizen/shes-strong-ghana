@@ -11,6 +11,7 @@ import {
   User,
   FlaskConical
 } from "lucide-react";
+import { NotificationCenter } from "@/components/notifications/NotificationCenter";
 import homeIcon from "@/assets/home-icon.svg";
 import personIcon from "@/assets/person-icon.svg";
 
@@ -118,6 +119,7 @@ export function Navigation() {
 
           {/* User Profile & Mobile Menu */}
           <div className="flex items-center gap-2">
+            <NotificationCenter />
             <Link to="/profile">
               <Button variant="ghost" size="sm" className="hidden md:flex">
                 <User className="h-4 w-4 mr-2" />

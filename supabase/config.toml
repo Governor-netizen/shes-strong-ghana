@@ -8,3 +8,6 @@ verify_jwt = true
 
 [functions.vision-analyze]
 verify_jwt = true
+
+[functions.notification-scheduler]
+verify_jwt = false
