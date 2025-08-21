@@ -15,11 +15,9 @@ import {
   MapPin,
   Calendar,
   Shield,
-  Bell,
-  TestTube
+  Bell
 } from "lucide-react";
 import { NotificationPreferences } from "@/components/notifications/NotificationPreferences";
-import { TestNotifications } from "@/components/notifications/TestNotifications";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface UserProfile {
@@ -156,7 +154,7 @@ export default function Profile() {
         </div>
 
         <Tabs defaultValue="profile" className="space-y-6">
-          <TabsList className="grid w-full grid-cols-3">
+          <TabsList className="grid w-full grid-cols-2">
             <TabsTrigger value="profile" className="flex items-center gap-2">
               <User className="h-4 w-4" />
               Profile
@@ -164,10 +162,6 @@ export default function Profile() {
             <TabsTrigger value="notifications" className="flex items-center gap-2">
               <Bell className="h-4 w-4" />
               Notifications
-            </TabsTrigger>
-            <TabsTrigger value="test" className="flex items-center gap-2">
-              <TestTube className="h-4 w-4" />
-              Test
             </TabsTrigger>
           </TabsList>
 
@@ -381,10 +375,6 @@ export default function Profile() {
 
           <TabsContent value="notifications" className="space-y-6">
             <NotificationPreferences />
-          </TabsContent>
-
-          <TabsContent value="test" className="space-y-6">
-            <TestNotifications />
           </TabsContent>
         </Tabs>
       </div>
