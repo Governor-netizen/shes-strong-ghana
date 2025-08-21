@@ -21,6 +21,7 @@ import {
   AlertCircle,
   Stethoscope
 } from "lucide-react";
+import ClinicMap from "@/components/ClinicMap";
 import { useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useSEO } from "@/hooks/useSEO";
@@ -98,6 +99,7 @@ export default function Appointments() {
   const [notes, setNotes] = useState("");
   const [providers, setProviders] = useState<Provider[]>([]);
   const [slots, setSlots] = useState<Slot[]>([]);
+  const [showClinicMap, setShowClinicMap] = useState(false);
   const { toast } = useToast();
 const location = useLocation();
   const navigate = useNavigate();
@@ -367,7 +369,10 @@ const location = useLocation();
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-card shadow-card-soft cursor-pointer hover:shadow-medical transition-shadow">
+          <Card 
+            className="bg-gradient-card shadow-card-soft cursor-pointer hover:shadow-medical transition-shadow"
+            onClick={() => setShowClinicMap(true)}
+          >
             <CardContent className="p-6">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-success/20 rounded-lg flex items-center justify-center">
@@ -570,6 +575,11 @@ const location = useLocation();
           </CardContent>
         </Card>
       </div>
+
+      {/* Clinic Map Modal */}
+      {showClinicMap && (
+        <ClinicMap onClose={() => setShowClinicMap(false)} />
+      )}
     </div>
   );
 }

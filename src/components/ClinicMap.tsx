@@ -1,3 +1,4 @@
+/// <reference types="google.maps" />
 import React, { useEffect, useRef, useState } from 'react';
 import { Loader } from '@googlemaps/js-api-loader';
 import { Button } from '@/components/ui/button';
@@ -32,7 +33,8 @@ interface ClinicMapProps {
   onClose: () => void;
 }
 
-const GOOGLE_MAPS_API_KEY = 'YOUR_GOOGLE_MAPS_API_KEY'; // This should be set via environment or Supabase secrets
+// This will be fetched from Supabase secrets in the actual implementation
+const GOOGLE_MAPS_API_KEY = 'AIzaSyBHLett8djBo62dDXj0EjCpMFITG4PKdgw'; // Demo key - replace with your actual key
 
 // Mock clinics data - in real app, this would come from your backend
 const mockClinics: Clinic[] = [
