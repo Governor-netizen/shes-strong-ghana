@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/integrations/supabase/client';
 import { 
   MapPin, 
   Navigation, 
@@ -33,8 +34,6 @@ interface ClinicMapProps {
   onClose: () => void;
 }
 
-// This will be fetched from Supabase secrets in the actual implementation
-const GOOGLE_MAPS_API_KEY = 'AIzaSyBHLett8djBo62dDXj0EjCpMFITG4PKdgw'; // Demo key - replace with your actual key
 
 // Mock clinics data covering all major regions of Ghana
 const mockClinics: Clinic[] = [
@@ -189,6 +188,8 @@ const ClinicMap: React.FC<ClinicMapProps> = ({ onClose }) => {
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isLoading, setIsLoading] = useState(true);
+  const [apiKey, setApiKey] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
   const { toast } = useToast();
 
   // Calculate distance between two coordinates
@@ -254,17 +255,67 @@ const ClinicMap: React.FC<ClinicMapProps> = ({ onClose }) => {
     }
   };
 
+  // Fetch Google Maps API key
+  useEffect(() => {
+    const fetchApiKey = async () => {
+      try {
+        console.log('Fetching Google Maps API key...');
+        const { data, error } = await supabase.functions.invoke('get-maps-api-key');
+        
+        if (error) {
+          console.error('Error fetching API key:', error);
+          setError('Failed to fetch API key');
+          toast({
+            title: "Configuration Error",
+            description: "Unable to load map configuration. Please try again later.",
+            variant: "destructive"
+          });
+          return;
+        }
+
+        if (!data?.apiKey) {
+          console.error('No API key received from server');
+          setError('No API key received');
+          toast({
+            title: "Configuration Error",
+            description: "Google Maps API key not configured properly.",
+            variant: "destructive"
+          });
+          return;
+        }
+
+        console.log('Successfully received API key');
+        setApiKey(data.apiKey);
+      } catch (error) {
+        console.error('Error fetching Google Maps API key:', error);
+        setError(`Failed to fetch API key: ${error.message}`);
+        toast({
+          title: "Network Error",
+          description: "Unable to connect to server. Please check your connection.",
+          variant: "destructive"
+        });
+        setIsLoading(false);
+      }
+    };
+
+    fetchApiKey();
+  }, [toast]);
+
   // Initialize Google Map
   useEffect(() => {
+    if (!apiKey) return;
+
     const initMap = async () => {
       try {
+        console.log('Initializing Google Maps...');
         const loader = new Loader({
-          apiKey: GOOGLE_MAPS_API_KEY,
+          apiKey: apiKey,
           version: 'weekly',
           libraries: ['places']
         });
 
         await loader.load();
+        console.log('Google Maps API loaded successfully');
 
         if (mapRef.current) {
           const mapInstance = new google.maps.Map(mapRef.current, {
@@ -280,15 +331,17 @@ const ClinicMap: React.FC<ClinicMapProps> = ({ onClose }) => {
           });
 
           setMap(mapInstance);
+          console.log('Map initialized successfully');
           
           // Get user location after map is initialized
           getUserLocation();
         }
       } catch (error) {
         console.error('Error loading Google Maps:', error);
+        setError(`Map loading failed: ${error.message}`);
         toast({
           title: "Map Loading Error",
-          description: "Failed to load Google Maps. Please check your API key.",
+          description: `Failed to load Google Maps: ${error.message}`,
           variant: "destructive"
         });
       } finally {
@@ -297,7 +350,7 @@ const ClinicMap: React.FC<ClinicMapProps> = ({ onClose }) => {
     };
 
     initMap();
-  }, [toast]);
+  }, [apiKey, toast]);
 
   // Add markers when map and clinics are ready
   useEffect(() => {
@@ -354,7 +407,22 @@ const ClinicMap: React.FC<ClinicMapProps> = ({ onClose }) => {
           <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
             <div className="text-center">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-              <p>Loading map...</p>
+              <p>{apiKey ? 'Loading map...' : 'Fetching configuration...'}</p>
+            </div>
+          </div>
+        )}
+        
+        {error && (
+          <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
+            <div className="text-center p-6 max-w-md">
+              <div className="text-destructive mb-4">
+                <MapPin className="h-12 w-12 mx-auto mb-2" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Map Unavailable</h3>
+              <p className="text-muted-foreground mb-4">{error}</p>
+              <Button onClick={() => window.location.reload()}>
+                Try Again
+              </Button>
             </div>
           </div>
         )}
