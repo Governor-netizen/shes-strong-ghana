@@ -30,7 +30,6 @@ import { secureProviderData } from "@/utils/secureProviderData";
 const sb: any = supabase;
 const appointmentTypes = [
   { value: "screening", label: "Screening Mammogram", duration: "30 minutes" },
-  { value: "consultation", label: "Specialist Consultation", duration: "45 minutes" },
   { value: "followup", label: "Follow-up Visit", duration: "30 minutes" },
   { value: "biopsy", label: "Biopsy Procedure", duration: "60 minutes" },
   { value: "genetic", label: "Genetic Counseling", duration: "60 minutes" },
@@ -78,18 +77,7 @@ interface Appointment {
 }
 
 export default function Appointments() {
-  const [appointments, setAppointments] = useState<Appointment[]>([
-    {
-      id: "1",
-      type: "consultation",
-      doctor: "Dr. Akosua Mensah",
-      date: new Date(2024, 2, 15),
-      time: "10:00",
-      location: "Korle-Bu Teaching Hospital",
-      notes: "Initial consultation for family history assessment",
-      status: "scheduled"
-    }
-  ]);
+  const [appointments, setAppointments] = useState<Appointment[]>([]);
   
   const [showBookingForm, setShowBookingForm] = useState(false);
   const [selectedType, setSelectedType] = useState("");
@@ -557,13 +545,60 @@ const location = useLocation();
                     )}
 
                     <div className="flex gap-2 mt-4">
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => {
+                          // Reset form and open with existing appointment data
+                          setSelectedType(appointment.type);
+                          setSelectedDoctor(appointments.find(a => a.doctor === appointment.doctor)?.id || "");
+                          setSelectedDate(appointment.date);
+                          setSelectedTime(appointment.time);
+                          setNotes(appointment.notes);
+                          setShowBookingForm(true);
+                          toast({
+                            title: "Reschedule Mode",
+                            description: "Form opened with current appointment details. Make changes and book again."
+                          });
+                        }}
+                      >
                         Reschedule
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => {
+                          setAppointments(prev => prev.map(a => 
+                            a.id === appointment.id 
+                              ? { ...a, status: "cancelled" as const }
+                              : a
+                          ));
+                          toast({
+                            title: "Appointment Cancelled",
+                            description: "Your appointment has been cancelled successfully."
+                          });
+                        }}
+                      >
                         Cancel
                       </Button>
-                      <Button variant="outline" size="sm">
+                      <Button 
+                        variant="outline" 
+                        size="sm"
+                        onClick={() => {
+                          // Extract phone number from location or use emergency number
+                          let phoneNumber = "+233123456789"; // Default emergency number
+                          
+                          // Try to match with clinic data from the map
+                          const clinicPhone = appointment.location.includes("Korle-Bu") ? "+233302672501"
+                            : appointment.location.includes("University of Ghana") ? "+233302512401"
+                            : appointment.location.includes("37 Military") ? "+233302776591"
+                            : appointment.location.includes("Komfo Anokye") ? "+233320227701"
+                            : appointment.location.includes("Tamale") ? "+23337202970"
+                            : "+233123456789";
+                          
+                          window.open(`tel:${clinicPhone}`, '_self');
+                        }}
+                      >
                         <Phone className="h-4 w-4 mr-1" />
                         Call Clinic
                       </Button>

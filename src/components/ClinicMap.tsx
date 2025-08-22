@@ -36,8 +36,9 @@ interface ClinicMapProps {
 // This will be fetched from Supabase secrets in the actual implementation
 const GOOGLE_MAPS_API_KEY = 'AIzaSyBHLett8djBo62dDXj0EjCpMFITG4PKdgw'; // Demo key - replace with your actual key
 
-// Mock clinics data - in real app, this would come from your backend
+// Mock clinics data covering all major regions of Ghana
 const mockClinics: Clinic[] = [
+  // Greater Accra Region
   {
     id: '1',
     name: 'Korle-Bu Teaching Hospital',
@@ -62,17 +63,6 @@ const mockClinics: Clinic[] = [
   },
   {
     id: '3',
-    name: 'Greater Accra Regional Hospital',
-    address: 'Ridge Hospital Rd, Accra, Ghana',
-    phone: '+233 30 222 5441',
-    rating: 3.8,
-    hours: 'Mon-Sat: 7AM-9PM',
-    services: ['Genetic Counseling', 'Support Groups'],
-    lat: 5.5736,
-    lng: -0.1958
-  },
-  {
-    id: '4',
     name: '37 Military Hospital',
     address: '37 Military Hospital Rd, Accra, Ghana',
     phone: '+233 30 277 6591',
@@ -81,6 +71,113 @@ const mockClinics: Clinic[] = [
     services: ['Surgery', 'Emergency Care'],
     lat: 5.5614,
     lng: -0.1692
+  },
+  // Ashanti Region
+  {
+    id: '4',
+    name: 'Komfo Anokye Teaching Hospital',
+    address: 'Bantama, Kumasi, Ghana',
+    phone: '+233 32 022 701',
+    rating: 4.3,
+    hours: '24/7',
+    services: ['Oncology', 'Surgery', 'Emergency Care'],
+    lat: 6.6885,
+    lng: -1.6244
+  },
+  {
+    id: '5',
+    name: 'Kumasi South Hospital',
+    address: 'Atonsu, Kumasi, Ghana',
+    phone: '+233 32 026 345',
+    rating: 3.9,
+    hours: 'Mon-Sun: 6AM-10PM',
+    services: ['Screening', 'Consultation', 'Radiology'],
+    lat: 6.6745,
+    lng: -1.6163
+  },
+  // Northern Region
+  {
+    id: '6',
+    name: 'Tamale Teaching Hospital',
+    address: 'Education Ridge, Tamale, Ghana',
+    phone: '+233 37 202 9701',
+    rating: 4.0,
+    hours: '24/7',
+    services: ['Oncology', 'Surgery', 'Screening'],
+    lat: 9.4034,
+    lng: -0.8424
+  },
+  // Western Region
+  {
+    id: '7',
+    name: 'Effia-Nkwanta Regional Hospital',
+    address: 'Sekondi-Takoradi, Ghana',
+    phone: '+233 31 201 2345',
+    rating: 3.8,
+    hours: 'Mon-Sun: 6AM-9PM',
+    services: ['Consultation', 'Screening', 'Support Groups'],
+    lat: 4.9344,
+    lng: -1.7637
+  },
+  // Central Region
+  {
+    id: '8',
+    name: 'Cape Coast Teaching Hospital',
+    address: 'Cape Coast, Ghana',
+    phone: '+233 33 213 2109',
+    rating: 3.9,
+    hours: '24/7',
+    services: ['Oncology', 'Radiology', 'Surgery'],
+    lat: 5.1053,
+    lng: -1.2466
+  },
+  // Eastern Region
+  {
+    id: '9',
+    name: 'Eastern Regional Hospital',
+    address: 'Koforidua, Ghana',
+    phone: '+233 34 202 0234',
+    rating: 3.7,
+    hours: 'Mon-Sat: 7AM-8PM',
+    services: ['Screening', 'Consultation', 'Genetic Counseling'],
+    lat: 6.0897,
+    lng: -0.2599
+  },
+  // Volta Region
+  {
+    id: '10',
+    name: 'Ho Teaching Hospital',
+    address: 'Ho, Ghana',
+    phone: '+233 36 202 6543',
+    rating: 3.8,
+    hours: 'Mon-Sun: 6AM-9PM',
+    services: ['Consultation', 'Screening', 'Support Groups'],
+    lat: 6.6108,
+    lng: 0.4724
+  },
+  // Upper East Region
+  {
+    id: '11',
+    name: 'Bolgatanga Regional Hospital',
+    address: 'Bolgatanga, Ghana',
+    phone: '+233 38 202 2134',
+    rating: 3.6,
+    hours: 'Mon-Fri: 7AM-7PM',
+    services: ['Screening', 'Consultation', 'Emergency Care'],
+    lat: 10.7856,
+    lng: -0.8512
+  },
+  // Upper West Region
+  {
+    id: '12',
+    name: 'Wa Regional Hospital',
+    address: 'Wa, Ghana',
+    phone: '+233 39 202 3456',
+    rating: 3.5,
+    hours: 'Mon-Sat: 6AM-8PM',
+    services: ['Consultation', 'Screening', 'Radiology'],
+    lat: 10.0601,
+    lng: -2.5057
   }
 ];
 
@@ -138,13 +235,13 @@ const ClinicMap: React.FC<ClinicMapProps> = ({ onClose }) => {
             description: "Please enable location access to find nearby clinics",
             variant: "destructive"
           });
-          // Use Accra as default location
-          const accraCenter = { lat: 5.6037, lng: -0.1870 };
-          setUserLocation(accraCenter);
+          // Use Ghana center as default location
+          const ghanaCenter = { lat: 7.9465, lng: -1.0232 };
+          setUserLocation(ghanaCenter);
           setClinics(mockClinics);
           if (map) {
-            map.setCenter(accraCenter);
-            map.setZoom(11);
+            map.setCenter(ghanaCenter);
+            map.setZoom(7);
           }
         }
       );
@@ -171,8 +268,8 @@ const ClinicMap: React.FC<ClinicMapProps> = ({ onClose }) => {
 
         if (mapRef.current) {
           const mapInstance = new google.maps.Map(mapRef.current, {
-            center: { lat: 5.6037, lng: -0.1870 }, // Accra center
-            zoom: 11,
+            center: { lat: 7.9465, lng: -1.0232 }, // Ghana center
+            zoom: 7,
             styles: [
               {
                 featureType: 'poi.medical',
@@ -346,11 +443,25 @@ const ClinicMap: React.FC<ClinicMapProps> = ({ onClose }) => {
                 </div>
                 
                 <div className="flex gap-2 mt-3">
-                  <Button size="sm" className="flex-1">
+                  <Button 
+                    size="sm" 
+                    className="flex-1"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(`https://www.google.com/maps/dir/?api=1&destination=${clinic.lat},${clinic.lng}`, '_blank');
+                    }}
+                  >
                     <Navigation className="h-3 w-3 mr-1" />
                     Directions
                   </Button>
-                  <Button size="sm" variant="outline">
+                  <Button 
+                    size="sm" 
+                    variant="outline"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      window.open(`tel:${clinic.phone}`, '_self');
+                    }}
+                  >
                     <Phone className="h-3 w-3 mr-1" />
                     Call
                   </Button>
