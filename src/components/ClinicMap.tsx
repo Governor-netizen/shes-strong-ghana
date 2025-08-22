@@ -399,28 +399,28 @@ const ClinicMap: React.FC<ClinicMapProps> = ({ onClose }) => {
   );
 
   return (
-    <div className="fixed inset-0 bg-background z-50 flex">
+    <div className="fixed inset-0 bg-background z-50 flex flex-col md:flex-row">
       {/* Map Container */}
-      <div className="flex-1 relative">
+      <div className="flex-1 relative order-2 md:order-1 h-2/3 md:h-full">
         <div ref={mapRef} className="w-full h-full" />
         {isLoading && (
           <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
             <div className="text-center">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-              <p>{apiKey ? 'Loading map...' : 'Fetching configuration...'}</p>
+              <p className="text-sm">{apiKey ? 'Loading map...' : 'Fetching configuration...'}</p>
             </div>
           </div>
         )}
         
         {error && (
           <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
-            <div className="text-center p-6 max-w-md">
+            <div className="text-center p-4 max-w-sm">
               <div className="text-destructive mb-4">
-                <MapPin className="h-12 w-12 mx-auto mb-2" />
+                <MapPin className="h-8 w-8 mx-auto mb-2" />
               </div>
-              <h3 className="text-lg font-semibold mb-2">Map Unavailable</h3>
-              <p className="text-muted-foreground mb-4">{error}</p>
-              <Button onClick={() => window.location.reload()}>
+              <h3 className="text-base font-semibold mb-2">Map Unavailable</h3>
+              <p className="text-muted-foreground mb-4 text-sm">{error}</p>
+              <Button size="sm" onClick={() => window.location.reload()}>
                 Try Again
               </Button>
             </div>
@@ -429,7 +429,7 @@ const ClinicMap: React.FC<ClinicMapProps> = ({ onClose }) => {
       </div>
 
       {/* Sidebar */}
-      <div className="w-96 bg-background border-l border-border overflow-hidden flex flex-col">
+      <div className="w-full md:w-96 bg-background border-t md:border-t-0 md:border-l border-border overflow-hidden flex flex-col order-1 md:order-2 h-1/3 md:h-full">
         {/* Header */}
         <div className="p-4 border-b border-border">
           <div className="flex items-center justify-between mb-4">
