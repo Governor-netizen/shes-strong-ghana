@@ -6,6 +6,9 @@ import { Resend } from "npm:resend@4.0.0";
 const supabaseUrl = Deno.env.get('SUPABASE_URL')!;
 const supabaseServiceKey = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 const resendApiKey = Deno.env.get('RESEND_API_KEY')!;
+const twilioAccountSid = Deno.env.get('TWILIO_ACCOUNT_SID')!;
+const twilioAuthToken = Deno.env.get('TWILIO_AUTH_TOKEN')!;
+const twilioPhoneNumber = Deno.env.get('TWILIO_PHONE_NUMBER')!;
 
 const supabase = createClient(supabaseUrl, supabaseServiceKey);
 const resend = new Resend(resendApiKey);
@@ -122,6 +125,11 @@ async function sendNotification(notification: ScheduledNotification, userPrefs: 
     await sendEmailNotification(notification);
   }
 
+  // Send SMS if enabled
+  if (channels.includes('sms')) {
+    await sendSMSNotification(notification);
+  }
+
   // Send push notification if enabled
   if (channels.includes('push')) {
     await sendPushNotification(notification);
@@ -206,6 +214,67 @@ async function sendEmailNotification(notification: ScheduledNotification) {
     
   } catch (error) {
     console.error('Error sending email notification:', error);
+    throw error;
+  }
+}
+
+async function sendSMSNotification(notification: ScheduledNotification) {
+  try {
+    // Get user phone number from profile
+    const { data: profile, error: profileError } = await supabase
+      .from('profiles')
+      .select('phone, first_name')
+      .eq('id', notification.user_id)
+      .single();
+
+    if (profileError || !profile?.phone) {
+      console.log(`No phone number found for user ${notification.user_id}, skipping SMS`);
+      return;
+    }
+
+    // Format phone number for Ghana (+233)
+    let phoneNumber = profile.phone.replace(/\D/g, ''); // Remove non-digits
+    if (phoneNumber.startsWith('0')) {
+      phoneNumber = '233' + phoneNumber.substring(1); // Convert local to international
+    } else if (!phoneNumber.startsWith('233')) {
+      phoneNumber = '233' + phoneNumber; // Add country code if missing
+    }
+    phoneNumber = '+' + phoneNumber;
+
+    console.log(`Sending SMS to ${phoneNumber} for notification ${notification.id}`);
+
+    // Create SMS message (keep it concise)
+    const userName = profile.first_name || 'there';
+    const smsMessage = `Hi ${userName}, ${notification.title}: ${notification.message}. Check your app for details.`;
+
+    // Send SMS using Twilio API
+    const twilioUrl = `https://api.twilio.com/2010-04-01/Accounts/${twilioAccountSid}/Messages.json`;
+    const credentials = btoa(`${twilioAccountSid}:${twilioAuthToken}`);
+
+    const response = await fetch(twilioUrl, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Basic ${credentials}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        From: twilioPhoneNumber,
+        To: phoneNumber,
+        Body: smsMessage,
+      }),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.text();
+      console.error('Twilio API error:', errorData);
+      throw new Error(`Twilio API error: ${response.status} ${errorData}`);
+    }
+
+    const result = await response.json();
+    console.log(`SMS sent successfully to ${phoneNumber}:`, result.sid);
+
+  } catch (error) {
+    console.error('Error sending SMS notification:', error);
     throw error;
   }
 }
