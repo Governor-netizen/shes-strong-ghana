@@ -10,6 +10,12 @@ export default function Research() {
     canonical: typeof window !== "undefined" ? `${window.location.origin}/research` : "/research",
   });
 
+  const handleEmailClick = (subject: string) => {
+    const email = "Research.shesstrong@outlook.com";
+    const mailtoUrl = `mailto:${email}?subject=${encodeURIComponent(subject)}`;
+    window.location.href = mailtoUrl;
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 py-8">
       <div className="container mx-auto px-4 max-w-3xl">
@@ -22,25 +28,25 @@ export default function Research() {
           </CardHeader>
           <CardContent className="space-y-6">
             <p className="text-muted-foreground">
-              Share your interest below. We’ll follow up with next steps and opportunities.
+              Share your interest below. We'll follow up with next steps and opportunities.
             </p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              <a
-                href="mailto:Research.shesstrong@outlook.com?subject=Research%20Interest%20-%20Student%2FYoung%20Researcher"
-                className="block p-5 rounded-lg border border-border hover:bg-muted/50 transition-colors"
+              <button
+                onClick={() => handleEmailClick("Research Interest - Student/Young Researcher")}
+                className="block p-5 rounded-lg border border-border hover:bg-muted/50 transition-colors cursor-pointer text-left"
               >
-                <div className="font-medium mb-1">I’m a Student / Young Researcher</div>
+                <div className="font-medium mb-1">I'm a Student / Young Researcher</div>
                 <div className="text-sm text-muted-foreground">Collaborate on projects and gain experience</div>
-              </a>
+              </button>
 
-              <a
-                href="mailto:Research.shesstrong@outlook.com?subject=Research%20Interest%20-%20Breast%20Cancer%20Survivor"
-                className="block p-5 rounded-lg border border-border hover:bg-muted/50 transition-colors"
+              <button
+                onClick={() => handleEmailClick("Research Interest - Breast Cancer Survivor")}
+                className="block p-5 rounded-lg border border-border hover:bg-muted/50 transition-colors cursor-pointer text-left"
               >
-                <div className="font-medium mb-1">I’m a Breast Cancer Survivor</div>
+                <div className="font-medium mb-1">I'm a Breast Cancer Survivor</div>
                 <div className="text-sm text-muted-foreground">Join studies to help advance care and support</div>
-              </a>
+              </button>
             </div>
 
             <div className="flex gap-3 pt-2">
