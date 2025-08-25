@@ -684,6 +684,18 @@ export type Database = {
         Args: { assess_id: string }
         Returns: boolean
       }
+      get_notification_template: {
+        Args: {
+          template_care_stage?: Database["public"]["Enums"]["care_stage"]
+          template_channel?: Database["public"]["Enums"]["notification_channel"]
+          template_type: Database["public"]["Enums"]["notification_type"]
+        }
+        Returns: {
+          message_template: string
+          title_template: string
+          variables: Json
+        }[]
+      }
       has_appointment_with_provider: {
         Args: { provider_uuid: string }
         Returns: boolean

@@ -10,6 +10,7 @@ import { useSEO } from "@/hooks/useSEO";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
 import ReactMarkdown from 'react-markdown';
+import { SafeContent } from "@/components/SafeContent";
 const educationalContent = {
   "risk-factors": [{
     id: 1,
@@ -678,15 +679,7 @@ export default function Education() {
               <CardDescription className="text-lg">{selectedArticle.description}</CardDescription>
             </CardHeader>
             <CardContent className="prose prose-slate max-w-none [&_h3]:font-medium [&_ol]:space-y-6 md:[&_ol]:space-y-8 [&_ol>li>p:first-of-type>strong]:text-base md:[&_ol>li>p:first-of-type>strong]:text-lg [&_ol>li>p:first-of-type>strong]:block [&_ol>li>p:first-of-type]:mb-1 [&_ul]:list-disc [&_ul]:pl-5 [&_a]:story-link">
-                {typeof selectedArticle.content === 'string' ? (
-                  selectedArticle.content.includes('<') ? (
-                    <div dangerouslySetInnerHTML={{ __html: selectedArticle.content }} />
-                  ) : (
-                    <ReactMarkdown>{selectedArticle.content}</ReactMarkdown>
-                  )
-                ) : (
-                  selectedArticle.content
-                )}
+                <SafeContent content={selectedArticle.content} />
               
               <div className="mt-8 p-6 bg-muted/50 rounded-lg">
                 <h3 className="font-semibold mb-3">Key Takeaways:</h3>
@@ -833,7 +826,9 @@ export default function Education() {
                   </AccordionContent>
                 </AccordionItem>
               </Accordion>
-              <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+              <script type="application/ld+json">
+                {JSON.stringify(faqSchema)}
+              </script>
             </CardContent>
           </Card>
         </section>
