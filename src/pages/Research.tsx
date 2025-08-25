@@ -27,7 +27,7 @@ export default function Research() {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <a
-                href="mailto:research@shesstrong.org?subject=Research%20Interest%20-%20Student%2FYoung%20Researcher"
+                href="mailto:Research.shesstrong@outlook.com?subject=Research%20Interest%20-%20Student%2FYoung%20Researcher"
                 className="block p-5 rounded-lg border border-border hover:bg-muted/50 transition-colors"
               >
                 <div className="font-medium mb-1">I’m a Student / Young Researcher</div>
@@ -35,7 +35,7 @@ export default function Research() {
               </a>
 
               <a
-                href="mailto:research@shesstrong.org?subject=Research%20Interest%20-%20Breast%20Cancer%20Survivor"
+                href="mailto:Research.shesstrong@outlook.com?subject=Research%20Interest%20-%20Breast%20Cancer%20Survivor"
                 className="block p-5 rounded-lg border border-border hover:bg-muted/50 transition-colors"
               >
                 <div className="font-medium mb-1">I’m a Breast Cancer Survivor</div>
