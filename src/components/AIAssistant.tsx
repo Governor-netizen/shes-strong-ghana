@@ -57,6 +57,7 @@ export function AIAssistant() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const bottomRef = useRef<HTMLDivElement>(null);
 const [animateIntro, setAnimateIntro] = useState(false);
+  const [animationComplete, setAnimationComplete] = useState(false);
   
   const addMessage = (content: string, type: 'user' | 'bot', images?: string[]) => {
     const newMessage: Message = {
@@ -203,8 +204,14 @@ useEffect(() => {
     const done = sessionStorage.getItem('oncoAIIntroDone');
     if (!done) {
       setAnimateIntro(true);
-      // Mark as done after a short delay to ensure initial render applies the class
-      setTimeout(() => sessionStorage.setItem('oncoAIIntroDone', '1'), 0);
+      // Mark as done after animation completes (6s)
+      setTimeout(() => {
+        setAnimationComplete(true);
+        sessionStorage.setItem('oncoAIIntroDone', '1');
+      }, 6000);
+    } else {
+      // If already done, go straight to final position
+      setAnimationComplete(true);
     }
   } catch {
     // ignore storage errors
@@ -215,7 +222,9 @@ useEffect(() => {
     return (
       <Button
         onClick={() => setIsOpen(true)}
-        className={`fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-primary shadow-medical hover:shadow-lg ring-2 ring-primary ring-offset-2 ring-offset-background z-50 oncoai-float-blink hover-scale`}
+        className={`fixed bottom-6 right-6 w-14 h-14 rounded-full bg-gradient-primary shadow-medical hover:shadow-lg ring-2 ring-primary ring-offset-2 ring-offset-background z-50 hover-scale ${
+          animationComplete ? 'oncoai-final-position' : (animateIntro ? 'oncoai-float-blink' : '')
+        }`}
         size="icon"
       >
         <img

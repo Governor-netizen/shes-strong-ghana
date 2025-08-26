@@ -167,3 +167,8 @@ All colors MUST be HSL.
 .oncoai-float-blink {
   animation: oncoai-fly-in 6s ease-out forwards, soft-blink 1.4s ease-in-out infinite;
 }
+/* Final position after animation completes */
+.oncoai-final-position {
+  transform: translateY(-40vh);
+  animation: soft-blink 1.4s ease-in-out infinite;
+}
