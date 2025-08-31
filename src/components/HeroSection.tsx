@@ -76,7 +76,7 @@ export function HeroSection() {
           <div className="flex justify-center lg:justify-end order-1 lg:order-2">
             <div className="relative group opacity-100 animate-scale-in">
               <img
-                src="/lovable-uploads/8cf2595b-e19e-431b-9e9d-667b3cc49c83.png"
+                src="/lovable-uploads/c5614e2b-c58a-4424-a218-3f4732b21d33.png"
                 alt="Strong woman flexing muscles with breast cancer awareness ribbon, embodying strength and empowerment"
                 className="w-full max-w-sm md:max-w-md rounded-2xl shadow-2xl transition-all duration-300 ease-out transform group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl block"
                 loading="eager"
