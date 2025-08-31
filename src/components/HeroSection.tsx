@@ -76,8 +76,8 @@ export function HeroSection() {
           <div className="flex justify-center lg:justify-end order-1 lg:order-2">
             <div className="relative group animate-fade-in-delayed">
               <img
-                src="/lovable-uploads/ff01b965-6445-4eef-a8ae-b891a4f1b8e8.png"
-                alt="Strong woman with breast cancer awareness ribbon flexing muscles, showing strength and empowerment"
+                src="/lovable-uploads/8cf2595b-e19e-431b-9e9d-667b3cc49c83.png"
+                alt="Strong woman flexing muscles with breast cancer awareness ribbon, embodying strength and empowerment"
                 className="w-full max-w-lg rounded-2xl shadow-2xl transition-all duration-700 ease-out transform group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl opacity-90 hover:opacity-100"
                 loading="eager"
                 fetchPriority="high"
