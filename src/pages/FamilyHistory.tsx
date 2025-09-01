@@ -25,15 +25,15 @@ const questions = [
     questions: [
       { id: "breast_cancer", label: "Have you been diagnosed with breast cancer?", type: "boolean" },
       { id: "ovarian_cancer", label: "Have you been diagnosed with ovarian cancer?", type: "boolean" },
-      { id: "age_first_period", label: "Age when you first started menstruating (if applicable)", type: "number", info: "Early menarche (before age 12) increases risk" },
+      { id: "age_first_period", label: "Age when you first started menstruating (if applicable)", type: "number" },
       { id: "pregnancies", label: "Number of pregnancies", type: "number" },
-      { id: "age_first_birth", label: "Age at first childbirth (if applicable)", type: "number", info: "Late first childbirth (after 30) or never giving birth increases risk" },
-      { id: "breastfeeding", label: "Did you breastfeed any of your children?", type: "boolean", info: "Lack of breastfeeding increases risk" },
+      { id: "age_first_birth", label: "Age at first childbirth (if applicable)", type: "number" },
+      { id: "breastfeeding", label: "Did you breastfeed any of your children?", type: "boolean" },
       { id: "breastfeeding_duration", label: "Total months of breastfeeding (if applicable)", type: "number" },
       { id: "menopause_age", label: "Age at menopause (if applicable)", type: "number" },
       { id: "hormonal_contraceptives", label: "Have you used hormonal contraceptives (birth control pills, injections)?", type: "boolean" },
-      { id: "contraceptive_duration", label: "For how many years did you use hormonal contraceptives?", type: "number", info: "Long-term use (5+ years) increases risk" },
-      { id: "radiation_exposure", label: "Have you been exposed to radiation or toxic chemicals?", type: "boolean", info: "Previous exposure to radiation or chemicals increases risk" }
+      { id: "contraceptive_duration", label: "For how many years did you use hormonal contraceptives?", type: "number" },
+      { id: "radiation_exposure", label: "Have you been exposed to radiation or toxic chemicals?", type: "boolean" }
     ]
   },
   {
@@ -50,7 +50,7 @@ const questions = [
       { id: "family_ovarian", label: "Family history of ovarian cancer", type: "boolean" },
       { id: "family_prostate", label: "Family history of prostate cancer", type: "boolean" },
       { id: "family_pancreatic", label: "Family history of pancreatic cancer", type: "boolean" },
-      { id: "genetic_testing", label: "Have you had genetic testing for BRCA1/BRCA2 mutations?", type: "boolean", info: "BRCA mutations are more common in TNBC" },
+      { id: "genetic_testing", label: "Have you had genetic testing for BRCA1/BRCA2 mutations?", type: "boolean" },
       { id: "genetic_results", label: "If tested, were any mutations found?", type: "boolean" }
     ]
   },
@@ -60,13 +60,13 @@ const questions = [
     questions: [
       { id: "current_weight", label: "Current weight (kg)", type: "number" },
       { id: "height", label: "Height (cm)", type: "number" },
-      { id: "weight_gain", label: "Have you gained significant weight after menopause? (if applicable)", type: "boolean", info: "Post-menopausal obesity increases risk" },
-      { id: "alcohol", label: "Do you consume alcohol regularly?", type: "boolean", info: "Regular alcohol consumption increases risk" },
+      { id: "weight_gain", label: "Have you gained significant weight after menopause? (if applicable)", type: "boolean" },
+      { id: "alcohol", label: "Do you consume alcohol regularly?", type: "boolean" },
       { id: "alcohol_bottles", label: "On average, how many bottles of alcohol do you drink per week?", type: "number" },
       { id: "smoking", label: "Do you smoke or have you smoked?", type: "boolean" },
       { id: "smoking_duration", label: "If yes, for how many years?", type: "number" },
-      { id: "exercise", label: "How often do you exercise or engage in physical activity?", type: "select", options: ["Never", "1-2 times/week", "3-4 times/week", "Daily"], info: "Lack of physical activity increases risk" },
-      { id: "diet", label: "How would you describe your diet?", type: "select", options: ["Mostly processed/fried foods", "Mixed diet", "Mostly healthy/balanced", "Very healthy/organic"], info: "High-fat diet increases risk" },
+      { id: "exercise", label: "How often do you exercise or engage in physical activity?", type: "select", options: ["Never", "1-2 times/week", "3-4 times/week", "Daily"] },
+      { id: "diet", label: "How would you describe your diet?", type: "select", options: ["Mostly processed/fried foods", "Mixed diet", "Mostly healthy/balanced", "Very healthy/organic"] },
       { id: "local_foods", label: "Do you regularly consume traditional Ghanaian foods (palm oil, processed meats)?", type: "boolean" }
     ]
   },
@@ -655,10 +655,6 @@ export default function FamilyHistory() {
                           ))}
                         </RadioGroup>
                       </div>
-                     )}
-                     
-                     {question.info && (
-                       <p className="text-xs text-muted-foreground">{question.info}</p>
                      )}
                    </div>
                   );
