@@ -62,7 +62,7 @@ const questions = [
       { id: "height", label: "Height (cm)", type: "number" },
       { id: "weight_gain", label: "Have you gained significant weight after menopause? (if applicable)", type: "boolean", info: "Post-menopausal obesity increases risk" },
       { id: "alcohol", label: "Do you consume alcohol regularly?", type: "boolean", info: "Regular alcohol consumption increases risk" },
-      { id: "alcohol_frequency", label: "How often do you drink alcohol?", type: "select", options: ["Never", "Occasionally", "1-2 times/week", "3-4 times/week", "Daily"] },
+      { id: "alcohol_bottles", label: "On average, how many bottles of alcohol do you drink per week?", type: "number" },
       { id: "smoking", label: "Do you smoke or have you smoked?", type: "boolean" },
       { id: "smoking_duration", label: "If yes, for how many years?", type: "number" },
       { id: "exercise", label: "How often do you exercise or engage in physical activity?", type: "select", options: ["Never", "1-2 times/week", "3-4 times/week", "Daily"], info: "Lack of physical activity increases risk" },
@@ -156,9 +156,9 @@ export default function FamilyHistory() {
     if (ans.family_pancreatic) riskScore += 2;
     
     // Lifestyle factors
-    if (ans.alcohol_frequency === "Daily") riskScore += 3;
-    else if (ans.alcohol_frequency === "3-4 times/week") riskScore += 2;
-    else if (ans.alcohol_frequency === "1-2 times/week") riskScore += 1;
+    if (ans.alcohol_bottles >= 7) riskScore += 3; // Daily drinking (7+ bottles/week)
+    else if (ans.alcohol_bottles >= 4) riskScore += 2; // Heavy drinking (4-6 bottles/week)
+    else if (ans.alcohol_bottles >= 1) riskScore += 1; // Moderate drinking (1-3 bottles/week)
     
     if (ans.smoking_duration && ans.smoking_duration > 10) riskScore += 2;
     else if (ans.smoking) riskScore += 1;
@@ -579,7 +579,13 @@ export default function FamilyHistory() {
               </>
             ) : (
               <>
-                {currentSection.questions.map((question) => (
+                {currentSection.questions.map((question) => {
+                  // Hide alcohol bottles question if alcohol consumption is not "Yes"
+                  if (question.id === "alcohol_bottles" && answers["alcohol"] !== true) {
+                    return null;
+                  }
+                  
+                  return (
                   <div key={question.id} className="space-y-3">
                     <Label className="text-base font-medium">{question.label}</Label>
                     
@@ -649,9 +655,14 @@ export default function FamilyHistory() {
                           ))}
                         </RadioGroup>
                       </div>
-                    )}
-                  </div>
-                ))}
+                     )}
+                     
+                     {question.info && (
+                       <p className="text-xs text-muted-foreground">{question.info}</p>
+                     )}
+                   </div>
+                  );
+                })}
               </>
             )}
           </CardContent>
