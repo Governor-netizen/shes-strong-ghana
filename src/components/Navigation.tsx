@@ -79,12 +79,12 @@ export function Navigation() {
              )}
            >
              <item.icon className="h-5 w-5" />
-            <div className={mobile ? "text-left" : "hidden lg:block"}>
-              <div className="font-medium">{item.title}</div>
-              {mobile && (
-                <div className="text-xs opacity-70">{item.description}</div>
-              )}
-            </div>
+             <div className={mobile ? "flex flex-col" : "hidden lg:block"}>
+               <div className="font-medium">{item.title}</div>
+               {mobile && (
+                 <div className="text-xs opacity-70">{item.description}</div>
+               )}
+             </div>
           </Link>
         );
       })}
