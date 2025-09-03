@@ -77,14 +77,16 @@ export function Navigation() {
                  ? "bg-primary text-primary-foreground shadow-medical"
                  : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
              )}
-           >
-             <item.icon className="h-5 w-5" />
-             <div className={mobile ? "flex flex-col" : "hidden lg:block"}>
-               <div className="font-medium">{item.title}</div>
-               {mobile && (
+            >
+              <item.icon className="h-5 w-5 flex-shrink-0" />
+             {mobile ? (
+               <div className="flex flex-col">
+                 <div className="font-medium">{item.title}</div>
                  <div className="text-xs opacity-70">{item.description}</div>
-               )}
-             </div>
+               </div>
+             ) : (
+               <span className="font-medium hidden lg:inline">{item.title}</span>
+             )}
           </Link>
         );
       })}
