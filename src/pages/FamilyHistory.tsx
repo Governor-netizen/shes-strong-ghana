@@ -309,7 +309,7 @@ export default function FamilyHistory() {
                 loading="lazy"
               />
               <CardTitle className="text-2xl">Risk Assessment Results</CardTitle>
-              <CardDescription>Based on your family history and lifestyle factors</CardDescription>
+              <CardDescription>Based on the Tyrer-Cuzick model using your family history and lifestyle factors</CardDescription>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="text-center">
