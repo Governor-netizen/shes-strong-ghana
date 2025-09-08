@@ -2,7 +2,6 @@
 import { HeroSection } from "@/components/HeroSection";
 import { AIAssistant } from "@/components/AIAssistant";
 import { useSEO } from "@/hooks/useSEO";
-import AuthStatus from "@/components/auth/AuthStatus";
 
 
 const Index = () => {
@@ -16,7 +15,6 @@ const Index = () => {
     <div className="min-h-screen">
       <HeroSection />
       <AIAssistant />
-      <AuthStatus />
     </div>
   );
 };

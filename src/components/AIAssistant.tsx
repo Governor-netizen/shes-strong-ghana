@@ -47,7 +47,7 @@ export function AIAssistant() {
     {
       id: '1',
       type: 'bot',
-      content: "Hello! I'm OncoAI, your AI health assistant. I can help you with symptom assessment, answer questions about breast cancer, and guide you on next steps. What would you like to discuss today?",
+      content: "Hi there! 👋 I'm Grace, your friendly health companion. I'm here to chat about any health concerns you might have and help you understand your symptoms better. What's on your mind today?",
       timestamp: new Date()
     }
   ]);
@@ -83,20 +83,20 @@ const handleSendMessage = async (override?: string) => {
     const { supabase } = await import("@/integrations/supabase/client");
 
     if (mediaPreviews.length > 0) {
-      const { data, error } = await supabase.functions.invoke('vision-analyze', {
-        body: {
-          images: mediaPreviews,
-          prompt: text,
-        }
-      });
+        const { data, error } = await supabase.functions.invoke('vision-analyze', {
+          body: {
+            images: mediaPreviews,
+            prompt: text,
+          }
+        });
 
-      if (error) {
-        console.error("vision-analyze error", error);
-        addMessage("Sorry, I couldn't analyze the media right now. Please try again.", 'bot');
-      } else {
-        const content = (data as any)?.generatedText || "I couldn't analyze the media.";
-        addMessage(content, 'bot');
-      }
+        if (error) {
+          console.error("vision-analyze error", error);
+          addMessage("Oops! I'm having trouble looking at that image right now. Could you try again?", 'bot');
+        } else {
+          const content = (data as any)?.generatedText || "I'm sorry, I couldn't make out what's in the image.";
+          addMessage(content, 'bot');
+        }
 
       // Clear attachments after send
       setMediaPreviews([]);
@@ -107,7 +107,7 @@ const handleSendMessage = async (override?: string) => {
     const { data, error } = await supabase.functions.invoke('openai-chat', {
       body: {
         messages: [
-          { role: 'system', content: "You are OncoAI, a helpful, concise health assistant. Be accurate, avoid diagnosis, include Ghana/Sub-Saharan context when relevant. If unsure, say you don't know and suggest seeing a clinician." },
+          { role: 'system', content: "You are Grace, a warm and caring health companion. Keep responses brief and conversational. Be supportive but always remind people to see a doctor for proper medical advice. Use a friendly, approachable tone. Include Ghana/Sub-Saharan context when relevant." },
           ...messages.slice(-10).map(m => ({
             role: m.type === 'user' ? 'user' : 'assistant',
             content: m.content
@@ -119,14 +119,14 @@ const handleSendMessage = async (override?: string) => {
 
     if (error) {
       console.error("openai-chat error", error);
-      addMessage("Sorry, I couldn't fetch an answer right now. Please try again.", 'bot');
+      addMessage("I'm having a little trouble connecting right now. Mind trying that again?", 'bot');
     } else {
-      const content = (data as any)?.generatedText || "I couldn't find an answer.";
+      const content = (data as any)?.generatedText || "Hmm, I'm not sure about that one.";
       addMessage(content, 'bot');
     }
   } catch (e: any) {
     console.error("AI error", e);
-    addMessage("There was a problem reaching the AI service. Please try again.", 'bot');
+    addMessage("Oops! Something went wrong on my end. Let's try that again!", 'bot');
   } finally {
     setIsLoading(false);
   }
@@ -248,7 +248,7 @@ useEffect(() => {
             className="h-5 w-5 rounded-full object-cover ring-1 ring-primary-foreground/30"
             loading="lazy"
           />
-          <span className="font-semibold text-primary-foreground">OncoAI</span>
+          <span className="font-semibold text-primary-foreground">Grace</span>
         </div>
         <Button
           variant="ghost"
@@ -281,7 +281,7 @@ useEffect(() => {
                 ) : (
                   <img
                     src="/lovable-uploads/149c2f84-f3e6-435d-b22f-fe5f9e85d931.png"
-                    alt="OncoAI avatar"
+                    alt="Grace avatar"
                     className="h-8 w-8 rounded-full object-cover"
                     loading="lazy"
                   />
@@ -314,7 +314,7 @@ useEffect(() => {
                 />
               </div>
               <div className="max-w-[85%] p-3 rounded-lg bg-muted border">
-                <div className="typing-indicator" aria-live="polite" aria-label="OncoAI is typing">
+                <div className="typing-indicator" aria-live="polite" aria-label="Grace is typing">
                   <span className="typing-dot"></span>
                   <span className="typing-dot"></span>
                   <span className="typing-dot"></span>
