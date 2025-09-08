@@ -149,14 +149,14 @@ export default {
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
-				'slide-in-left': 'slide-in-left 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-				'slide-in-left-delayed': 'slide-in-left 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both',
-				'slide-in-left-delayed-2': 'slide-in-left 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both',
-				'slide-in-left-delayed-3': 'slide-in-left 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s both',
-				'slide-in-bottom': 'slide-in-bottom 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.8s both',
-				'fade-in-up': 'fade-in-up 0.6s ease-out',
-				'fade-in-delayed': 'fade-in-up 0.8s ease-out 1.0s both',
-				'fade-in': 'fade-in 1.2s ease-out 0.5s both',
+				'slide-in-left': 'slide-in-left 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
+				'slide-in-left-delayed': 'slide-in-left 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.1s both',
+				'slide-in-left-delayed-2': 'slide-in-left 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both',
+				'slide-in-left-delayed-3': 'slide-in-left 0.4s cubic-bezier(0.4, 0, 0.2, 1) 0.3s both',
+				'slide-in-bottom': 'slide-in-bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both',
+				'fade-in-up': 'fade-in-up 0.3s ease-out',
+				'fade-in-delayed': 'fade-in-up 0.4s ease-out 0.5s both',
+				'fade-in': 'fade-in 0.6s ease-out 0.2s both',
 				'pulse-glow': 'pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite'
 			}
 		}
