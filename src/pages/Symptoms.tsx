@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar } from "@/components/ui/calendar";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import { format } from "date-fns";
 import { 
   Activity, 
@@ -17,7 +18,9 @@ import {
   TrendingUp,
   Heart,
   Clock,
-  CheckCircle
+  CheckCircle,
+  Trash2,
+  Shield
 } from "lucide-react";
 
 const commonSymptoms = [
@@ -57,6 +60,8 @@ export default function Symptoms() {
   const [notes, setNotes] = useState("");
   const [duration, setDuration] = useState("");
   const [showAddForm, setShowAddForm] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { toast } = useToast();
 
   const addFormRef = useRef<HTMLDivElement | null>(null);
@@ -66,6 +71,37 @@ export default function Symptoms() {
       addFormRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
     });
   };
+
+  // Load symptoms from database
+  useEffect(() => {
+    const loadSymptoms = async () => {
+      const { data: userData } = await supabase.auth.getUser();
+      const userId = userData.user?.id;
+      setIsAuthenticated(!!userId);
+      setLoading(false);
+
+      if (!userId) return;
+
+      const { data, error } = await supabase
+        .from("symptoms")
+        .select("*")
+        .order("date", { ascending: false });
+
+      if (!error && data) {
+        const loadedSymptoms: SymptomEntry[] = data.map((symptom: any) => ({
+          id: symptom.id,
+          symptom: symptom.symptom,
+          severity: symptom.severity,
+          date: new Date(symptom.date),
+          notes: symptom.notes || "",
+          duration: symptom.duration || ""
+        }));
+        setSymptoms(loadedSymptoms);
+      }
+    };
+
+    loadSymptoms();
+  }, []);
 
   useEffect(() => {
     if (showAddForm) {
@@ -79,7 +115,7 @@ export default function Symptoms() {
     }
   }, []);
 
-  const addSymptom = () => {
+  const addSymptom = async () => {
     const symptomToAdd = selectedSymptom || customSymptom;
     if (!symptomToAdd.trim()) {
       toast({
@@ -90,13 +126,46 @@ export default function Symptoms() {
       return;
     }
 
+    // Check authentication
+    const { data: userData } = await supabase.auth.getUser();
+    if (!userData.user) {
+      toast({
+        title: "Authentication Required",
+        description: "Please sign in to track symptoms",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from("symptoms")
+      .insert({
+        user_id: userData.user.id,
+        symptom: symptomToAdd,
+        severity: selectedSeverity,
+        date: selectedDate.toISOString().split('T')[0], // Convert to date string
+        notes,
+        duration
+      })
+      .select()
+      .single();
+
+    if (error) {
+      toast({
+        title: "Error",
+        description: "Failed to save symptom. Please try again.",
+        variant: "destructive"
+      });
+      return;
+    }
+
     const newSymptom: SymptomEntry = {
-      id: Date.now().toString(),
-      symptom: symptomToAdd,
-      severity: selectedSeverity,
-      date: selectedDate,
-      notes,
-      duration
+      id: data.id,
+      symptom: data.symptom,
+      severity: data.severity,
+      date: new Date(data.date),
+      notes: data.notes || "",
+      duration: data.duration || ""
     };
 
     setSymptoms(prev => [newSymptom, ...prev]);
@@ -115,6 +184,28 @@ export default function Symptoms() {
     });
   };
 
+  const deleteSymptom = async (symptomId: string) => {
+    const { error } = await supabase
+      .from("symptoms")
+      .delete()
+      .eq("id", symptomId);
+
+    if (error) {
+      toast({
+        title: "Error",
+        description: "Failed to delete symptom. Please try again.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    setSymptoms(prev => prev.filter(symptom => symptom.id !== symptomId));
+    toast({
+      title: "Symptom Deleted",
+      description: "The symptom has been removed from your records",
+    });
+  };
+
   const getSeverityLabel = (severity: number) => {
     return severityLevels.find(level => level.value === severity);
   };
@@ -128,6 +219,43 @@ export default function Symptoms() {
   const getHighSeveritySymptoms = () => {
     return symptoms.filter(symptom => symptom.severity === 3);
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 py-8">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <div className="text-center py-12">
+            <Activity className="h-12 w-12 text-muted-foreground mx-auto mb-4 animate-pulse" />
+            <p className="text-muted-foreground">Loading your symptom tracker...</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 py-8">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <Card className="shadow-medical bg-gradient-card">
+            <CardContent className="p-8 text-center">
+              <Shield className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+              <h2 className="text-xl font-semibold mb-2">Authentication Required</h2>
+              <p className="text-muted-foreground mb-6">
+                Please sign in to track your symptoms. Your symptom data will be securely stored and accessible only to you.
+              </p>
+              <Button 
+                onClick={() => window.location.href = '/auth'}
+                className="bg-gradient-primary"
+              >
+                Sign In to Continue
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 py-8">
@@ -332,7 +460,7 @@ export default function Symptoms() {
                       className="border border-border rounded-lg p-4 hover:shadow-card-soft transition-shadow"
                     >
                       <div className="flex items-start justify-between mb-3">
-                        <div>
+                        <div className="flex-1">
                           <h4 className="font-medium text-lg">{symptom.symptom}</h4>
                           <div className="flex items-center gap-2 mt-1">
                             <Clock className="h-4 w-4 text-muted-foreground" />
@@ -346,11 +474,21 @@ export default function Symptoms() {
                             )}
                           </div>
                         </div>
-                        {severityInfo && (
-                          <Badge className={severityInfo.color}>
-                            {severityInfo.label}
-                          </Badge>
-                        )}
+                        <div className="flex items-center gap-2">
+                          {severityInfo && (
+                            <Badge className={severityInfo.color}>
+                              {severityInfo.label}
+                            </Badge>
+                          )}
+                          <Button
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => deleteSymptom(symptom.id)}
+                            className="text-destructive hover:text-destructive hover:bg-destructive/10"
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
                       </div>
                       {symptom.notes && (
                         <p className="text-sm text-muted-foreground bg-muted/50 p-3 rounded">

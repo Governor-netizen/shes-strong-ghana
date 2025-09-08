@@ -609,6 +609,42 @@ export type Database = {
         }
         Relationships: []
       }
+      symptoms: {
+        Row: {
+          created_at: string
+          date: string
+          duration: string | null
+          id: string
+          notes: string | null
+          severity: number
+          symptom: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          date: string
+          duration?: string | null
+          id?: string
+          notes?: string | null
+          severity: number
+          symptom: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          date?: string
+          duration?: string | null
+          id?: string
+          notes?: string | null
+          severity?: number
+          symptom?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_locations: {
         Row: {
           created_at: string
@@ -683,6 +719,18 @@ export type Database = {
       can_view_assessment: {
         Args: { assess_id: string }
         Returns: boolean
+      }
+      get_notification_template: {
+        Args: {
+          template_care_stage?: Database["public"]["Enums"]["care_stage"]
+          template_channel?: Database["public"]["Enums"]["notification_channel"]
+          template_type: Database["public"]["Enums"]["notification_type"]
+        }
+        Returns: {
+          message_template: string
+          title_template: string
+          variables: Json
+        }[]
       }
       has_appointment_with_provider: {
         Args: { provider_uuid: string }

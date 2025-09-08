@@ -54,6 +54,7 @@ export default function Profile() {
 
   const [loading, setLoading] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   const handleChange = (field: keyof UserProfile, value: string) => {
     setProfile((prev) => ({ ...prev, [field]: value }));
@@ -64,6 +65,7 @@ export default function Profile() {
       const { data: userData } = await supabase.auth.getUser();
       const uid = userData.user?.id ?? null;
       setUserId(uid);
+      setIsAuthenticated(!!uid);
       if (!uid) return;
 
       const { data, error } = await supabase
@@ -139,6 +141,30 @@ export default function Profile() {
       description: "Your profile information has been saved successfully.",
     });
   };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 py-8">
+        <div className="container mx-auto px-4 max-w-2xl">
+          <Card className="shadow-medical bg-gradient-card">
+            <CardContent className="p-8 text-center">
+              <Shield className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+              <h2 className="text-xl font-semibold mb-2">Authentication Required</h2>
+              <p className="text-muted-foreground mb-6">
+                Please sign in to access your profile information.
+              </p>
+              <Button 
+                onClick={() => window.location.href = '/auth'}
+                className="bg-gradient-primary"
+              >
+                Sign In
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 py-8">

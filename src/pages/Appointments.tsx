@@ -214,8 +214,8 @@ const location = useLocation();
     } = await supabase.auth.getSession();
     if (!session) {
       toast({
-        title: "Please sign in",
-        description: "Login to book appointments.",
+        title: "Authentication Required",
+        description: "You must be signed in to book appointments. Please sign in first.",
         variant: "destructive",
       });
       navigate("/auth", { replace: false, state: { redirectTo: "/appointments#book" } });
