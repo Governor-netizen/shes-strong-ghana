@@ -156,7 +156,7 @@ export default {
 				'slide-in-bottom': 'slide-in-bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1) 0.4s both',
 				'fade-in-up': 'fade-in-up 0.3s ease-out',
 				'fade-in-delayed': 'fade-in-up 0.4s ease-out 0.5s both',
-				'fade-in': 'fade-in 0.6s ease-out 0.2s both',
+				'fade-in': 'fade-in 0.3s ease-out 0.1s both',
 				'pulse-glow': 'pulse 2.5s cubic-bezier(0.4, 0, 0.6, 1) infinite'
 			}
 		}
