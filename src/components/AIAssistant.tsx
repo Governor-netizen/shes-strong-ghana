@@ -47,7 +47,7 @@ export function AIAssistant() {
     {
       id: '1',
       type: 'bot',
-      content: "Hi there! 👋 I'm Grace, your friendly health companion. I'm here to chat about any health concerns you might have and help you understand your symptoms better. What's on your mind today?",
+      content: "Hi there! 👋 I'm OncoAI, your friendly health companion. I'm here to chat about any health concerns you might have and help you understand your symptoms better. What's on your mind today?",
       timestamp: new Date()
     }
   ]);
@@ -107,7 +107,7 @@ const handleSendMessage = async (override?: string) => {
     const { data, error } = await supabase.functions.invoke('openai-chat', {
       body: {
         messages: [
-          { role: 'system', content: "You are Grace, a warm and caring health companion. Keep responses brief and conversational. Be supportive but always remind people to see a doctor for proper medical advice. Use a friendly, approachable tone. Include Ghana/Sub-Saharan context when relevant." },
+          { role: 'system', content: "You are OncoAI, a warm and caring health companion. Keep responses brief and conversational. Be supportive but always remind people to see a doctor for proper medical advice. Use a friendly, approachable tone. Include Ghana/Sub-Saharan context when relevant." },
           ...messages.slice(-10).map(m => ({
             role: m.type === 'user' ? 'user' : 'assistant',
             content: m.content
@@ -248,7 +248,7 @@ useEffect(() => {
             className="h-5 w-5 rounded-full object-cover ring-1 ring-primary-foreground/30"
             loading="lazy"
           />
-          <span className="font-semibold text-primary-foreground">Grace</span>
+          <span className="font-semibold text-primary-foreground">OncoAI</span>
         </div>
         <Button
           variant="ghost"
@@ -281,7 +281,7 @@ useEffect(() => {
                 ) : (
                   <img
                     src="/lovable-uploads/149c2f84-f3e6-435d-b22f-fe5f9e85d931.png"
-                    alt="Grace avatar"
+                    alt="OncoAI avatar"
                     className="h-8 w-8 rounded-full object-cover"
                     loading="lazy"
                   />
@@ -314,7 +314,7 @@ useEffect(() => {
                 />
               </div>
               <div className="max-w-[85%] p-3 rounded-lg bg-muted border">
-                <div className="typing-indicator" aria-live="polite" aria-label="Grace is typing">
+                <div className="typing-indicator" aria-live="polite" aria-label="OncoAI is typing">
                   <span className="typing-dot"></span>
                   <span className="typing-dot"></span>
                   <span className="typing-dot"></span>
