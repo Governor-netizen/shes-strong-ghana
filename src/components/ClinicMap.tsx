@@ -14,7 +14,9 @@ import {
   Clock, 
   Star,
   Search,
-  X
+  X,
+  Maximize2,
+  Minimize2
 } from 'lucide-react';
 
 interface Clinic {
@@ -190,6 +192,7 @@ const ClinicMap: React.FC<ClinicMapProps> = ({ onClose }) => {
   const [isLoading, setIsLoading] = useState(true);
   const [apiKey, setApiKey] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [isMapExpanded, setIsMapExpanded] = useState(false);
   const { toast } = useToast();
 
   // Calculate distance between two coordinates
@@ -399,59 +402,30 @@ const ClinicMap: React.FC<ClinicMapProps> = ({ onClose }) => {
   );
 
   return (
-    <div className="fixed inset-0 bg-background z-50 flex flex-col md:flex-row">
-      {/* Map Container */}
-      <div className="flex-1 relative order-2 md:order-1 h-2/3 md:h-full">
-        <div ref={mapRef} className="w-full h-full" />
-        {isLoading && (
-          <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
-            <div className="text-center">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary mx-auto mb-4"></div>
-              <p className="text-sm">{apiKey ? 'Loading map...' : 'Fetching configuration...'}</p>
-            </div>
-          </div>
-        )}
+    <div className="fixed inset-0 bg-background z-50 flex flex-col">
+      {/* Header */}
+      <div className="p-4 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-xl font-semibold">Find Nearby Clinics</h2>
+          <Button variant="ghost" size="sm" onClick={onClose}>
+            <X className="h-4 w-4" />
+          </Button>
+        </div>
         
-        {error && (
-          <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
-            <div className="text-center p-4 max-w-sm">
-              <div className="text-destructive mb-4">
-                <MapPin className="h-8 w-8 mx-auto mb-2" />
-              </div>
-              <h3 className="text-base font-semibold mb-2">Map Unavailable</h3>
-              <p className="text-muted-foreground mb-4 text-sm">{error}</p>
-              <Button size="sm" onClick={() => window.location.reload()}>
-                Try Again
-              </Button>
-            </div>
-          </div>
-        )}
+        <div className="relative">
+          <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
+          <Input
+            placeholder="Search clinics or services..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="pl-10"
+          />
+        </div>
       </div>
 
-      {/* Sidebar */}
-      <div className="w-full md:w-96 bg-background border-t md:border-t-0 md:border-l border-border overflow-hidden flex flex-col order-1 md:order-2 h-1/3 md:h-full">
-        {/* Header */}
-        <div className="p-4 border-b border-border">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">Find Nearby Clinics</h2>
-            <Button variant="ghost" size="sm" onClick={onClose}>
-              <X className="h-4 w-4" />
-            </Button>
-          </div>
-          
-          <div className="relative">
-            <Search className="absolute left-3 top-3 h-4 w-4 text-muted-foreground" />
-            <Input
-              placeholder="Search clinics or services..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10"
-            />
-          </div>
-        </div>
-
-        {/* Clinic List */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+      {/* Clinic List - Primary Content */}
+      <div className="flex-1 overflow-y-auto p-4">
+        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
           {filteredClinics.map((clinic) => (
             <Card
               key={clinic.id}
@@ -466,17 +440,17 @@ const ClinicMap: React.FC<ClinicMapProps> = ({ onClose }) => {
                 }
               }}
             >
-              <CardHeader className="pb-2">
+              <CardHeader className="pb-3">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <CardTitle className="text-base">{clinic.name}</CardTitle>
-                    <div className="flex items-center gap-2 mt-1">
+                    <CardTitle className="text-lg leading-tight">{clinic.name}</CardTitle>
+                    <div className="flex items-center gap-2 mt-2">
                       <div className="flex items-center">
-                        <Star className="h-3 w-3 fill-warning text-warning mr-1" />
-                        <span className="text-sm text-muted-foreground">{clinic.rating}</span>
+                        <Star className="h-4 w-4 fill-warning text-warning mr-1" />
+                        <span className="text-sm font-medium">{clinic.rating}</span>
                       </div>
                       {clinic.distance && (
-                        <Badge variant="outline" className="text-xs">
+                        <Badge variant="outline" className="text-xs font-medium">
                           {clinic.distance}
                         </Badge>
                       )}
@@ -485,63 +459,123 @@ const ClinicMap: React.FC<ClinicMapProps> = ({ onClose }) => {
                 </div>
               </CardHeader>
               <CardContent className="pt-0">
-                <div className="space-y-2 text-sm">
-                  <div className="flex items-center text-muted-foreground">
-                    <MapPin className="h-3 w-3 mr-2 flex-shrink-0" />
+                <div className="space-y-3">
+                  <div className="flex items-start text-muted-foreground text-sm">
+                    <MapPin className="h-4 w-4 mr-2 flex-shrink-0 mt-0.5" />
                     <span className="line-clamp-2">{clinic.address}</span>
                   </div>
                   
-                  <div className="flex items-center text-muted-foreground">
-                    <Phone className="h-3 w-3 mr-2 flex-shrink-0" />
+                  <div className="flex items-center text-muted-foreground text-sm">
+                    <Phone className="h-4 w-4 mr-2 flex-shrink-0" />
                     <span>{clinic.phone}</span>
                   </div>
                   
-                  <div className="flex items-center text-muted-foreground">
-                    <Clock className="h-3 w-3 mr-2 flex-shrink-0" />
+                  <div className="flex items-center text-muted-foreground text-sm">
+                    <Clock className="h-4 w-4 mr-2 flex-shrink-0" />
                     <span>{clinic.hours}</span>
                   </div>
                   
-                  <div className="flex flex-wrap gap-1 mt-2">
-                    {clinic.services.slice(0, 3).map((service) => (
-                      <Badge key={service} variant="secondary" className="text-xs">
+                  {/* Service Tags */}
+                  <div className="flex flex-wrap gap-1">
+                    {clinic.services.map((service) => (
+                      <Badge 
+                        key={service} 
+                        variant={
+                          service === 'Oncology' ? 'default' :
+                          service === 'Surgery' ? 'secondary' :
+                          service === 'Emergency Care' ? 'destructive' :
+                          'outline'
+                        }
+                        className="text-xs"
+                      >
                         {service}
                       </Badge>
                     ))}
                   </div>
-                </div>
-                
-                <div className="flex gap-2 mt-3">
-                  <Button 
-                    size="sm" 
-                    className="flex-1"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.open(`https://www.google.com/maps/dir/?api=1&destination=${clinic.lat},${clinic.lng}`, '_blank');
-                    }}
-                  >
-                    <Navigation className="h-3 w-3 mr-1" />
-                    Directions
-                  </Button>
-                  <Button 
-                    size="sm" 
-                    variant="outline"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      window.open(`tel:${clinic.phone}`, '_self');
-                    }}
-                  >
-                    <Phone className="h-3 w-3 mr-1" />
-                    Call
-                  </Button>
+                  
+                  {/* Action Buttons */}
+                  <div className="flex gap-2 pt-2">
+                    <Button 
+                      size="sm" 
+                      className="flex-1"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open(`https://www.google.com/maps/dir/?api=1&destination=${clinic.lat},${clinic.lng}`, '_blank');
+                      }}
+                    >
+                      <Navigation className="h-3 w-3 mr-1" />
+                      Directions
+                    </Button>
+                    <Button 
+                      size="sm" 
+                      variant="outline"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        window.open(`tel:${clinic.phone}`, '_self');
+                      }}
+                    >
+                      <Phone className="h-3 w-3 mr-1" />
+                      Call
+                    </Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
           ))}
+        </div>
+        
+        {filteredClinics.length === 0 && !isLoading && (
+          <div className="text-center py-12 text-muted-foreground">
+            <MapPin className="h-12 w-12 mx-auto mb-4 opacity-50" />
+            <p className="text-lg">No clinics found matching your search.</p>
+            <p className="text-sm mt-1">Try adjusting your search terms or location.</p>
+          </div>
+        )}
+      </div>
+
+      {/* Map Container - Secondary, Collapsible */}
+      <div className={`bg-background border-t border-border transition-all duration-300 ${
+        isMapExpanded ? 'h-2/3' : 'h-48'
+      }`}>
+        <div className="flex items-center justify-between p-3 border-b border-border bg-muted/30">
+          <h3 className="text-sm font-medium text-muted-foreground">Map View</h3>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setIsMapExpanded(!isMapExpanded)}
+            className="h-8 w-8 p-0"
+          >
+            {isMapExpanded ? (
+              <Minimize2 className="h-4 w-4" />
+            ) : (
+              <Maximize2 className="h-4 w-4" />
+            )}
+          </Button>
+        </div>
+        
+        <div className="h-full relative">
+          <div ref={mapRef} className="w-full h-full" />
+          {isLoading && (
+            <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
+              <div className="text-center">
+                <div className="animate-spin rounded-full h-6 w-6 border-b-2 border-primary mx-auto mb-2"></div>
+                <p className="text-xs text-muted-foreground">{apiKey ? 'Loading map...' : 'Fetching configuration...'}</p>
+              </div>
+            </div>
+          )}
           
-          {filteredClinics.length === 0 && !isLoading && (
-            <div className="text-center py-8 text-muted-foreground">
-              <MapPin className="h-8 w-8 mx-auto mb-2" />
-              <p>No clinics found matching your search.</p>
+          {error && (
+            <div className="absolute inset-0 bg-background/80 flex items-center justify-center">
+              <div className="text-center p-4 max-w-sm">
+                <div className="text-destructive mb-2">
+                  <MapPin className="h-6 w-6 mx-auto mb-1" />
+                </div>
+                <h3 className="text-sm font-semibold mb-1">Map Unavailable</h3>
+                <p className="text-muted-foreground mb-2 text-xs">{error}</p>
+                <Button size="sm" onClick={() => window.location.reload()}>
+                  Try Again
+                </Button>
+              </div>
             </div>
           )}
         </div>
