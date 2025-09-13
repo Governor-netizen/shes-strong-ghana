@@ -336,7 +336,7 @@ const location = useLocation();
                 <div>
                   <p className="font-medium">Emergency Contact</p>
                   <p className="text-sm text-muted-foreground">24/7 Health Hotline</p>
-                  <p className="text-sm font-mono text-primary">+233 123 456 789</p>
+                  <p className="text-sm font-mono text-primary">112</p>
                 </div>
               </div>
             </CardContent>
@@ -586,7 +586,7 @@ const location = useLocation();
                         size="sm"
                         onClick={() => {
                           // Extract phone number from location or use emergency number
-                          let phoneNumber = "+233123456789"; // Default emergency number
+                          let phoneNumber = "112"; // Ghana emergency hotline
                           
                           // Try to match with clinic data from the map
                           const clinicPhone = appointment.location.includes("Korle-Bu") ? "+233302672501"

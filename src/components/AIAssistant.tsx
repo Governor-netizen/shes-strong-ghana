@@ -389,7 +389,7 @@ useEffect(() => {
       <div className="p-3 bg-destructive/10 border-t">
         <div className="flex items-center gap-2 text-xs text-destructive">
           <AlertTriangle className="h-3 w-3" />
-          <span>For emergencies, call your nearest hospital immediately</span>
+          <span>For emergencies, call 112 immediately</span>
         </div>
       </div>
     </Card>
