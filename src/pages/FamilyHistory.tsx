@@ -7,13 +7,15 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useToast } from "@/hooks/use-toast";
 import { 
   Users, 
   AlertTriangle, 
   CheckCircle, 
   ArrowLeft, 
-  ArrowRight
+  ArrowRight,
+  Info
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
@@ -585,9 +587,25 @@ export default function FamilyHistory() {
                     return null;
                   }
                   
-                  return (
-                  <div key={question.id} className="space-y-3">
-                    <Label className="text-base font-medium">{question.label}</Label>
+                   return (
+                   <div key={question.id} className="space-y-3">
+                     <div className="flex items-center gap-2">
+                       <Label className="text-base font-medium">{question.label}</Label>
+                       {question.id === "local_foods" && (
+                         <TooltipProvider>
+                           <Tooltip>
+                             <TooltipTrigger asChild>
+                               <Info className="h-4 w-4 text-muted-foreground cursor-help" />
+                             </TooltipTrigger>
+                             <TooltipContent className="max-w-sm p-3">
+                               <p className="text-sm">
+                                 Processed meats in Ghana include koobi (salted tilapia), momoni (fermented fish), kako (dried fish), tolo beef (salted beef), chinchinga (khebab), and canned corned beef.
+                               </p>
+                             </TooltipContent>
+                           </Tooltip>
+                         </TooltipProvider>
+                       )}
+                     </div>
                     
                     {question.type === "boolean" && (
                       <div className="space-y-3">
