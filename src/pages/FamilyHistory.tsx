@@ -14,7 +14,8 @@ import {
   AlertTriangle, 
   CheckCircle, 
   ArrowLeft, 
-  ArrowRight
+  ArrowRight,
+  Info
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
@@ -68,7 +69,7 @@ const questions = [
       { id: "smoking_duration", label: "If yes, for how many years?", type: "number" },
       { id: "exercise", label: "How often do you exercise or engage in physical activity?", type: "select", options: ["Never", "1-2 times/week", "3-4 times/week", "Daily"] },
       { id: "diet", label: "How would you describe your diet?", type: "select", options: ["Mostly processed/fried foods", "Mixed diet", "Mostly healthy/balanced", "Very healthy/organic"] },
-      { id: "local_foods", label: "Do you regularly consume traditional Ghanaian foods (palm oil, processed meats)? *Processed meats include: koobi (salted tilapia), momoni (fermented fish), kako (dried fish), tolo beef (salted beef), chinchinga (khebab), and canned corned beef*", type: "boolean" }
+      { id: "local_foods", label: "Do you regularly consume traditional Ghanaian foods (palm oil, processed meats)?", type: "boolean" }
     ]
   },
   {
@@ -92,6 +93,7 @@ export default function FamilyHistory() {
   const [currentStep, setCurrentStep] = useState(0);
   const [answers, setAnswers] = useState<Record<string, any>>({});
   const [riskLevel, setRiskLevel] = useState<"low" | "moderate" | "high" | null>(null);
+  const [tooltipVisible, setTooltipVisible] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -588,7 +590,53 @@ export default function FamilyHistory() {
                   
                    return (
                    <div key={question.id} className="space-y-3">
-                     <Label className="text-base font-medium">{question.label}</Label>
+                     <div className="flex items-center gap-2">
+                       <Label className="text-base font-medium">{question.label}</Label>
+                       {question.id === "local_foods" && (
+                         <div style={{ position: "relative", display: "inline-block" }}>
+                           <button
+                             type="button"
+                             style={{
+                               marginLeft: "6px",
+                               cursor: "pointer",
+                               borderRadius: "50%",
+                               padding: "2px 6px",
+                               background: "#eee",
+                               fontWeight: "bold",
+                               border: "none",
+                               fontSize: "12px"
+                             }}
+                             onMouseEnter={() => setTooltipVisible(true)}
+                             onMouseLeave={() => setTooltipVisible(false)}
+                             onClick={() => setTooltipVisible(!tooltipVisible)}
+                           >
+                             ℹ️
+                           </button>
+                           
+                           <div style={{
+                             visibility: tooltipVisible ? "visible" : "hidden",
+                             width: "220px",
+                             backgroundColor: "#333",
+                             color: "#fff",
+                             textAlign: "left",
+                             borderRadius: "6px",
+                             padding: "8px",
+                             position: "absolute",
+                             zIndex: 1000,
+                             bottom: "125%",
+                             left: "50%",
+                             marginLeft: "-110px",
+                             opacity: tooltipVisible ? 1 : 0,
+                             transition: "opacity 0.3s",
+                             fontSize: "14px",
+                             lineHeight: "1.4"
+                           }}>
+                             Processed meats in Ghana include koobi (salted tilapia), momoni (fermented fish), kako (dried fish), 
+                             tolo beef (salted beef), chinchinga (khebab), and canned corned beef.
+                           </div>
+                         </div>
+                       )}
+                     </div>
                     
                     {question.type === "boolean" && (
                       <div className="space-y-3">
