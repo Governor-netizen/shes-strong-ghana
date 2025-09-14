@@ -1,7 +1,9 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router-dom";
 import { Heart, Shield, Users, BookOpen, ArrowRight, Star } from "lucide-react";
+import { useState } from "react";
 const features = [{
   icon: Shield,
   title: "Risk Assessment",
@@ -30,6 +32,9 @@ const stats = [{
   label: "early detection success rate"
 }];
 export function HeroSection() {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
+
   return <div className="min-h-screen bg-gradient-to-br from-background to-muted/30">
       {/* Hero Section */}
       <section className="container mx-auto px-4 pt-12 pb-16">
@@ -74,23 +79,49 @@ export function HeroSection() {
 
           {/* Right side: Hero image with animations */}
           <div className="flex justify-center lg:justify-end order-1 lg:order-2">
-          <div className="relative group">
-            <img
-              src="/lovable-uploads/1c97f9a5-35a1-4b7e-a5d3-4d5db1c333f1.png"
-              alt="Strong woman flexing muscles with breast cancer awareness ribbon, embodying strength and empowerment"
-              className="w-full max-w-sm md:max-w-md rounded-2xl shadow-2xl transition-all duration-200 ease-out transform group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl"
-              loading="eager"
-              fetchPriority="high"
-              decoding="sync"
-                onError={(e) => {
-                  console.log('Image failed to load:', e);
-                  e.currentTarget.style.display = 'block';
+            <div className="relative group">
+              {/* Loading skeleton */}
+              {!imageLoaded && !imageError && (
+                <Skeleton className="w-full max-w-sm md:max-w-md h-96 rounded-2xl animate-pulse" />
+              )}
+              
+              {/* Error fallback */}
+              {imageError && (
+                <div className="w-full max-w-sm md:max-w-md h-96 rounded-2xl bg-muted/50 border-2 border-dashed border-muted-foreground/30 flex items-center justify-center">
+                  <div className="text-center text-muted-foreground">
+                    <Heart className="h-12 w-12 mx-auto mb-2 opacity-50" />
+                    <p className="text-sm">Image loading...</p>
+                  </div>
+                </div>
+              )}
+              
+              {/* Hero image */}
+              <img
+                src="/lovable-uploads/1c97f9a5-35a1-4b7e-a5d3-4d5db1c333f1.png"
+                alt="Strong woman flexing muscles with breast cancer awareness ribbon, embodying strength and empowerment"
+                className={`w-full max-w-sm md:max-w-md rounded-2xl shadow-2xl transition-all duration-500 ease-out transform group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl ${
+                  imageLoaded ? 'opacity-100 animate-fade-in' : 'opacity-0 absolute inset-0'
+                }`}
+                loading="eager"
+                fetchPriority="high"
+                decoding="async"
+                sizes="(max-width: 768px) 384px, 448px"
+                onLoad={() => setImageLoaded(true)}
+                onError={() => {
+                  console.log('Hero image failed to load');
+                  setImageError(true);
                 }}
               />
-              {/* Animated glow effect */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/15 via-secondary/15 to-primary/15 opacity-60 group-hover:opacity-80 transition-all duration-700 blur-2xl scale-110 -z-10"></div>
-              {/* Subtle overlay */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              {/* Animated glow effect - only show when image is loaded */}
+              {imageLoaded && (
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/15 via-secondary/15 to-primary/15 opacity-60 group-hover:opacity-80 transition-all duration-700 blur-2xl scale-110 -z-10"></div>
+              )}
+              
+              {/* Subtle overlay - only show when image is loaded */}
+              {imageLoaded && (
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              )}
             </div>
           </div>
         </div>
