@@ -1,21 +1,25 @@
 {
-  "name": "She's Strong Ghana",
-  "short_name": "She's Strong",
+  "name": "She's Strong",
+  "short_name": "ShesStrong",
   "description": "Empowering Ghanaian women with tools for breast cancer prevention and care",
+  "start_url": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#e60073",
   "icons": [
     {
-      "src": "/lovable-uploads/c5614e2b-c58a-4424-a218-3f4732b21d33.png",
+      "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable any"
     },
     {
-      "src": "/lovable-uploads/c5614e2b-c58a-4424-a218-3f4732b21d33.png",
+      "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable any"
     }
   ],
-  "theme_color": "#e91e63",
-  "background_color": "#ffffff",
-  "display": "standalone",
-  "start_url": "/"
+  "categories": ["health", "medical", "lifestyle"],
+  "orientation": "portrait-primary"
 }

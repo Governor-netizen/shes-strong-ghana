@@ -13,6 +13,7 @@ import Research from "./pages/Research";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Layout from "@/components/Layout";
+import { PWAInstallPrompt } from "@/components/PWAInstallPrompt";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +22,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <PWAInstallPrompt />
       <BrowserRouter>
       <Routes>
         <Route element={<Layout />}>
