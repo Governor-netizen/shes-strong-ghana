@@ -7,15 +7,14 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+
 import { useToast } from "@/hooks/use-toast";
 import { 
   Users, 
   AlertTriangle, 
   CheckCircle, 
   ArrowLeft, 
-  ArrowRight,
-  Info
+  ArrowRight
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { useScrollToTop } from "@/hooks/useScrollToTop";
@@ -69,7 +68,7 @@ const questions = [
       { id: "smoking_duration", label: "If yes, for how many years?", type: "number" },
       { id: "exercise", label: "How often do you exercise or engage in physical activity?", type: "select", options: ["Never", "1-2 times/week", "3-4 times/week", "Daily"] },
       { id: "diet", label: "How would you describe your diet?", type: "select", options: ["Mostly processed/fried foods", "Mixed diet", "Mostly healthy/balanced", "Very healthy/organic"] },
-      { id: "local_foods", label: "Do you regularly consume traditional Ghanaian foods (palm oil, processed meats)?", type: "boolean" }
+      { id: "local_foods", label: "Do you regularly consume traditional Ghanaian foods (palm oil, processed meats)? *Processed meats include: koobi (salted tilapia), momoni (fermented fish), kako (dried fish), tolo beef (salted beef), chinchinga (khebab), and canned corned beef*", type: "boolean" }
     ]
   },
   {
@@ -589,24 +588,7 @@ export default function FamilyHistory() {
                   
                    return (
                    <div key={question.id} className="space-y-3">
-                     <div className="flex items-center gap-2">
-                       <Label className="text-base font-medium">{question.label}</Label>
-                       {question.id === "local_foods" && (
-                         <Tooltip>
-                           <TooltipTrigger asChild>
-                             <button type="button" className="inline-flex items-center justify-center rounded-full p-1 hover:bg-muted transition-colors">
-                               <Info className="h-4 w-4 text-muted-foreground" />
-                               <span className="sr-only">Information about traditional Ghanaian foods</span>
-                             </button>
-                           </TooltipTrigger>
-                           <TooltipContent className="z-50 max-w-sm p-3 bg-popover border shadow-md">
-                             <p className="text-sm text-popover-foreground">
-                               Processed meats in Ghana include koobi (salted tilapia), momoni (fermented fish), kako (dried fish), tolo beef (salted beef), chinchinga (khebab), and canned corned beef.
-                             </p>
-                           </TooltipContent>
-                         </Tooltip>
-                       )}
-                     </div>
+                     <Label className="text-base font-medium">{question.label}</Label>
                     
                     {question.type === "boolean" && (
                       <div className="space-y-3">
