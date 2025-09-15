@@ -2,14 +2,14 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router-dom";
-import { Heart, Shield, Users, BookOpen, ArrowRight, Star } from "lucide-react";
+import { Heart, Shield, Users, BookOpen, ArrowRight, Star, Stethoscope } from "lucide-react";
 import { useState } from "react";
 const features = [{
   icon: Shield,
   title: "Risk Assessment",
   description: "Comprehensive family history evaluation to understand your personal risk factors"
 }, {
-  icon: Heart,
+  icon: Stethoscope,
   title: "Symptom Tracking",
   description: "Monitor and track symptoms with intelligent insights for early detection"
 }, {
