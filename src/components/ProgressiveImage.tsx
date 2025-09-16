@@ -7,6 +7,7 @@ interface ProgressiveImageProps {
   alt: string;
   className?: string;
   placeholderSrc?: string;
+  lowQualitySrc?: string;
   sizes?: string;
   priority?: boolean;
   onLoad?: () => void;
@@ -18,6 +19,7 @@ export const ProgressiveImage = ({
   alt,
   className = '',
   placeholderSrc,
+  lowQualitySrc,
   sizes,
   priority = false,
   onLoad,
@@ -26,7 +28,9 @@ export const ProgressiveImage = ({
   const [isLoaded, setIsLoaded] = useState(false);
   const [isError, setIsError] = useState(false);
   const [showPlaceholder, setShowPlaceholder] = useState(true);
+  const [lowQualityLoaded, setLowQualityLoaded] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
+  const lowQualityRef = useRef<HTMLImageElement>(null);
 
   useEffect(() => {
     if (!imgRef.current) return;
@@ -55,8 +59,18 @@ export const ProgressiveImage = ({
 
   return (
     <div className="relative">
-      {/* Loading skeleton */}
-      {showPlaceholder && !isError && (
+      {/* Instant base64 placeholder (if provided) */}
+      {placeholderSrc && showPlaceholder && !isError && (
+        <img
+          src={placeholderSrc}
+          alt=""
+          className="w-full max-w-sm md:max-w-md h-96 rounded-2xl object-cover blur-md"
+          aria-hidden="true"
+        />
+      )}
+      
+      {/* Loading skeleton fallback */}
+      {!placeholderSrc && showPlaceholder && !isError && (
         <Skeleton className="w-full max-w-sm md:max-w-md h-96 rounded-2xl animate-pulse" />
       )}
       
@@ -70,25 +84,30 @@ export const ProgressiveImage = ({
         </div>
       )}
       
-      {/* Low-quality placeholder image (if provided) */}
-      {placeholderSrc && showPlaceholder && !isError && (
+      {/* Low-quality preview image */}
+      {lowQualitySrc && !isError && (
         <img
-          src={placeholderSrc}
+          ref={lowQualityRef}
+          src={lowQualitySrc}
           alt=""
-          className={`absolute inset-0 w-full h-full object-cover rounded-2xl blur-sm transition-opacity duration-300 ${
-            isLoaded ? 'opacity-0' : 'opacity-100'
+          className={`absolute inset-0 w-full h-full object-cover rounded-2xl transition-all duration-700 ease-out ${
+            lowQualityLoaded ? (isLoaded ? 'opacity-0 blur-0' : 'opacity-100 blur-sm') : 'opacity-0'
           }`}
+          onLoad={() => {
+            setLowQualityLoaded(true);
+            setShowPlaceholder(false);
+          }}
           aria-hidden="true"
         />
       )}
       
-      {/* Main image */}
+      {/* Main high-quality image */}
       <img
         ref={imgRef}
         src={src}
         alt={alt}
-        className={`transition-all duration-500 ease-out ${
-          isLoaded ? 'opacity-100' : showPlaceholder ? 'opacity-0 absolute inset-0' : 'opacity-0'
+        className={`transition-all duration-700 ease-out ${
+          isLoaded ? 'opacity-100 blur-0' : 'opacity-0 absolute inset-0'
         } ${className}`}
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : "auto"}
