@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import { ProgressiveImage } from "./ProgressiveImage";
-import heroOptimized from "@/assets/hero-optimized.webp";
-import heroPlaceholderLow from "@/assets/hero-placeholder-low.webp";
-import heroPlaceholderMicro from "@/assets/hero-placeholder-micro.jpg";
-import heroSecondary from "@/assets/hero-secondary.webp";
-import heroSecondaryMicro from "@/assets/hero-secondary-micro.jpg";
+
+// Using existing images from public/lovable-uploads
+const heroImage1 = "/lovable-uploads/c64c30e8-7b83-4ec5-ba1e-c6fba6f7c803.png";
+const heroImage2 = "/lovable-uploads/9b92abbb-cd8a-4ebc-9559-42ec68c756e9.png";
+
+// Inline micro-placeholders as base64 data URIs
+const microPlaceholder = "data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAiIGhlaWdodD0iMTAiIHZpZXdCb3g9IjAgMCAxMCAxMCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjEwIiBoZWlnaHQ9IjEwIiBmaWxsPSIjZjNmNGY2Ii8+Cjwvc3ZnPgo=";
 
 interface HeroImage {
   src: string;
@@ -16,16 +18,16 @@ interface HeroImage {
 
 const heroImages: HeroImage[] = [
   {
-    src: heroOptimized,
-    placeholderSrc: heroPlaceholderLow,
-    microPlaceholder: heroPlaceholderMicro,
+    src: heroImage1,
+    placeholderSrc: heroImage1,
+    microPlaceholder: microPlaceholder,
     alt: "Empowering African woman in healthcare setting promoting breast cancer awareness",
     duration: 8000, // 8 seconds
   },
   {
-    src: heroSecondary,
-    placeholderSrc: heroSecondary, // Using same image as placeholder for now
-    microPlaceholder: heroSecondaryMicro,
+    src: heroImage2,
+    placeholderSrc: heroImage2,
+    microPlaceholder: microPlaceholder,
     alt: "Diverse group of African women standing together in solidarity for breast cancer awareness",
     duration: 2000, // 2 seconds
   },
