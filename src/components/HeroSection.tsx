@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { Shield, Users, BookOpen, ArrowRight, Star, Stethoscope } from "lucide-react";
 import { useState } from "react";
 import { ProgressiveImage } from "@/components/ProgressiveImage";
-import heroOptimized from '@/assets/hero-optimized.webp';
-import heroPlaceholderLow from '@/assets/hero-placeholder-low.webp';
+import heroOptimized from '/hero-strong-woman.webp';
+import heroPlaceholderLow from '/hero-strong-woman-low.webp';
 const features = [{
   icon: Shield,
   title: "Risk Assessment",
@@ -85,8 +85,8 @@ export function HeroSection() {
               <ProgressiveImage
                 src={heroOptimized}
                 lowQualitySrc={heroPlaceholderLow}
-                placeholderSrc="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iMzYiIHZpZXdCb3g9IjAgMCA2NCAzNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjM2IiBmaWxsPSIjZmZlZGYzIi8+CjxjaXJjbGUgY3g9IjMyIiBjeT0iMTgiIHI9IjgiIGZpbGw9IiNmOTI2NjEiIG9wYWNpdHk9IjAuMyIvPgo8L3N2Zz4K"
-                alt="Strong woman flexing muscles with breast cancer awareness ribbon, embodying strength and empowerment"
+                placeholderSrc="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHZpZXdCb3g9IjAgMCA2NCA2NCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjZmZlZGYzIi8+CjxjaXJjbGUgY3g9IjMyIiBjeT0iMjQiIHI9IjEyIiBmaWxsPSIjZjkyNjYxIiBvcGFjaXR5PSIwLjQiLz4KPGVsbGlwc2UgY3g9IjMyIiBjeT0iNDgiIHJ4PSIxNiIgcnk9IjgiIGZpbGw9IiNlZDY0YTYiIG9wYWNpdHk9IjAuMyIvPgo8L3N2Zz4K"
+                alt="Strong Black woman flexing muscles with breast cancer awareness ribbon, embodying strength and empowerment in health"
                 className="w-full max-w-sm md:max-w-md rounded-2xl shadow-2xl transform group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl animate-fade-in"
                 sizes="(max-width: 768px) 384px, 448px"
                 priority={true}
