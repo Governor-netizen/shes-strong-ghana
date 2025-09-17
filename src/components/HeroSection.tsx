@@ -2,7 +2,10 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
 import { Shield, Users, BookOpen, ArrowRight, Star, Stethoscope } from "lucide-react";
-import { HeroCarousel } from "./HeroCarousel";
+import { useState } from "react";
+import { ProgressiveImage } from "@/components/ProgressiveImage";
+import heroOptimized from '@/assets/hero-optimized.webp';
+import heroPlaceholderLow from '@/assets/hero-placeholder-low.webp';
 const features = [{
   icon: Shield,
   title: "Risk Assessment",
@@ -31,6 +34,8 @@ const stats = [{
   label: "early detection success rate"
 }];
 export function HeroSection() {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [imageError, setImageError] = useState(false);
 
   return <div className="min-h-screen bg-gradient-to-br from-background to-muted/30">
       {/* Hero Section */}
@@ -74,16 +79,30 @@ export function HeroSection() {
             <div className="text-sm text-muted-foreground animate-slide-in-left-delayed-3">3 steps • under 3 minutes • Trusted by local clinicians</div>
           </div>
 
-          {/* Right side: Hero image carousel with animations */}
+          {/* Right side: Hero image with animations */}
           <div className="flex justify-center lg:justify-end order-1 lg:order-2">
             <div className="relative group">
-              <HeroCarousel className="w-full max-w-sm md:max-w-md rounded-2xl shadow-2xl transform group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl animate-fade-in" />
+              <ProgressiveImage
+                src={heroOptimized}
+                lowQualitySrc={heroPlaceholderLow}
+                placeholderSrc="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iMzYiIHZpZXdCb3g9IjAgMCA2NCAzNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjM2IiBmaWxsPSIjZmZlZGYzIi8+CjxjaXJjbGUgY3g9IjMyIiBjeT0iMTgiIHI9IjgiIGZpbGw9IiNmOTI2NjEiIG9wYWNpdHk9IjAuMyIvPgo8L3N2Zz4K"
+                alt="Strong woman flexing muscles with breast cancer awareness ribbon, embodying strength and empowerment"
+                className="w-full max-w-sm md:max-w-md rounded-2xl shadow-2xl transform group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl animate-fade-in"
+                sizes="(max-width: 768px) 384px, 448px"
+                priority={true}
+                onLoad={() => setImageLoaded(true)}
+                onError={() => setImageError(true)}
+              />
               
-              {/* Animated glow effect */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/15 via-secondary/15 to-primary/15 opacity-60 group-hover:opacity-80 transition-all duration-700 blur-2xl scale-110 -z-10"></div>
+              {/* Animated glow effect - only show when image is loaded */}
+              {imageLoaded && (
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-primary/15 via-secondary/15 to-primary/15 opacity-60 group-hover:opacity-80 transition-all duration-700 blur-2xl scale-110 -z-10"></div>
+              )}
               
-              {/* Subtle overlay */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              {/* Subtle overlay - only show when image is loaded */}
+              {imageLoaded && (
+                <div className="absolute inset-0 rounded-2xl bg-gradient-to-t from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              )}
             </div>
           </div>
         </div>
