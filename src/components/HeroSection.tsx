@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import { Shield, Users, BookOpen, ArrowRight, Star, Stethoscope } from "lucide-react";
 import { useState } from "react";
 import { ProgressiveImage } from "@/components/ProgressiveImage";
-import heroOptimized from '@/assets/hero-optimized.webp';
-import heroPlaceholderLow from '@/assets/hero-placeholder-low.webp';
+const heroOptimized = "/hero-healthcare-professional.webp";
+const heroPlaceholderLow = "/hero-healthcare-professional-low.webp";
 const features = [{
   icon: Shield,
   title: "Risk Assessment",
@@ -85,8 +85,8 @@ export function HeroSection() {
               <ProgressiveImage
                 src={heroOptimized}
                 lowQualitySrc={heroPlaceholderLow}
-                placeholderSrc="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iMzYiIHZpZXdCb3g9IjAgMCA2NCAzNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjM2IiBmaWxsPSIjZmZlZGYzIi8+CjxjaXJjbGUgY3g9IjMyIiBjeT0iMTgiIHI9IjgiIGZpbGw9IiNmOTI2NjEiIG9wYWNpdHk9IjAuMyIvPgo8L3N2Zz4K"
-                alt="Strong woman flexing muscles with breast cancer awareness ribbon, embodying strength and empowerment"
+                placeholderSrc="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjQiIGhlaWdodD0iMzYiIHZpZXdCb3g9IjAgMCA2NCAzNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGRlZnM+CjxsaW5lYXJHcmFkaWVudCBpZD0iZ3JhZGllbnQiIHgxPSIwJSIgeTE9IjAlIiB4Mj0iMTAwJSIgeTI9IjEwMCUiPgo8c3RvcCBvZmZzZXQ9IjAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZmJjMmU3O3N0b3Atb3BhY2l0eToxIiAvPgo8c3RvcCBvZmZzZXQ9IjUwJSIgc3R5bGU9InN0b3AtY29sb3I6I2Y0OGVkMTtzdG9wLW9wYWNpdHk6MSIgLz4KPHN0b3Agb2Zmc2V0PSIxMDAlIiBzdHlsZT0ic3RvcC1jb2xvcjojZWM0ODk5O3N0b3Atb3BhY2l0eToxIiAvPgo8L2xpbmVhckdyYWRpZW50Pgo8L2RlZnM+CjxyZWN0IHdpZHRoPSI2NCIgaGVpZ2h0PSIzNiIgZmlsbD0idXJsKCNncmFkaWVudCkiLz4KPHN2Zz4="
+                alt="Professional healthcare provider with stethoscope and breast cancer awareness ribbon, representing expert medical care and support"
                 className="w-full max-w-sm md:max-w-md rounded-2xl shadow-2xl transform group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl animate-fade-in"
                 sizes="(max-width: 768px) 384px, 448px"
                 priority={true}
