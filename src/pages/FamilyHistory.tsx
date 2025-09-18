@@ -5,6 +5,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
 import { Progress } from "@/components/ui/progress";
 
@@ -34,6 +35,7 @@ const questions = [
       { id: "breastfeeding_duration", label: "Total months of breastfeeding (if applicable)", type: "number" },
       { id: "menopause_age", label: "Age at menopause (if applicable)", type: "number" },
       { id: "hormonal_contraceptives", label: "Have you used hormonal contraceptives (birth control pills, injections)?", type: "boolean" },
+      { id: "contraceptive_type", label: "What type of hormonal contraceptives did you use?", type: "select", options: ["Estrogen only", "Progestin only", "Both (combined)"] },
       { id: "contraceptive_duration", label: "For how many years did you use hormonal contraceptives?", type: "number" },
       { id: "radiation_exposure", label: "Have you been exposed to radiation or toxic chemicals?", type: "boolean" }
     ]
@@ -134,7 +136,12 @@ export default function FamilyHistory() {
     if (ans.age_first_period && ans.age_first_period < 12) riskScore += 2;
     if (ans.pregnancies === 0 || (ans.age_first_birth && ans.age_first_birth > 30)) riskScore += 2;
     if (!ans.breastfeeding || (ans.breastfeeding_duration && ans.breastfeeding_duration < 6)) riskScore += 1;
-    if (ans.contraceptive_duration && ans.contraceptive_duration >= 5) riskScore += 2;
+    if (ans.contraceptive_duration && ans.contraceptive_duration >= 5) {
+      if (ans.contraceptive_type === "Estrogen only") riskScore += 3;
+      else if (ans.contraceptive_type === "Progestin only") riskScore += 2;
+      else if (ans.contraceptive_type === "Both (combined)") riskScore += 2;
+      else riskScore += 2; // fallback for legacy answers
+    }
     if (ans.radiation_exposure) riskScore += 3;
     
     // Calculate BMI and weight factors
@@ -588,6 +595,11 @@ export default function FamilyHistory() {
                     return null;
                   }
                   
+                  // Hide contraceptive type question if hormonal contraceptives is not "Yes"
+                  if (question.id === "contraceptive_type" && answers["hormonal_contraceptives"] !== true) {
+                    return null;
+                  }
+                  
                    return (
                    <div key={question.id} className="space-y-3">
                      <div className="flex items-center gap-2">
@@ -690,21 +702,39 @@ export default function FamilyHistory() {
                       </div>
                     )}
                     
-                    {question.type === "select" && question.options && (
-                      <div className="space-y-3">
-                        <RadioGroup
-                          value={answers[question.id]}
-                          onValueChange={(value) => handleAnswer(question.id, value)}
-                        >
-                          {question.options.map((option) => (
-                            <div key={option} className="flex items-center space-x-2">
-                              <RadioGroupItem value={option} id={`${question.id}-${option}`} />
-                              <Label htmlFor={`${question.id}-${option}`}>{option}</Label>
-                            </div>
-                          ))}
-                        </RadioGroup>
-                      </div>
-                     )}
+                     {question.type === "select" && question.options && (
+                       <div className="space-y-3">
+                         {question.id === "contraceptive_type" ? (
+                           <Select
+                             value={answers[question.id] || ""}
+                             onValueChange={(value) => handleAnswer(question.id, value)}
+                           >
+                             <SelectTrigger className="w-full">
+                               <SelectValue placeholder="Select contraceptive type" />
+                             </SelectTrigger>
+                             <SelectContent className="bg-background border border-border z-50">
+                               {question.options.map((option) => (
+                                 <SelectItem key={option} value={option}>
+                                   {option}
+                                 </SelectItem>
+                               ))}
+                             </SelectContent>
+                           </Select>
+                         ) : (
+                           <RadioGroup
+                             value={answers[question.id]}
+                             onValueChange={(value) => handleAnswer(question.id, value)}
+                           >
+                             {question.options.map((option) => (
+                               <div key={option} className="flex items-center space-x-2">
+                                 <RadioGroupItem value={option} id={`${question.id}-${option}`} />
+                                 <Label htmlFor={`${question.id}-${option}`}>{option}</Label>
+                               </div>
+                             ))}
+                           </RadioGroup>
+                         )}
+                       </div>
+                      )}
                    </div>
                   );
                 })}
