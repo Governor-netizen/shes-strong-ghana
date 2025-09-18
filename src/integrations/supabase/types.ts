@@ -58,6 +58,10 @@ export type Database = {
           created_at: string
           ends_at: string
           id: string
+          meeting_details: Json | null
+          meeting_room_id: string | null
+          meeting_type: Database["public"]["Enums"]["meeting_type"] | null
+          meeting_url: string | null
           notes: string | null
           profile_snapshot: Json | null
           provider_id: string
@@ -71,6 +75,10 @@ export type Database = {
           created_at?: string
           ends_at: string
           id?: string
+          meeting_details?: Json | null
+          meeting_room_id?: string | null
+          meeting_type?: Database["public"]["Enums"]["meeting_type"] | null
+          meeting_url?: string | null
           notes?: string | null
           profile_snapshot?: Json | null
           provider_id: string
@@ -84,6 +92,10 @@ export type Database = {
           created_at?: string
           ends_at?: string
           id?: string
+          meeting_details?: Json | null
+          meeting_room_id?: string | null
+          meeting_type?: Database["public"]["Enums"]["meeting_type"] | null
+          meeting_url?: string | null
           notes?: string | null
           profile_snapshot?: Json | null
           provider_id?: string
@@ -711,6 +723,47 @@ export type Database = {
         }
         Relationships: []
       }
+      virtual_meeting_rooms: {
+        Row: {
+          appointment_id: string | null
+          created_at: string
+          created_by: string
+          expires_at: string | null
+          id: string
+          is_active: boolean | null
+          room_id: string
+          updated_at: string
+        }
+        Insert: {
+          appointment_id?: string | null
+          created_at?: string
+          created_by: string
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          room_id: string
+          updated_at?: string
+        }
+        Update: {
+          appointment_id?: string | null
+          created_at?: string
+          created_by?: string
+          expires_at?: string | null
+          id?: string
+          is_active?: boolean | null
+          room_id?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "virtual_meeting_rooms_appointment_id_fkey"
+            columns: ["appointment_id"]
+            isOneToOne: false
+            referencedRelation: "appointments"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
@@ -754,6 +807,7 @@ export type Database = {
         | "follow_up"
         | "survivorship"
       delivery_status: "pending" | "sent" | "delivered" | "failed" | "read"
+      meeting_type: "in_person" | "virtual"
       notification_channel: "in_app" | "email" | "push" | "sms"
       notification_type:
         | "appointment_reminder"
@@ -909,6 +963,7 @@ export const Constants = {
         "survivorship",
       ],
       delivery_status: ["pending", "sent", "delivered", "failed", "read"],
+      meeting_type: ["in_person", "virtual"],
       notification_channel: ["in_app", "email", "push", "sms"],
       notification_type: [
         "appointment_reminder",

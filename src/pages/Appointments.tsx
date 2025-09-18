@@ -19,9 +19,13 @@ import {
   Plus,
   CheckCircle,
   AlertCircle,
-  Stethoscope
+  Stethoscope,
+  Video,
+  X,
+  FileText
 } from "lucide-react";
 import ClinicMap from "@/components/ClinicMap";
+import { VirtualMeetingRoom } from "@/components/VirtualMeetingRoom";
 import { useLocation, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useSEO } from "@/hooks/useSEO";
@@ -30,9 +34,12 @@ import { secureProviderData } from "@/utils/secureProviderData";
 const sb: any = supabase;
 const appointmentTypes = [
   { value: "screening", label: "Screening Mammogram", duration: "30 minutes" },
+  { value: "virtual-screening", label: "Virtual Screening Consultation", duration: "30 minutes" },
   { value: "followup", label: "Follow-up Visit", duration: "30 minutes" },
+  { value: "virtual-followup", label: "Virtual Follow-up", duration: "30 minutes" },
   { value: "biopsy", label: "Biopsy Procedure", duration: "60 minutes" },
   { value: "genetic", label: "Genetic Counseling", duration: "60 minutes" },
+  { value: "virtual-genetic", label: "Virtual Genetic Counseling", duration: "60 minutes" },
   { value: "support", label: "Support Group", duration: "90 minutes" }
 ];
 
@@ -88,6 +95,7 @@ export default function Appointments() {
   const [providers, setProviders] = useState<Provider[]>([]);
   const [slots, setSlots] = useState<Slot[]>([]);
   const [showClinicMap, setShowClinicMap] = useState(false);
+  const [showVirtualMeeting, setShowVirtualMeeting] = useState<string | null>(null);
   const { toast } = useToast();
 const location = useLocation();
   const navigate = useNavigate();
@@ -240,6 +248,7 @@ const location = useLocation();
           ends_at: selectedSlot.ends_at,
           status: "booked",
           notes,
+          meeting_type: selectedType.includes('virtual') ? 'virtual' : 'in_person',
         })
         .select()
         .single();
@@ -303,6 +312,10 @@ const location = useLocation();
     return appointmentTypes.find(t => t.value === type);
   };
 
+  const joinVirtualMeeting = (appointmentId: string) => {
+    setShowVirtualMeeting(appointmentId);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background to-muted/30 py-8">
       <div className="container mx-auto px-4 max-w-4xl">
@@ -342,15 +355,18 @@ const location = useLocation();
             </CardContent>
           </Card>
 
-          <Card className="bg-gradient-card shadow-card-soft cursor-pointer hover:shadow-medical transition-shadow">
+          <Card 
+            className="bg-gradient-card shadow-card-soft cursor-pointer hover:shadow-medical transition-shadow"
+            onClick={openAndScrollToForm}
+          >
             <CardContent className="p-6">
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-warning/20 rounded-lg flex items-center justify-center">
-                  <AlertCircle className="h-6 w-6 text-warning" />
+                  <Video className="h-6 w-6 text-warning" />
                 </div>
                 <div>
-                  <p className="font-medium">Telemedicine</p>
-                  <p className="text-sm text-muted-foreground">Virtual consultations</p>
+                  <p className="font-medium">Virtual Consultations</p>
+                  <p className="text-sm text-muted-foreground">Book telemedicine appointment</p>
                   <p className="text-sm text-primary">Available now</p>
                 </div>
               </div>
@@ -533,8 +549,17 @@ const location = useLocation();
                         <span className="text-sm">{appointment.doctor}</span>
                       </div>
                       <div className="flex items-center gap-2">
-                        <MapPin className="h-4 w-4 text-muted-foreground" />
-                        <span className="text-sm">{appointment.location}</span>
+                        {appointment.type.includes('virtual') ? (
+                          <>
+                            <Video className="h-4 w-4 text-muted-foreground" />
+                            <span className="text-sm">Virtual Meeting</span>
+                          </>
+                        ) : (
+                          <>
+                            <MapPin className="h-4 w-4 text-muted-foreground" />
+                            <span className="text-sm">{appointment.location}</span>
+                          </>
+                        )}
                       </div>
                     </div>
 
@@ -545,6 +570,16 @@ const location = useLocation();
                     )}
 
                     <div className="flex gap-2 mt-4">
+                      {appointment.type.includes('virtual') && appointment.status === 'scheduled' && (
+                        <Button 
+                          onClick={() => joinVirtualMeeting(appointment.id)}
+                          size="sm"
+                          className="bg-green-600 hover:bg-green-700 text-white"
+                        >
+                          <Video className="h-4 w-4 mr-1" />
+                          Join Meeting
+                        </Button>
+                      )}
                       <Button 
                         variant="outline" 
                         size="sm"
@@ -614,6 +649,14 @@ const location = useLocation();
       {/* Clinic Map Modal */}
       {showClinicMap && (
         <ClinicMap onClose={() => setShowClinicMap(false)} />
+      )}
+
+      {/* Virtual Meeting Room Modal */}
+      {showVirtualMeeting && (
+        <VirtualMeetingRoom 
+          appointmentId={showVirtualMeeting}
+          onClose={() => setShowVirtualMeeting(null)}
+        />
       )}
     </div>
   );
