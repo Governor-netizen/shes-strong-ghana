@@ -1,4 +1,4 @@
-const CACHE_NAME = 'shesstrong-cache-v1';
+const CACHE_NAME = 'shesstrong-cache-v2';
 const urlsToCache = [
   '/',
   '/static/js/bundle.js',
@@ -6,7 +6,8 @@ const urlsToCache = [
   '/manifest.json',
   '/icons/icon-192x192.png',
   '/icons/icon-512x512.png',
-  // Add other static assets as needed
+  '/lovable-uploads/1c97f9a5-lqip.jpg',
+  '/lovable-uploads/1c97f9a5-35a1-4b7e-a5d3-4d5db1c333f1.png',
 ];
 
 // Install event - cache resources

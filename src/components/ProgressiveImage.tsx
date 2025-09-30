@@ -11,6 +11,7 @@ interface ProgressiveImageProps {
   priority?: boolean;
   onLoad?: () => void;
   onError?: () => void;
+  lqip?: string; // Low-Quality Image Placeholder for instant loading
 }
 
 export const ProgressiveImage = ({
@@ -21,12 +22,31 @@ export const ProgressiveImage = ({
   sizes,
   priority = false,
   onLoad,
-  onError
+  onError,
+  lqip
 }: ProgressiveImageProps) => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isError, setIsError] = useState(false);
   const [showPlaceholder, setShowPlaceholder] = useState(true);
   const imgRef = useRef<HTMLImageElement>(null);
+
+  // Preload priority images
+  useEffect(() => {
+    if (priority && src) {
+      const link = document.createElement('link');
+      link.rel = 'preload';
+      link.as = 'image';
+      link.href = src;
+      if (sizes) link.setAttribute('imagesizes', sizes);
+      document.head.appendChild(link);
+      
+      return () => {
+        if (document.head.contains(link)) {
+          document.head.removeChild(link);
+        }
+      };
+    }
+  }, [src, priority, sizes]);
 
   useEffect(() => {
     if (!imgRef.current) return;
@@ -55,8 +75,21 @@ export const ProgressiveImage = ({
 
   return (
     <div className="relative">
-      {/* Loading skeleton */}
-      {showPlaceholder && !isError && (
+      {/* Low-Quality Image Placeholder - loads instantly */}
+      {lqip && (
+        <img
+          src={lqip}
+          alt=""
+          className={`absolute inset-0 w-full h-full object-cover rounded-2xl blur-2xl scale-110 transition-opacity duration-700 ${
+            isLoaded ? 'opacity-0' : 'opacity-100'
+          }`}
+          aria-hidden="true"
+          loading="eager"
+        />
+      )}
+      
+      {/* Loading skeleton - only show if no LQIP */}
+      {showPlaceholder && !isError && !lqip && (
         <Skeleton className="w-full max-w-sm md:max-w-md h-96 rounded-2xl animate-pulse" />
       )}
       
@@ -70,8 +103,8 @@ export const ProgressiveImage = ({
         </div>
       )}
       
-      {/* Low-quality placeholder image (if provided) */}
-      {placeholderSrc && showPlaceholder && !isError && (
+      {/* Standard placeholder (deprecated in favor of LQIP) */}
+      {placeholderSrc && showPlaceholder && !isError && !lqip && (
         <img
           src={placeholderSrc}
           alt=""
@@ -87,12 +120,12 @@ export const ProgressiveImage = ({
         ref={imgRef}
         src={src}
         alt={alt}
-        className={`transition-all duration-500 ease-out ${
+        className={`transition-all duration-700 ease-out ${
           isLoaded ? 'opacity-100' : showPlaceholder ? 'opacity-0 absolute inset-0' : 'opacity-0'
         } ${className}`}
         loading={priority ? "eager" : "lazy"}
         fetchPriority={priority ? "high" : "auto"}
-        decoding="async"
+        decoding={priority ? "sync" : "async"}
         sizes={sizes}
         onLoad={handleLoad}
         onError={handleError}

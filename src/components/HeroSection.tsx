@@ -86,6 +86,7 @@ export function HeroSection() {
                 className="w-full max-w-sm md:max-w-md rounded-2xl shadow-2xl transform group-hover:scale-105 group-hover:rotate-1 group-hover:shadow-3xl animate-fade-in"
                 sizes="(max-width: 768px) 384px, 448px"
                 priority={true}
+                lqip="/lovable-uploads/1c97f9a5-lqip.jpg"
                 onLoad={() => setImageLoaded(true)}
                 onError={() => setImageError(true)}
               />
