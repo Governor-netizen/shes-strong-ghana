@@ -1,4 +1,4 @@
-# Welcome to your Lovable project
+# Shes Strong
 
 ## Project info
 
