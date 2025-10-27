@@ -22,7 +22,8 @@ import {
   Stethoscope,
   Video,
   X,
-  FileText
+  FileText,
+  Map
 } from "lucide-react";
 import ClinicMap from "@/components/ClinicMap";
 import { VirtualMeetingRoom } from "@/components/VirtualMeetingRoom";
@@ -326,11 +327,11 @@ const location = useLocation();
               <h1 className="text-2xl font-bold">Appointments</h1>
             </div>
             <Button 
-              onClick={openAndScrollToForm}
+              onClick={() => setShowClinicMap(true)}
               className="bg-gradient-primary"
             >
-              <Plus className="h-4 w-4 mr-2" />
-              Book Appointment
+              <Map className="h-4 w-4 mr-2" />
+              View Hospitals Near You
             </Button>
           </div>
           <p className="text-muted-foreground mt-2">
