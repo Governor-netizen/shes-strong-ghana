@@ -9,7 +9,8 @@ import {
   BookOpen, 
   Menu,
   User,
-  FlaskConical
+  FlaskConical,
+  MapPin
 } from "lucide-react";
 import { NotificationCenter } from "@/components/notifications/NotificationCenter";
 import { supabase } from "@/integrations/supabase/client";
@@ -41,10 +42,10 @@ const navigationItems = [
     description: "Monitor your health"
   },
   {
-    title: "Appointments",
+    title: "Find Hospitals",
     href: "/appointments",
-    icon: Calendar,
-    description: "Schedule & manage visits"
+    icon: MapPin,
+    description: "Locate hospitals and clinics"
   },
   {
     title: "Education",
