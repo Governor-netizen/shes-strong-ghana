@@ -257,6 +257,59 @@ export default function FamilyHistory() {
     return mapping;
   };
 
+  const isCurrentStepComplete = (): boolean => {
+    const currentSection = questions[currentStep];
+    
+    // Special handling for family history section (step 1)
+    if (currentStep === 1) {
+      if (familyGate === null) return false;
+      
+      if (familyGate === true) {
+        if (selectedRelatives.length === 0) return false;
+        
+        // Check if each selected relative has cancer details
+        for (const relative of selectedRelatives) {
+          const details = relativeDetails[relative];
+          if (!details || details.types.length === 0) return false;
+        }
+      }
+      
+      // Check genetic testing follow-up
+      if (answers.genetic_testing === true && !answers.genetic_results) {
+        return false;
+      }
+      
+      return true;
+    }
+    
+    // Check all required questions in current section
+    for (const question of currentSection.questions) {
+      const answer = answers[question.id];
+      
+      // Boolean questions are always required
+      if (question.type === "boolean") {
+        if (answer === undefined || answer === null) return false;
+      }
+      
+      // Select questions are required
+      if (question.type === "select") {
+        // Conditional questions - only required if parent condition is met
+        if (question.id === "contraceptive_type") {
+          if (answers.hormonal_contraceptives === true && !answer) return false;
+        } else {
+          if (!answer) return false;
+        }
+      }
+      
+      // Number questions with conditional requirements
+      if (question.type === "number" && question.id === "alcohol_bottles") {
+        if (answers.alcohol === true && !answer) return false;
+      }
+    }
+    
+    return true;
+  };
+
   const handleSubmit = () => {
     if (
       familyGate &&
@@ -743,36 +796,48 @@ export default function FamilyHistory() {
           </CardContent>
         </Card>
 
-        <div className="flex justify-between mt-8">
-          <Button
-            variant="outline"
-            onClick={() => {
-              setCurrentStep(Math.max(0, currentStep - 1));
-              window.scrollTo({ top: 0, behavior: 'smooth' });
-            }}
-            disabled={currentStep === 0}
-          >
-            <ArrowLeft className="h-4 w-4 mr-2" />
-            Previous
-          </Button>
-          
-          {currentStep === questions.length - 1 ? (
-            <Button onClick={handleSubmit} className="bg-gradient-primary">
-              Calculate Risk
-              <CheckCircle className="h-4 w-4 ml-2" />
-            </Button>
-          ) : (
+        <div className="space-y-4 mt-8">
+          {!isCurrentStepComplete() && (
+            <p className="text-sm text-muted-foreground text-center">
+              Please answer all required questions to continue
+            </p>
+          )}
+          <div className="flex justify-between">
             <Button
+              variant="outline"
               onClick={() => {
-                setCurrentStep(Math.min(questions.length - 1, currentStep + 1));
+                setCurrentStep(Math.max(0, currentStep - 1));
                 window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
-              className="bg-gradient-primary"
+              disabled={currentStep === 0}
             >
-              Next
-              <ArrowRight className="h-4 w-4 ml-2" />
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Previous
             </Button>
-          )}
+            
+            {currentStep === questions.length - 1 ? (
+              <Button 
+                onClick={handleSubmit} 
+                className="bg-gradient-primary"
+                disabled={!isCurrentStepComplete()}
+              >
+                Calculate Risk
+                <CheckCircle className="h-4 w-4 ml-2" />
+              </Button>
+            ) : (
+              <Button
+                onClick={() => {
+                  setCurrentStep(Math.min(questions.length - 1, currentStep + 1));
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+                }}
+                className="bg-gradient-primary"
+                disabled={!isCurrentStepComplete()}
+              >
+                Next
+                <ArrowRight className="h-4 w-4 ml-2" />
+              </Button>
+            )}
+          </div>
         </div>
       </div>
     </div>
