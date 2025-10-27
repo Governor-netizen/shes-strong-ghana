@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Link } from "react-router-dom";
-import { Shield, Users, BookOpen, ArrowRight, Star, Stethoscope } from "lucide-react";
+import { Shield, Users, BookOpen, ArrowRight, Star, Stethoscope, MapPin } from "lucide-react";
 import { useState } from "react";
 import { ProgressiveImage } from "@/components/ProgressiveImage";
 const features = [{
@@ -15,7 +15,7 @@ const features = [{
 }, {
   icon: Users,
   title: "Expert Care",
-  description: "Schedule appointments with healthcare professionals specialized in breast cancer"
+  description: "View hospitals near you with contact information and location maps"
 }, {
   icon: BookOpen,
   title: "Education Hub",
@@ -74,7 +74,10 @@ export function HeroSection() {
                 </Link>
               </Button>
             </div>
-            <div className="text-sm text-muted-foreground animate-slide-in-left-delayed-3">3 steps • under 3 minutes • Trusted by local clinicians</div>
+            <div className="space-y-1 animate-slide-in-left-delayed-3">
+              <div className="text-sm text-muted-foreground">3 steps • under 3 minutes • Trusted by local clinicians</div>
+              <div className="text-sm font-medium text-primary">Oncologist-reviewed</div>
+            </div>
           </div>
 
           {/* Right side: Hero image with animations */}
@@ -153,14 +156,15 @@ export function HeroSection() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button asChild size="lg" variant="secondary">
-                <Link to="/family-history">
-                  Begin Assessment
-                  <Star className="ml-2 h-5 w-5" />
+                <Link to="/appointments">
+                  View Hospitals Near You
+                  <MapPin className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
               <Button asChild size="lg" className="hover-scale h-12 md:h-11">
-                <Link to="/symptoms">
-                  Track Symptoms
+                <Link to="/family-history">
+                  Begin Assessment
+                  <Star className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
             </div>
