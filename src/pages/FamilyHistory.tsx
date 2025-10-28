@@ -275,7 +275,7 @@ export default function FamilyHistory() {
       }
       
       // Check genetic testing follow-up
-      if (answers.genetic_testing === true && !answers.genetic_results) {
+      if (answers.genetic_testing === true && answers.genetic_results === undefined) {
         return false;
       }
       
