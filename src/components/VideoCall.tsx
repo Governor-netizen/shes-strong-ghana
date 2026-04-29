@@ -29,7 +29,7 @@ export const VideoCall: React.FC<VideoCallProps> = ({
   const [callDuration, setCallDuration] = useState(0);
 
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    let interval: ReturnType<typeof setInterval> | undefined;
     if (connectionStatus === 'connected') {
       interval = setInterval(() => {
         setCallDuration(prev => prev + 1);
