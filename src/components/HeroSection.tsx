@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { Shield, Users, BookOpen, ArrowRight, Star, Stethoscope, MapPin } from "lucide-react";
 import { useState } from "react";
 import { ProgressiveImage } from "@/components/ProgressiveImage";
+import { GhanaWaveIcon } from "@/components/GhanaWaveIcon";
 const features = [{
   icon: Shield,
   title: "Risk Assessment",
@@ -56,7 +57,7 @@ export function HeroSection() {
 
             <div className="flex justify-center lg:justify-start animate-slide-in-bottom">
               <span className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium border border-primary/20 animate-pulse-glow">
-                <span className="mr-2">⚡</span>
+                <GhanaWaveIcon aria-hidden="true" className="inline-block h-4 w-auto mr-2 align-text-bottom" />
                 About 60% of Ghanaian breast cancer cases are triple-negative — early detection matters.
               </span>
             </div>
