@@ -16,7 +16,7 @@ export type Database = {
     Tables: {
       alerts: {
         Row: {
-          coordinates: unknown | null
+          coordinates: unknown
           created_at: string | null
           description: string
           expires_at: string | null
@@ -28,7 +28,7 @@ export type Database = {
           user_id: string
         }
         Insert: {
-          coordinates?: unknown | null
+          coordinates?: unknown
           created_at?: string | null
           description: string
           expires_at?: string | null
@@ -40,7 +40,7 @@ export type Database = {
           user_id: string
         }
         Update: {
-          coordinates?: unknown | null
+          coordinates?: unknown
           created_at?: string | null
           description?: string
           expires_at?: string | null
@@ -769,10 +769,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      can_view_assessment: {
-        Args: { assess_id: string }
-        Returns: boolean
-      }
+      can_view_assessment: { Args: { assess_id: string }; Returns: boolean }
       get_notification_template: {
         Args: {
           template_care_stage?: Database["public"]["Enums"]["care_stage"]
@@ -789,10 +786,7 @@ export type Database = {
         Args: { provider_uuid: string }
         Returns: boolean
       }
-      is_assessment_owner: {
-        Args: { assess_id: string }
-        Returns: boolean
-      }
+      is_assessment_owner: { Args: { assess_id: string }; Returns: boolean }
     }
     Enums: {
       appointment_status: "booked" | "confirmed" | "canceled" | "completed"
